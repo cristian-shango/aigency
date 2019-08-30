@@ -1,0 +1,59 @@
+funciones
+
+leer_data_modelo
+	altera
+		$data_modelo
+$container
+$group
+agregar_proxim_pago
+	usa 	pagos
+	altera 	proximos_pagos
+bind_eventos
+	llama 	borrar_esto
+		actualizar_esto
+leer_tag
+escribir_tag
+traer_forma
+	usa 	url_traer_forma
+		pagos
+		$data_modelo
+	altera 	trayendo_forma
+		forma_pago
+marcar_formas
+	usa	pagos
+popular_plazo_tag
+	usa	plazo_pago
+	llama	popular_plazo_registro
+popular_plazo_registro
+	usa	plazo_pago
+		pagos
+traer_plazo
+	usa	plazo_pago
+		trayendo_plazo
+		url_traer_plazo
+		pagos
+	altera	trayendo_plazo
+		plazo_pago
+	llama	popular_plazo_tag
+		actualizar_monto
+		actualizar_totales
+leer_datos
+sumar_porciento
+agregar_nuevo_pago
+cargar_pago_registro
+completitud
+actualizar_completitud
+traer_pagos
+guardable
+guardar_esto
+guardar_pago
+borrar_esto
+actualizar_totales
+actualizar_monto
+actualizar_esto
+enableGuardar
+bind_boton_guardar
+actualizar_registro
+bind_totales
+bind_boton_cancelar
+bind_boton_nuevo_pagos

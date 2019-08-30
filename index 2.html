@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Viva Admin | Carga de Proyecto</title>
+	  	<meta charset="utf-8">
+	  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	  	
+	  	<link rel="stylesheet" href="css/normalize.css">
+	  	<link rel="stylesheet" href="css/jquery-ui.css">
+	  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	  	<link rel="stylesheet" href="css/style.css">
+	  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	  	
+	  	<script src="js/jquery.min.js" async></script>
+	  	<script src="js/popper.min.js" async></script>
+	  	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	  	
+	</head>
+	<body>
+		<div class="container">
+			<section id="primero">
+				<div id="linea"></div>
+				<div class="row">
+					<div class="col">
+						<h3 class="vivashango">VIVA ADMIN</h3>
+						<h3 style="font-size: 3em;">Carga de Proyecto</h3>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+						    <h4>Cliente</h4>
+						    <select class="form-control" id="dropdown_dias" >
+							      	<option value="">Seleccionar</option>
+									<option value="HSBC">HSBC</option>
+									<option value="Ualá">Ualá</option>
+									<option value="CPM">CPM</option>
+									<option value="Infobae">Infobae</option>
+									<option value="PMI">PMI</option>
+									<option value="Tigo">Tigo</option>
+							    </select>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+						    <h4>Proyecto</h4>
+						    <select class="form-control" id="dropdown_dias" >
+							      	<option value="">Seleccionar</option>
+									<option value="Proyecto 1">Proyecto 1</option>
+									<option value="Proyecto 2">Proyecto 2</option>
+									<option value="Proyecto 3">Proyecto 3</option>
+									<option value="Proyecto 4">Proyecto 4</option>
+									<option value="Proyecto 5">Proyecto 5</option>
+									<option value="Proyecto 6">Proyecto 6</option>
+									<option value="Proyecto 7">Proyecto 7</option>
+							    </select>
+						</div>
+					</div>
+					<div class="col-md-12"><h2>Listado</h2></div>
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr class="d-flex">
+									<th scope="col">Detalle</th>
+									<th scope="col">Item</th>
+									<th scope="col">OT</th>
+									<th scope="col">Tipo Factura</th>
+									<th scope="col">Nº Factura</th>
+									<th scope="col">Fecha Factura</th>
+									<th scope="col">Fecha Pactada</th>
+									<th scope="col">Imp. Neto</th>
+									<th scope="col">I.V.A.</th>
+									<th scope="col">Perc.</th>
+									<th scope="col">Imp. Bruto</th>
+									<th scope="col">Adjunto</th>
+									<th scope="col">Editar</th>
+									<th scope="col">Borrar</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="d-flex">
+									<td scope="row">Detalle 1</td>
+									<td>Item 1</td>
+									<td>1234</td>
+									<td>A</td>
+									<td>20-4554</td>
+									<td>12/12/2018</td>
+									<td>12/03/2019</td>
+									<td>$25.000</td>
+									<td>21%</td>
+									<td>$0</td>
+									<td>$33.200</td>
+									<td><i class="fas fa-paperclip"></i></td>
+									<td><i class="fas fa-edit" data-toggle="modal" data-target="#modal_nuevo_editar"></i></td>
+									<td><i class="far fa-trash-alt" data-toggle="modal" data-target="#modal_eliminar"></i></td>
+								</tr>
+								<tr class="d-flex">
+									<td scope="row">Detalle 1</td>
+									<td>Item 1</td>
+									<td>1234</td>
+									<td>A</td>
+									<td>20-4554</td>
+									<td>12/12/2018</td>
+									<td>12/03/2019</td>
+									<td>$25.000</td>
+									<td>21%</td>
+									<td>$0</td>
+									<td>$33.200</td>
+									<td></td>
+									<td><i class="fas fa-edit" data-toggle="modal" data-target="#modal_nuevo_editar"></i></td>
+									<td><i class="far fa-trash-alt" data-toggle="modal" data-target="#modal_eliminar"></i></td>
+								</tr>
+								<tr class="d-flex">
+									<td scope="row">Detalle 1</td>
+									<td>Item 1</td>
+									<td>1234</td>
+									<td>A</td>
+									<td>20-4554</td>
+									<td>12/12/2018</td>
+									<td>12/03/2019</td>
+									<td>$25.000</td>
+									<td>21%</td>
+									<td>$0</td>
+									<td>$33.200</td>
+									<td><i class="fas fa-paperclip"></i></td>
+									<td><i class="fas fa-edit" data-toggle="modal" data-target="#modal_nuevo_editar"></i></td>
+									<td><i class="far fa-trash-alt" data-toggle="modal" data-target="#modal_eliminar"></i></td>
+								</tr>
+								<tr class="d-flex">
+									<td scope="row">Detalle 1</td>
+									<td>Item 1</td>
+									<td>1234</td>
+									<td>A</td>
+									<td>20-4554</td>
+									<td>12/12/2018</td>
+									<td>12/03/2019</td>
+									<td>$25.000</td>
+									<td>21%</td>
+									<td>$0</td>
+									<td>$33.200</td>
+									<td><i class="fas fa-paperclip"></i></td>
+									<td><i class="fas fa-edit" data-toggle="modal" data-target="#modal_nuevo_editar"></i></td>
+									<td><i class="far fa-trash-alt" data-toggle="modal" data-target="#modal_eliminar"></i></td>
+								</tr>
+								
+							</tbody>
+						</table>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+						    <h4>Costo Presupuestado</h4>
+						    <div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">$</div>
+								</div>
+								<input type="text" class="form-control form-control-lg" id="inlineFormInputGroupUsername" readonly placeholder="350.000">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+						    <h4>Saldo</h4>
+						    <div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">$</div>
+								</div>
+								<input type="text" class="form-control form-control-lg" id="inlineFormInputGroupUsername" readonly placeholder="20.000">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-9">
+				    	<button class="btn btn-block btn-lg btn-success" id="boton_venue_si" style="cursor: pointer;" data-toggle="modal" data-target="#modal_nuevo_editar">Nuevo registro</button>
+					</div>
+					<div class="col-md-3">
+				    	<button class="btn btn-block btn-lg btn-danger" id="boton_venue_si" style="cursor: pointer;">Volver</button>
+					</div>
+				</div>
+			</section>
+			<!-- Modal Eliminar -->
+			<div class="modal fade" id="modal_eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">¿Borrar Registro?</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal Eliminar -->
+			<div class="modal fade" id="modal_nuevo_editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12"><h2>Nuevo / Edición de Registro</h2></div>
+
+							<div class="col-md-6">
+								<div class="form-group">
+								    <h4>Detalle</h4>
+								    <textarea row="8" id="motivo_tematica" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"></textarea>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+								    <h4>Tipo de Item</h4>
+								    <select class="form-control" id="dropdown_items" >
+								      	<option value="">Seleccionar</option>
+										<option value="Alquiler">Alquiler</option>
+										<option value="Servicio">Servicio</option>
+										<option value="Varios">Varios</option>
+										<option value="Otro">Otro</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+								    <h4>OT</h4>
+								    <input type="number" id="objetivo" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+								    <h4>Tipo de Factura</h4>
+								    <select class="form-control" id="dropdown_dias" >
+								      	<option value="">Seleccionar</option>
+										<option value="A">"A"</option>
+										<option value="C">"C"</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+								    <h4>Número de Factura</h4>
+								    <input type="number" id="objetivo" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+								    <h4>Fecha de Factura</h4>
+								    <input type="text" id="objetivo" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="DD/MM/AAAA">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+								    <h4>Fecha Pactada</h4>
+								    <input type="text" id="objetivo" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="DD/MM/AAAA">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+								    <h4>Importe Neto</h4>
+								    <div class="input-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text">$</div>
+										</div>
+										<input type="number" class="form-control form-control-lg" id="inlineFormInputGroupUsername">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+								    <h4>I.V.A.</h4>
+								    <div class="input-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text">$</div>
+										</div>
+										<input type="number" class="form-control form-control-lg" id="inlineFormInputGroupUsername">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+								    <h4>Percepción</h4>
+								    <div class="input-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text">$</div>
+										</div>
+										<input type="number" class="form-control form-control-lg" id="inlineFormInputGroupUsername">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+								    <h4>Importe Bruto</h4>
+								    <div class="input-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text">$</div>
+										</div>
+										<input type="number" class="form-control form-control-lg" id="inlineFormInputGroupUsername">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text">Subir archivo</span>
+									</div>
+									<div class="custom-file">
+										<input type="file" class="custom-file-input" id="inputGroupFile01">
+										<label class="custom-file-label" for="inputGroupFile01"></label>
+									</div>
+								</div>
+							</div>
+      					</div>
+      					</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
