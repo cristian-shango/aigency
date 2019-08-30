@@ -35,13 +35,8 @@
         <link rel="stylesheet" href="design/assets/examples/css/forms/advanced.css">
         <link rel="stylesheet" href="design/global/vendor/blueimp-file-upload/jquery.fileupload.css">
         <link rel="stylesheet" href="design/global/vendor/dropify/dropify.css">
-<<<<<<< HEAD
 
 
-=======
-    
-    
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
     <!-- Fonts -->
     <link rel="stylesheet" href="design/global/fonts/web-icons/web-icons.min.css">
     <link rel="stylesheet" href="design/global/fonts/brand-icons/brand-icons.min.css">
@@ -70,10 +65,7 @@
     <script src="js/excel/shim.js"></script>
     <script src="js/excel/jszip.js"></script>
     <script src="js/excel/xlsx.js"></script>
-<<<<<<< HEAD
     <script src="js/pagos/pagos.js"></script>
-=======
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
     <script src="js/numeros/numeros.js"></script>
     <script>
       Breakpoints();
@@ -497,7 +489,6 @@
 
                   }
                 ?>
-<<<<<<< HEAD
                 <div class="cotizacion_pagos_totales">
 
                   <div id="mostrar_costo_presupuestado" class="cotizacion_pagos_totales_plazo col-md-12">
@@ -536,43 +527,6 @@
                     </div>
                   </div>
 
-=======
-
-                <div id="mostrar_costo_presupuestado" class="col-md-12">
-                  <div class="form-group">
-                      <h5>Pago a 30 días</h5>
-                      <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">$</div>
-                      </div>
-                      <input type="text" class="form-control numerable" id="pago30" readonly value="<?php echo ($valor30dias);?>">
-                    </div>
-                  </div>
-                </div>
-
-                <div id="mostrar_costo_presupuestado" class="col-md-12">
-                  <div class="form-group">
-                      <h5>Pago a 60 días</h5>
-                      <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">$</div>
-                      </div>
-                      <input type="text" class="form-control numerable" id="pago60" readonly value="<?php echo ($valor60dias);?>">
-                    </div>
-                  </div>
-                </div>
-
-                <div id="mostrar_costo_presupuestado" class="col-md-12">
-                  <div class="form-group">
-                      <h5>Pago a 90 días</h5>
-                      <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">$</div>
-                      </div>
-                      <input type="text" class="form-control numerable" id="pago90" readonly value="<?php echo ($valor90dias);?>">
-                    </div>
-                  </div>
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
                 </div>
 
                 <span id="ingreso_id" style="display: none;"><?php echo ($row['id']);?></span>
@@ -891,7 +845,6 @@
                     </div>
                   </div>
                   <div class="col-md-3">
-<<<<<<< HEAD
 
                     <div class="cotizacion_pagos_container" data-id_registro="" data-id_proyecto="">
                     <button type="button" class="btn btn-default cotizacion_pagos_ver_interfaz" data-toggle="modal">PAGOS</button>
@@ -925,16 +878,6 @@
                       </div>
                     </div>
 
-=======
-                    <div class="form-group">
-                        <h4>Tiempo de Pago</h4>
-                        <select class="tiempo_pago_cambio form-control" id="edicion_dias" data-registro="<?php echo ($row_registros['id']);?>">
-                          <option value="30">30 días</option>
-                          <option value="60">60 días</option>
-                          <option value="90" selected="selected">90 días</option>
-                        </select>
-                    </div>
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
                   </div>
                   <div class="col-md-2">
                     <div class="form-group">
@@ -1081,11 +1024,7 @@
                 <div class="col-md-1">
                   <i class="far fa-plus-square" id="agregar_proveedor"></i>
                 </div>
-<<<<<<< HEAD
 
-=======
-                
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
                 <div class="col-md-6">
                   <div class="form-group">
                       <h4>OT</h4>
@@ -1293,11 +1232,7 @@
                 </div>
                 <div class="col-md-6">
                   <button type="button" class="btn btn-danger btn-block" data-dismiss="modal"><strong>CANCELAR</strong></button>
-<<<<<<< HEAD
                 </div>
-=======
-                </div> 
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
               </div>
             </div>
           </form>
@@ -1351,11 +1286,7 @@
         <script src="design/global/js/Plugin/bootstrap-datepicker.js"></script>
         <script src="design/global/js/Plugin/dropify.js"></script>
 
-<<<<<<< HEAD
     <!--script>
-=======
-    <script>
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
       (function(document, window, $){
         'use strict';
 
@@ -1392,11 +1323,7 @@
         proyecto = document.getElementById('ingreso_id').innerHTML;
 
         $.ajax({
-<<<<<<< HEAD
             url:"ajax_cotizaciones___.php",
-=======
-            url:"ajax_cotizaciones.php",
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
             method:"POST",
             data:'proyecto='+proyecto,
             success:function(data){
@@ -1585,11 +1512,7 @@
             var archivo_adjunto = "sin_subir";
           } else {
             var adjunto = $(".upload_file")[0].files[0];
-<<<<<<< HEAD
             var archivo_adjunto = adjunto.name;
-=======
-            var archivo_adjunto = adjunto.name;  
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
           }
 
           importe_neto = parseFloat(importe_neto);
@@ -1598,13 +1521,8 @@
           importe_bruto = parseFloat(importe_bruto);
 
 
-<<<<<<< HEAD
           $.ajax({
             url:"agregar_proveedor_cotizacion.php",
-=======
-          $.ajax({  
-            url:"agregar_proveedor_cotizacion.php",  
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
             method:"POST",
             data: 'id='+id+'&id_proveedor='+id_proveedor+'&forma_pago='+forma_pago+'&tipo_factura='+tipo_factura+'&numero_factura='+numero_factura+'&fecha_factura='+fecha_factura+'&fecha_pactada='+fecha_pactada+'&archivo_adjunto='+archivo_adjunto+'&importe_neto='+importe_neto+'&iva='+iva+'&percepcion='+percepcion+'&importe_bruto='+importe_bruto,
             success:function(data){
@@ -1613,7 +1531,6 @@
               drEvent = drEvent.data('dropify');
               drEvent.resetPreview();
               drEvent.clearElement();
-<<<<<<< HEAD
               $.ajax({
                   url:"ajax_mostrar_cotizaciones_aprobadas.php",
                   method:"POST",
@@ -1623,17 +1540,6 @@
                   }
               });
             }
-=======
-              $.ajax({  
-                  url:"ajax_mostrar_cotizaciones_aprobadas.php",  
-                  method:"POST",  
-                  data:'proyecto='+proyecto,
-                  success:function(data){
-                      $('#modal_cargar_proveedor').modal('hide');
-                  }  
-              });
-            }  
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
           });
         });
 
@@ -1692,13 +1598,8 @@
           });
         } else {
           document.getElementById('texto_cambio_estado').innerHTML = estado;
-<<<<<<< HEAD
           $('#modal_mensaje').modal('show');
         }
-=======
-          $('#modal_mensaje').modal('show'); 
-        } 
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
       });
 
       $('#boton_mensaje').click(function(){
@@ -1974,11 +1875,7 @@
           let item = $(this).attr('data-item');
           let mensaje = $(this).attr('data-mensaje');
           let proyecto = '<?php echo $_GET['id'];?>';
-<<<<<<< HEAD
 
-=======
-          
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
           console.log("Proyecto: ",proyecto);
 
           if(mensaje == 0){
@@ -1991,11 +1888,7 @@
                 data:'registro='+registro+'&texto_mensaje='+texto_mensaje,
                 success:function(data){
                   $.ajax({
-<<<<<<< HEAD
                     url:"ajax_cotizaciones___.php",
-=======
-                    url:"ajax_cotizaciones.php",
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
                     method:"POST",
                     data:'proyecto='+proyecto,
                     success:function(data){
@@ -2110,11 +2003,7 @@
             success:function(data){
               //window.location.reload(true);
               $.ajax({
-<<<<<<< HEAD
                 url:"ajax_cotizaciones___.php",
-=======
-                url:"ajax_cotizaciones.php",
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
                 method:"POST",
                 data:'proyecto='+proyecto,
                 success:function(data){
@@ -2153,11 +2042,7 @@
             success:function(data){
               $('#modal_eliminar_cotizacion').modal('hide');
               $.ajax({
-<<<<<<< HEAD
                 url:"ajax_cotizaciones___.php",
-=======
-                url:"ajax_cotizaciones.php",
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
                 method:"POST",
                 data:'proyecto='+proyecto,
                 success:function(data){
@@ -2192,10 +2077,7 @@
               $("#edicion_forma_pago").val(data.forma_pago);
               $("#edicion_dias").val(data.tiempo_pago);
               $("#edicion_id_registro").val(id_registro);
-<<<<<<< HEAD
               $("#modal_editar_registro .cotizacion_pagos_container").data("id_registro", id_registro);
-=======
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
               $(".numerable").each(function(){abandonar(this);})
               $('#modal_editar_registro').modal('show');
             }
@@ -2224,11 +2106,7 @@
            success:function(data){
             $('#modal_editar_registro').modal('hide');
             $.ajax({
-<<<<<<< HEAD
                 url:"ajax_cotizaciones___.php",
-=======
-                url:"ajax_cotizaciones.php",
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
                 method:"POST",
                 data:'proyecto='+proyecto,
                 success:function(data){
@@ -2389,11 +2267,7 @@
                   $('#pago90').val(data.valor90dias);
                   $(".numerable").each(function(){abandonar(this);});
                     $.ajax({
-<<<<<<< HEAD
                       url:"ajax_cotizaciones___.php",
-=======
-                      url:"ajax_cotizaciones.php",
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
                       method:"POST",
                       data:'proyecto='+proyecto,
                       success:function(data){
@@ -2451,21 +2325,12 @@
 
         $('.cargar_proveedor_cotizacion').click(function(){
           var id = $(this).attr('data-id');
-<<<<<<< HEAD
           $.ajax({
               url:"traer_cotizaciones.php",
               method:"POST",
               data:{id:id},
               dataType:"json",
               success:function(data){
-=======
-          $.ajax({  
-              url:"traer_cotizaciones.php",  
-              method:"POST",  
-              data:{id:id},
-              dataType:"json",
-              success:function(data){  
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
                 $('#modal_cargar_proveedor').modal('show');
                 $('#proveedores').val(data.id_proveedor);
                 $('#ot').val(data.id);
@@ -2483,11 +2348,7 @@
                 $("#iva").val(data.iva);
                 $("#percepcion").val(data.percepcion);
                 $("#importe_bruto").val(data.importe_bruto);
-<<<<<<< HEAD
               }
-=======
-              }  
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
           });
         });
 
@@ -2524,7 +2385,6 @@
         $('#proveedores').change(function(){
           id = $(this).val();
           console.log("Proveedor elegido: "+id);
-<<<<<<< HEAD
           $.ajax({
             url:"cargar_proveedor.php",
             method:"POST",
@@ -2534,17 +2394,6 @@
               $('#forma_pago_nuevo').val(data.forma_pago);
               $('#tiempo_pago').val(data.tiempo_cobro);
             }
-=======
-          $.ajax({  
-            url:"cargar_proveedor.php",  
-            method:"POST",  
-            data:{id:id},
-            dataType:"json",
-            success:function(data){  
-              $('#forma_pago_nuevo').val(data.forma_pago);
-              $('#tiempo_pago').val(data.tiempo_cobro);
-            }  
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
           });
         });
 
@@ -2609,11 +2458,8 @@
           });
           $(".importe_bruto").val(sum);
         });
-<<<<<<< HEAD
 
         cotizacion_pagos.inicio(<?php echo $_GET['id']; ?>);
-=======
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
     }
     </script>
 
@@ -2629,11 +2475,7 @@
     </script>
 
     <!-- Script para la carga de Cotizaciones desde Excel -->
-<<<<<<< HEAD
     <!--script>
-=======
-    <script>
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
     /**
      * Get the URL parameters
      * source: https://css-tricks.com/snippets/javascript/get-url-variables/
@@ -2824,11 +2666,7 @@
     		desMerge(wb);
     		buscarCotizaciones(wb);
         $.ajax({
-<<<<<<< HEAD
             url:"ajax_cotizaciones___.php",
-=======
-            url:"ajax_cotizaciones.php",
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
             method:"POST",
             data:'proyecto=<?php echo $_GET["id"]; ?>',
             success:function(data){
@@ -3008,11 +2846,7 @@
 
 
         function boton(){
-<<<<<<< HEAD
           let id<?php echo "=$_GET['id']"; ?>;
-=======
-          let id=<?php echo $_GET['id']; ?>;
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
 
           $.ajax({
             url: "datos_tabla_cotizaciones.php",
@@ -3033,10 +2867,6 @@
             }
           });
         }
-<<<<<<< HEAD
     </script-->
-=======
-    </script>
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
   </body>
 </html>

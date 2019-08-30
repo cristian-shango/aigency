@@ -13,6 +13,7 @@
   $servicio = $_POST["servicio"];
   $descripcion = $_POST["descripcion"];
   $razon_social = $_POST["razon_social"];
+  $nombre_fantasia = $_POST["nombre_fantasia"];
   $cuit = $_POST["cuit"];
   $contacto = $_POST["contacto"];
   $telefono = $_POST["telefono"];
@@ -27,7 +28,7 @@
   $tiempo_cobro = $_POST["tiempo_cobro"];
   $obligatoriedad = $_POST["obligatoriedad"];
 
-  $sql = "INSERT INTO proveedores (servicio, descripcion, razon_social, cuit, contacto, telefono, celular, mail, website, observaciones, ubicacion, iso, forma_pago, descripcion_pago, tiempo_cobro, obligatoriedad) VALUES ('$servicio', '$descripcion', '$razon_social', '$cuit', '$contacto', '$telefono', '$celular', '$mail', '$web', '$observaciones', '$ubicacion', '$iso', '$forma_pago', '$descripcion_pago', '$tiempo_cobro', '$obligatoriedad')";
+  $sql = "INSERT INTO proveedores (servicio, descripcion, razon_social,nombre_fantasia, cuit, contacto, telefono, celular, mail, website, observaciones, ubicacion, iso, forma_pago, descripcion_pago, tiempo_cobro, obligatoriedad) VALUES ('$servicio', '$descripcion', '$razon_social','$nombre_fantasia', '$cuit', '$contacto', '$telefono', '$celular', '$mail', '$web', '$observaciones', '$ubicacion', '$iso', '$forma_pago', '$descripcion_pago', '$tiempo_cobro', '$obligatoriedad')";
 
   if(mysqli_query($conexion, $sql)){ 
     echo "Registro creado."; 

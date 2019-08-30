@@ -11,7 +11,7 @@
   } 
 
   $id = $_POST["id"];
-  $id_proveedor = $_POST["id_proveedor"];
+  $id_proveedor = $_POST["id_proveedor"];  
   $numero_factura = $_POST["numero_factura"];
   $fecha_factura = $_POST["fecha_factura"];
   $fecha_pactada = $_POST["fecha_pactada"];

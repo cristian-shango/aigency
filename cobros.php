@@ -447,7 +447,8 @@
                     </div>
                   </div>
                 </div>
-                <!-- <?php
+                <!-----------------------dropify----------------------------------------------------------------------------->
+                <?php
                   if(empty($row['archivo_adjunto'])){
                 ?>
                   <div class="col-md-12">
@@ -467,7 +468,7 @@
                   </div>
                 <?php
                   }
-                ?> -->
+                ?> 
 
                 <div class="col-md-3">
                   <button class="btn btn-block btn-success cambio_proyecto" data-estado="12" style="cursor: pointer;">FACTURADO</button>
@@ -602,7 +603,7 @@
                 $('#costo_inicial').val(data.costo_presupuestado);
                 $('#precio').val(data.precio);
                 $('#consumido').val(data.consumido);
-                //$('.upload_file').attr('data-default-file',data.archivo_adjunto);
+                $('.upload_file').attr('data-default-file',data.archivo_adjunto);
                 $("#diferencia").val(data.saldo);
                 $("#costo_markup").val(data.precio_markup);
                 $("#forma_cobro").val(data.forma_pago);
@@ -749,6 +750,28 @@
         asociareventonumerable();
         $(".numerable").each(function(){abandonar(this);})
       }
+
+
+      $(".upload_file").change(function(){
+          var fd = new FormData();
+          var files = $('.upload_file')[0].files[0];
+          fd.append('file',files);
+          console.log(fd);
+          uploadData(fd);
+        });
+
+        function uploadData(formdata){
+          $.ajax({
+            url: 'subir_archivo_shango.php',
+            type: 'post',
+            data: formdata,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function(response){
+            }
+          });
+        }
 
     </script>
   </body>

@@ -1,13 +1,9 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
 <?php
   include 'conexion.php';
   include 'session.php';
   mysql_set_charset('utf8');
   $proyecto = $_POST['proyecto'];
-<<<<<<< HEAD
 
   function modal_cotizacion_pagos($registro, $proyecto) {
     return '<div class="cotizacion_pagos_container" data-id_registro="'.$registro.'" data-id_proyecto="'.$proyecto.'">
@@ -60,23 +56,6 @@
                 <th scope='col' class='gray' width='10%;'>Pago a</th>
                 <th scope='col' class='gray' width='2%;'></th>
                 <th scope='col' class='gray' width='2%;'></th>
-=======
-      echo "<tbody>
-            <tr>
-              <th scope='col' class='gray' width='2%;'>#</th>
-              <th scope='col' class='gray' width='10%;'>Rubro</th>
-              <th scope='col' class='gray' width='10%;'>Categoría</th>
-              <th scope='col' class='gray' width='5%;'>Item</th>
-              <th scope='col' class='gray' width='5%;'>Condición</th>
-              <th scope='col' class='gray' width='20%;'>Detalle</th>
-              <th scope='col' class='gray' width='5%;'>Jornadas</th>
-              <th scope='col' class='gray' width='5%;'>Cant.</th>
-              <th scope='col' class='gray' width='15%;'>Valor</th>
-              <th scope='col' class='gray' width='14%;'>Total</th>
-              <th scope='col' class='gray' width='10%;'>Pago a</th>
-              <th scope='col' class='gray' width='2%;'></th>
-              <th scope='col' class='gray' width='2%;'></th>
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
             </tr>";
       $sql_registros = "SELECT * FROM registros r INNER JOIN rubros_cotizaciones rc ON r.rubro_cotizacion = rc.id_rubros_cotizaciones INNER JOIN categorias_cotizaciones cc ON r.categoria_cotizacion = cc.id_catcot INNER JOIN condicion_cotizacion concot ON r.condicion_registro = concot.id_concot WHERE id_proyecto = '$proyecto' ORDER BY rubro_cotizacion ASC, nombre_catcot ASC, item ASC, nombre_concot ASC";
       //echo $sql_registros."<br>";
@@ -117,7 +96,6 @@
                 /* CALCULO DE PROMEDIO O SUMA DE LOS ITEMS */
 
               if ($row_registros['registro_seleccionado'] == 0){
-<<<<<<< HEAD
                 echo "<tr class='cotizacion_pagos_group'>";
                   echo "<td>";
                     echo "<input class='form-check-input position-static mostrar_checkbox checkbox cotizacion_pagos_checked' type='checkbox' name='radio_cotizacion_".$row['id_catcot']."' id='radio_cotizacion' value='".$row_registros['importe_total']."' data-registro='".$row_registros['id']."' data-pago='".$row_registros['tiempo_pago']."' data-item='".$row_registros['item']."'></td>";
@@ -125,15 +103,6 @@
                 echo "<tr class='cotizacion_pagos_group'>";
                   echo "<td>";
                     echo "<input class='form-check-input position-static mostrar_checkbox checkbox cotizacion_pagos_checked' type='checkbox' name='radio_cotizacion_".$row['id_catcot']."' id='radio_cotizacion' value='".$row_registros['importe_total']."' data-registro='".$row_registros['id']."' data-pago='".$row_registros['tiempo_pago']."' data-item='".utf8_encode($row_registros['item'])."' checked></td>";
-=======
-                echo "<tr>";
-                  echo "<td>";
-                    echo "<input class='form-check-input position-static mostrar_checkbox checkbox' type='checkbox' name='radio_cotizacion_".$row['id_catcot']."' id='radio_cotizacion' value='".$row_registros['importe_total']."' data-registro='".$row_registros['id']."' data-pago='".$row_registros['tiempo_pago']."' data-item='".$row_registros['item']."'></td>";
-              } else {
-                echo "<tr>";
-                  echo "<td>";
-                    echo "<input class='form-check-input position-static mostrar_checkbox checkbox' type='checkbox' name='radio_cotizacion_".$row['id_catcot']."' id='radio_cotizacion' value='".$row_registros['importe_total']."' data-registro='".$row_registros['id']."' data-pago='".$row_registros['tiempo_pago']."' data-item='".utf8_encode($row_registros['item'])."' checked></td>";
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
               }
 
           echo "<td scope='row' style='font-weight: bolder;'>".utf8_encode($row_registros['nombre_rubros'])."</td>";
@@ -159,19 +128,12 @@
           echo "<td>".($row_registros['jornadas_registro'])."</td>";
           echo "<td>".$row_registros['cantidad']."</td>";
           echo "<td>$<span class='valor_precio_cliente numerable'>".$row_registros['importe_neto']."</span></td>";
-<<<<<<< HEAD
           echo "<td>$<span class='valor_promedio numerable cotizacion_pagos_total' data-registro='".$row['id_catcot']."' data-valor='".$row_registros['importe_total']."'>".$row_registros['importe_total']."</span></td>";
           echo "<td>";
             echo modal_cotizacion_pagos($row_registros['id'], $proyecto);
 
               if ($row_registros['tiempo_pago'] == 30){
                 echo "<select class='tiempo_pago_cambio form-control' data-registro='".$row_registros['id']."' data-plugin='select2' style='display:none; width: 100%;'>";
-=======
-          echo "<td>$<span class='valor_promedio numerable' data-registro='".$row['id_catcot']."' data-valor='".$row_registros['importe_total']."'>".$row_registros['importe_total']."</span></td>";
-          echo "<td>";
-              if ($row_registros['tiempo_pago'] == 30){
-                echo "<select class='tiempo_pago_cambio form-control' data-registro='".$row_registros['id']."' data-plugin='select2' style='width: 100%;'>";
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
                   echo "<option value='30' selected='selected'>30 días</option>";
                   echo "<option value='60'>60 días</option>";
                   echo "<option value='90'>90 días</option>";
@@ -179,11 +141,7 @@
               }
 
               if ($row_registros['tiempo_pago'] == 60){
-<<<<<<< HEAD
                 echo "<select class='tiempo_pago_cambio form-control' data-registro='".$row_registros['id']."' data-plugin='select2' style='display:none; width: 100%;'>";
-=======
-                echo "<select class='tiempo_pago_cambio form-control' data-registro='".$row_registros['id']."' data-plugin='select2' style='width: 100%;'>";
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
                   echo "<option value='30'>30 días</option>";
                   echo "<option value='60' selected='selected'>60 días</option>";
                   echo "<option value='90'>90 días</option>";
@@ -191,11 +149,7 @@
               }
 
               if ($row_registros['tiempo_pago'] == 90){
-<<<<<<< HEAD
               echo "<select class='tiempo_pago_cambio form-control' data-registro='".$row_registros['id']."' data-plugin='select2' style='display:none; width: 100%;'>";
-=======
-              echo "<select class='tiempo_pago_cambio form-control' data-registro='".$row_registros['id']."' data-plugin='select2' style='width: 100%;'>";
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
                 echo "<option value='30'>30 días</option>";
                 echo "<option value='60'>60 días</option>";
                 echo "<option value='90' selected='selected'>90 días</option>";
@@ -218,13 +172,8 @@
       } else{
               echo 'ERROR: Could not able to execute $sql_registros. ' . mysqli_error($conexion);
         }
-<<<<<<< HEAD
     echo "<tr id='tr_mostrar' class='cotizacion_pagos_group'>";
       echo "<td>#<input class='cotizacion_pagos_checked' checked='checked' hidden></input></td>";
-=======
-    echo "<tr id='tr_mostrar'>";
-      echo "<td>#</td>";
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
       echo "<td class='form_group'>";
          echo "<select class='form-control dropdown_rubro' id='ingreso_rubro' data-plugin='select2' style='width: 100%;'>";
           echo "<option value=''>Rubro</option>";
@@ -310,23 +259,11 @@
           echo "<div class='input-group-prepend'>";
             echo "<div class='input-group-text'>$</div>";
           echo "</div>";
-<<<<<<< HEAD
           echo "<input type='number text' class='form-control form-control importe_total numerable cotizacion_pagos_total' id='ingreso_importe_total' readonly value='0'>";
         echo "</div>";
       echo "</td>";
       echo "<td>";
       echo modal_cotizacion_pagos("guardable", $proyecto);
-=======
-          echo "<input type='number text' class='form-control form-control importe_total numerable' id='ingreso_importe_total' readonly value='0'>";
-        echo "</div>";
-      echo "</td>";
-      echo "<td>";
-        echo "<select class='tiempo_pago_cambio form-control' id='ingreso_dias' data-registro='".$row_registros['id']."' data-plugin='select2' style='width: 100%;'>";
-          echo "<option value='30'>30 días</option>";
-          echo "<option value='60'>60 días</option>";
-          echo "<option value='90' selected='selected'>90 días</option>";
-        echo "</select>";
->>>>>>> 00059c6bec1b069e4d59dcacc16293f16d9945c3
       echo "</td>";
       echo "<td><button type='button' class='btn btn-success' id='boton_guardar_cotizacion'><i class='icon wb-check' aria-hidden='true'></i></button></td>";
       echo "<td></td>";

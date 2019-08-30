@@ -488,73 +488,79 @@
 									<div class="col-md-4">
 										<div class="form-group">
 										    <h4>Servicio</h4>
-										    <input type="text" id="ver_servicio" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly></input>
+										    <input type="text" id="ver_servicio" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
 										</div>
 									</div>
 									<div class="col-md-8">
 										<div class="form-group">
 										    <h4>Descripción</h4>
-										    <input type="text" id="ver_descripcion" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly></input>
+										    <input type="text" id="ver_descripcion" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 										    <h4>Razón Social</h4>
-										    <input type="text" id="ver_razon_social" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly></input>
+										    <input type="text" id="ver_razon_social" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+										    <h4>Nombre Fantasia</h4>
+										    <input type="text" id="ver_nombre_fantasia" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 										    <h4>CUIT</h4>
-										    <input type="text" id="ver_cuit" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly></input>
+										    <input type="text" id="ver_cuit" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 										    <h4>Contacto</h4>
-										    <input type="text" id="ver_contacto" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly></input>
+										    <input type="text" id="ver_contacto" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 										    <h4>Teléfono</h4>
-										    <input type="text" id="ver_telefono" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly></input>
+										    <input type="text" id="ver_telefono" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 										    <h4>Celular</h4>
-										    <input type="text" id="ver_celular" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly></input>
+										    <input type="text" id="ver_celular" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 										    <h4>Mail</h4>
-										    <input type="text" id="ver_mail" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly></input>
+										    <input type="text" id="ver_mail" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 										    <h4>Sitio Web</h4>
-										    <input type="url" id="ver_web" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly></input>
+										    <input type="url" id="ver_web" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
 										    <h4>Observaciones</h4>
-										    <input type="text" id="ver_observaciones" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly></input>
+										    <input type="text" id="ver_observaciones" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 										    <h4>Ubicación</h4>
-										    <input type="text" id="ver_ubicacion" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly></input>
+										    <input type="text" id="ver_ubicacion" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
 										</div>
 									</div>
 									<div class="col-md-2">
 										<div class="form-group">
 										    <h4>ISO</h4>
-										    <input type="text" id="ver_iso" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly></input>
+										    <input type="text" id="ver_iso" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -589,7 +595,7 @@
 									<div class="col-md-12">
 										<div class="form-group">
 										    <h4>Descripción de Pago</h4>
-										    <input type="text" id="ver_descripcion_pago" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly></input>
+										    <input type="text" id="ver_descripcion_pago" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
 										</div>
 									</div>
 		      					</div>
@@ -629,6 +635,12 @@
 										<div class="form-group">
 										    <h4>Razón Social</h4>
 										    <input type="text" id="razon_social_nuevo" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+										    <h4>Nombre Fantasia</h4>
+										    <input type="text" id="nombre_fantasia_nuevo" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -810,6 +822,7 @@
 											 $('#servicio_nuevo').val(data.servicio);
 											 $('#descripcion_nuevo').val(data.descripcion);
 											 $('#razon_social_nuevo').val(data.razon_social);
+											 $('#nombre_fantasia_nuevo').val(data.nombre_fantasia);
 											 $('#cuit_nuevo').val(data.cuit);
 											 $('#contacto_nuevo').val(data.contacto);
 											 $('#telefono_nuevo').val(data.telefono);
@@ -845,6 +858,7 @@
 				var servicio = escapar($("#servicio_nuevo").val());
 				var descripcion = escapar($("#descripcion_nuevo").val());
 				var razon_social = escapar($("#razon_social_nuevo").val());
+				var nombre_fantasia = escapar($("#nombre_fantasia_nuevo").val());
 				var cuit = $("#cuit_nuevo").val();
 				var contacto = escapar($("#contacto_nuevo").val());
 				var telefono = $("#telefono_nuevo").val();
@@ -863,7 +877,7 @@
 				var url = (id < 0) ? "agregar_proveedor.php" : "editar_proveedor.php";
 				console.log("url ", url);
 
-				var dataString = 'id='+id+'&servicio='+servicio+'&descripcion='+descripcion+'&razon_social='+razon_social+'&cuit='+cuit+'&contacto='+contacto+'&telefono='+telefono+'&celular='+celular+'&mail='+mail+'&web='+web+'&observaciones='+observaciones+'&ubicacion='+ubicacion+'&iso='+iso+'&forma_pago='+forma_pago+'&descripcion_pago='+descripcion_pago+'&tiempo_cobro='+tiempo_cobro+'&obligatoriedad='+obligatoriedad;
+				var dataString = 'id='+id+'&servicio='+servicio+'&descripcion='+descripcion+'&razon_social='+razon_social+'&nombre_fantasia='+nombre_fantasia+'&cuit='+cuit+'&contacto='+contacto+'&telefono='+telefono+'&celular='+celular+'&mail='+mail+'&web='+web+'&observaciones='+observaciones+'&ubicacion='+ubicacion+'&iso='+iso+'&forma_pago='+forma_pago+'&descripcion_pago='+descripcion_pago+'&tiempo_cobro='+tiempo_cobro+'&obligatoriedad='+obligatoriedad;
 
 				console.log(dataString);
 				$.ajax({
@@ -928,6 +942,7 @@
 	                    $('#ver_servicio').val(data.servicio);
 	                    $('#ver_descripcion').val(data.descripcion);
 	                    $('#ver_razon_social').val(data.razon_social);
+						$('#ver_nombre_fantasia').val(data.nombre_fantasia);
 	                    $('#ver_cuit').val(data.cuit);
 	                    $('#ver_contacto').val(data.contacto);
 	                    $('#ver_telefono').val(data.telefono);

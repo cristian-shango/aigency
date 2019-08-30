@@ -14,6 +14,7 @@
   $servicio = $_POST["servicio"];
   $descripcion = $_POST["descripcion"];
   $razon_social = $_POST["razon_social"];
+  $nombre_fantasia = $_POST["nombre_fantasia"];
   $cuit = $_POST["cuit"];
   $contacto = $_POST["contacto"];
   $telefono = $_POST["telefono"];
@@ -28,7 +29,7 @@
   $tiempo_cobro = $_POST["tiempo_cobro"];
   $obligatoriedad = $_POST["obligatoriedad"];
 
-  $sql = "UPDATE proveedores SET servicio = '$servicio', descripcion = '$descripcion', razon_social = '$razon_social', cuit = '$cuit', contacto = '$contacto', telefono = '$telefono', celular = '$celular', mail = '$mail', website = '$web', observaciones = '$observaciones', ubicacion = '$ubicacion', iso = '$iso', forma_pago = '$forma_pago', descripcion_pago = '$descripcion_pago', tiempo_cobro = '$tiempo_cobro', obligatoriedad = '$obligatoriedad' WHERE id_proveedor = '$id'";
+  $sql = "UPDATE proveedores SET servicio = '$servicio', descripcion = '$descripcion', razon_social = '$razon_social',nombre_fantasia = '$nombre_fantasia', cuit = '$cuit', contacto = '$contacto', telefono = '$telefono', celular = '$celular', mail = '$mail', website = '$web', observaciones = '$observaciones', ubicacion = '$ubicacion', iso = '$iso', forma_pago = '$forma_pago', descripcion_pago = '$descripcion_pago', tiempo_cobro = '$tiempo_cobro', obligatoriedad = '$obligatoriedad' WHERE id_proveedor = '$id'";
 
   if(mysqli_query($conexion, $sql)){
     echo "Registro creado.";
