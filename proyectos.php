@@ -12,7 +12,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
     
-    <title>AiGency | Proveedores</title>
+    <title>AiGency | Proyectos</title>
     
     <link rel="apple-touch-icon" href="design/assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="design/assets/images/favicon.ico">
@@ -61,7 +61,7 @@
     </script>
   </head>
   <body class="animsition">
-    <!--[if lt IE 8]>
+   <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
@@ -154,177 +154,7 @@
         <!-- End Site Navbar Seach -->
       </div>
     </nav>
-    <div class="site-menubar">
-      <div class="site-menubar-body">
-        <div>
-          <div>
-            <ul class="site-menu" data-plugin="menu">
-              <li class="site-menu-category">Menú Principal</li>
-              <li class="site-menu-item has-sub">
-                <a href="home.php">
-                  <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
-                  <span class="site-menu-title">Home</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="agenda.php">
-                  <i class="site-menu-icon wb-calendar" aria-hidden="true"></i>
-                  <span class="site-menu-title">Agenda</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="proyectos.php">
-                  <i class="site-menu-icon wb-list-bulleted" aria-hidden="true"></i>
-                  <span class="site-menu-title">Proyectos</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="pedido_cotizacion.php">
-                  <i class="site-menu-icon wb-add-file" aria-hidden="true"></i>
-                  <span class="site-menu-title">Pedido de Cotización</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="cotizaciones.php">
-                  <i class="site-menu-icon wb-order" aria-hidden="true"></i>
-                  <span class="site-menu-title">Carga de Cotizaciones</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="javascript:void(0)">
-                        <i class="site-menu-icon wb-extension" aria-hidden="true"></i>
-                        <span class="site-menu-title">Administración</span>
-                                <span class="site-menu-arrow"></span>
-                    </a>
-                    <ul class="site-menu-sub">
-                      <li class="site-menu-item">
-                        <a class="animsition-link" href="#">
-                          <span class="site-menu-title">Cobros</span>
-                        </a>
-                      </li>
-                      <li class="site-menu-item">
-                        <a class="animsition-link" href="#">
-                          <span class="site-menu-title">Pagos</span>
-                        </a>
-                      </li>
-                      <li class="site-menu-item">
-                        <a class="animsition-link" href="#">
-                          <span class="site-menu-title">Facturación</span>
-                        </a>
-                      </li>
-                      <li class="site-menu-item">
-                        <a class="animsition-link" href="#">
-                          <span class="site-menu-title">Bancos</span>
-                        </a>
-                      </li>
-                      <li class="site-menu-item">
-                        <a class="animsition-link" href="#">
-                          <span class="site-menu-title">Gastos</span>
-                        </a>
-                      </li>
-                      <li class="site-menu-item">
-                        <a class="animsition-link" href="#">
-                          <span class="site-menu-title">Sueldos</span>
-                        </a>
-                      </li>
-                    </ul>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="proyeccion.php">
-                  <i class="site-menu-icon wb-graph-up" aria-hidden="true"></i>
-                  <span class="site-menu-title">Proyección</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="proveedores.php">
-                  <i class="site-menu-icon wb-hammer" aria-hidden="true"></i>
-                  <span class="site-menu-title">Proveedores</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="clientes.php">
-                  <i class="site-menu-icon wb-wrench" aria-hidden="true"></i>
-                  <span class="site-menu-title">Clientes</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="usuarios.php">
-                  <i class="site-menu-icon wb-user" aria-hidden="true"></i>
-                  <span class="site-menu-title">Usuarios</span>
-                </a>
-              </li>
-            </ul>  
-          </div>
-        </div>
-      </div>
-    
-      <div class="site-menubar-footer">
-        <a href="javascript: void(0);" class="fold-show" data-placement="top" data-toggle="tooltip"
-          data-original-title="Settings">
-          <span class="icon wb-settings" aria-hidden="true"></span>
-        </a>
-        <a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Lock">
-          <span class="icon wb-eye-close" aria-hidden="true"></span>
-        </a>
-        <a href="php/logout.php" data-placement="top" data-toggle="tooltip" data-original-title="Logout">
-          <span class="icon wb-power" aria-hidden="true"></span>
-        </a>
-      </div></div>    <div class="site-gridmenu">
-      <div>
-        <div>
-          <ul>
-            <li>
-              <a href="../../apps/mailbox/mailbox.html">
-                <i class="icon wb-envelope"></i>
-                <span>Mailbox</span>
-              </a>
-            </li>
-            <li>
-              <a href="../../apps/calendar/calendar.html">
-                <i class="icon wb-calendar"></i>
-                <span>Calendar</span>
-              </a>
-            </li>
-            <li>
-              <a href="../../apps/contacts/contacts.html">
-                <i class="icon wb-user"></i>
-                <span>Contacts</span>
-              </a>
-            </li>
-            <li>
-              <a href="../../apps/media/overview.html">
-                <i class="icon wb-camera"></i>
-                <span>Media</span>
-              </a>
-            </li>
-            <li>
-              <a href="../../apps/documents/categories.html">
-                <i class="icon wb-order"></i>
-                <span>Documents</span>
-              </a>
-            </li>
-            <li>
-              <a href="../../apps/projects/projects.html">
-                <i class="icon wb-image"></i>
-                <span>Project</span>
-              </a>
-            </li>
-            <li>
-              <a href="../../apps/forum/forum.html">
-                <i class="icon wb-chat-group"></i>
-                <span>Forum</span>
-              </a>
-            </li>
-            <li>
-              <a href="../../index.html">
-                <i class="icon wb-dashboard"></i>
-                <span>Dashboard</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <?php require "barra_lateral.php"; echo $html_barra_lateral; ?>
 
     <!-- Page -->
     <div class="page">
@@ -382,11 +212,11 @@
 											<td><?php echo (($row['precio']));?></td>
 											<td><?php echo (($row['costo_presupuestado']));?></td>
 											<td><?php echo (($row['saldo']));?></td>
-											<td><a href="mailto:<?php echo (($row['mail']));?>"><?php echo (($row['mail']));?></a></td>
+											
 											
 
 											<td>
-											<button type="button" class="btn btn-success ver2 " data-toggle="modal" data-id="<?php echo ($row['id_proyecto']);?>"><i class="icon wb-eye" aria-hidden="true"></i></button>
+											<button type="button" class="btn btn-success ver2 " data-toggle="modal" data-id="<?php echo ($row['id']);?>"><i class="icon wb-eye" aria-hidden="true"></i></button>
 											</td>
 											
 											
@@ -496,16 +326,16 @@
 									<div class="col-md-1">
 									<div class="form-group">
 										<h4>Hora</h4>
-										<input type="number" id="hora_interno" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
+										<input type="time" id="hora_interno" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
 									</div>
 									</div>
 
-									<div class="col-md-1">
+								<!--	<div class="col-md-1">
 									<div class="form-group">
 										<h4>Minutos</h4>
 										<input type="number" id="minutos_interno" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
 									</div>
-									</div>
+									</div>-->
 
 									<div class="col-md-12">
 										<div class="form-group">
@@ -517,16 +347,16 @@
 									<div class="col-md-1">
 									<div class="form-group">
 										<h4>Hora</h4>
-										<input type="number" id="hora_cliente" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
+										<input type="time" id="hora_cliente" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
 									</div>
 									</div>
 
-									<div class="col-md-1">
+									<!--<div class="col-md-1">
 									<div class="form-group">
 										<h4>Minutos</h4>
 										<input type="number" id="minutos_cliente" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
 									</div>
-									</div>
+									</div>-->
 
 									
 									</div>
@@ -703,29 +533,20 @@
 	                data:{id:id},
 	                dataType:"json",
 	                success:function(data){
-	                    $('#ver_servicio').val(data.servicio);
-	                    $('#ver_descripcion').val(data.descripcion);
-	                    $('#ver_razon_social').val(data.razon_social);
-	                    $('#ver_cuit').val(data.cuit);
-	                    $('#ver_contacto').val(data.contacto);
-	                    $('#ver_telefono').val(data.telefono);
-	                    $('#ver_celular').val(data.celular);
-	                    $('#ver_mail').val(data.mail);
-	                    $('#ver_web').val(data.website);
-	                    $('#ver_observaciones').val(data.observaciones);
-	                    $('#ver_ubicacion').val(data.ubicacion);
-	                    $('#ver_iso').val(data.iso);
-	                    $('#ver_forma_pago').val(data.forma_pago);
-	                    $('#ver_forma_pago').attr("disabled", true);
-	                    $('#ver_descripcion_pago').val(data.descripcion_pago);
-
-	                    $("#boton_enviar_mail").click(function(){
-	                    	window.location="mailto:"+data.mail;
-	                    });
-
-	                    $("#boton_visitar_sitio").click(function(){
-	                    	window.location.href=data.website;
-	                    });
+	                    $('#ver_cliente').val(data.cliente);
+	                    $('#ver_producto').val(data.producto_proyecto);
+	                    $('#ver_proyecto').val(data.nombre_proyecto);
+	                    $('#ver_detalle').val(data.detalle);
+	                    $('#ver_costo').val(data.costo_presupuestado);
+	                    $('#ver_precio').val(data.precio);
+	                    $('#ver_saldo').val(data.saldo);
+	                    $('#ver_consumido').val(data.consumido);
+	                    $('#ver_fecha_entrega').val(data.fecha_entrega);
+	                    $('#ver_hora_interno').val(data.hora_interno);
+	                    $('#ver_fecha_envio').val(data.fecha_envio);
+	                    $('#ver_hora_cliente').val(data.hora_cliente);
+	                    $('#ver_adicional').val(data.adicional);                    
+	                    $('#ver_markup').val(data.precio_markup);	                    
 
 	                    $('#modal_ver').modal('show');
 	                }

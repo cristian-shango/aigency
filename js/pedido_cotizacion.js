@@ -248,7 +248,7 @@ $(document).ready(function(){
             });
   });
 
-  $('.datepicker_fecha_entrega').datepicker({
+ /* $('.datepicker_fecha_entrega').datepicker({
     uiLibrary: 'bootstrap4',
     format: 'dd/mm/yyyy',
     locale: 'es-es'
@@ -267,7 +267,7 @@ $(document).ready(function(){
     uiLibrary: 'bootstrap4',
     format: 'dd/mm/yyyy',
     locale: 'es-es'
-  });
+  });*/
 
   $(".ver").click(function() {
     id = $(this).data("id");
@@ -290,3 +290,42 @@ $(document).ready(function(){
     lang: 'es_ar',
     autogrow: true
   });
+
+
+
+  document.getElementById("nuevo_precio_cliente").onblur =function (){    
+    this.value = parseFloat(this.value.replace(/,/g, ""))
+                    .toFixed(2)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");  
+    
+    
+}
+alert()
+
+document.getElementById("nuevo_costo_presupuestado").onblur =function (){    
+    this.value = parseFloat(this.value.replace(/,/g, ""))
+                    .toFixed(2)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");  
+    
+    
+}
+
+document.getElementById("precio_cliente_editar_proyecto").onblur =function (){    
+    this.value = parseFloat(this.value.replace(/,/g, ""))
+                    .toFixed(2)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");  
+    
+    
+}
+
+document.getElementById("editar_costo_presupuestado").onblur =function (){    
+    this.value = parseFloat(this.value.replace(/,/g, ""))
+                    .toFixed(2)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");  
+    
+    
+}

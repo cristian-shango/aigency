@@ -437,13 +437,18 @@
     <div class="modal fade" id="modal_aprobar_cotizacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-center" role="document">
         <div class="modal-content">
-          <div class="modal-body">
-            <h4>¿Aprobar Cotización?</h4>
-            <h5>(ESTAR SEGURO SEGURO EH)</h5>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" id="boton_aprobar_cotizacion" data-dismiss="modal">APROBAR</button>
-            <button type="button" class="btn btn-danger" id="boton_ignorar_cotizacion" data-dismiss="modal">CANCELAR</button>
+          <div class="modal-body">            
+              <h4>¿Aprobar Cotización?</h4>
+              <label for="fecha_inicio">Fecha Inicio:</label>
+              <input type="date" name="fecha_inicio" id="fecha_inicio">
+              <label for="fecha_culminacion">Fecha Culminacion:</label>
+              <input type="date" name="fecha_culminacion" id="fecha_culminacion">
+              
+              <!--<h5>(ESTAR SEGURO SEGURO EH)</h5>-->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" id="boton_aprobar_cotizacion" data-dismiss="modal">APROBAR</button>
+              <button type="button" class="btn btn-danger" id="boton_ignorar_cotizacion" data-dismiss="modal">CANCELAR</button>            
           </div>
         </div>
       </div>
@@ -810,6 +815,9 @@
 
         $('#boton_aprobar_cotizacion').click(function(){
           let id=<?php echo $_GET['id']; ?>;
+          let fecha_inicio=$('#fecha_inicio').val();
+          let fecha_culminacion= $('#fecha_culminacion').val();
+          
           var estado = "5";
           $.ajax({  
             url:"cambiar_estado.php",
@@ -826,8 +834,10 @@
                   $.ajax({  
                     url:"aprobar_proyecto.php",  
                     method:"POST",
-                    data: 'id='+ id,
-                    success:function(data){  
+                    data: 'id='+ id +'&fecha_inicio='+fecha_inicio +'&fecha_culminacion='+fecha_culminacion,
+                    success:function(data){
+                      console.log(fecha_inicio); 
+                      console.log(fecha_culminacion);  
                       window.location.reload(true);
                     }  
                   });

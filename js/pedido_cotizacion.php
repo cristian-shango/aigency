@@ -43,8 +43,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/trumbowyg/dist/trumbowyg.min.js"></script>
-    <script type="text/javascript" src="js/trumbowyg/dist/langs/es_ar.min.js"></script>  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/currencyformatter.js/2.2.0/currencyFormatter.js" integrity="sha256-lCXqGxPAQbTux1a9+jYZBXKJwb4amDg9c2MbtVk0Sec=" crossorigin="anonymous"></script>  
+    <script type="text/javascript" src="js/trumbowyg/dist/langs/es_ar.min.js"></script>    
          
       <link rel="stylesheet" href="js/trumbowyg/dist/ui/trumbowyg.min.css">
 
@@ -214,10 +213,10 @@
                               <td><?php echo (utf8_encode($row['tipo_cotizacion']));?></td>
                               <td><?php echo (utf8_encode($row['nombre_subtipo']));?></td>
                               <td><?php echo ($row['fecha_entrega']);?></td>
-                              <td><?php echo ($row['hora_interno']);?></td>
+                              <td><?php echo ($row['hora_interno']);?>:<?php echo ($row['minutos_interno']);?></td>
                               <td><?php echo ($row['fecha_envio']);?></td>
-                              <td><?php echo ($row['hora_cliente']);?></td>
-                              <td>$ <span class="valor_precio_cliente"><?php echo  ($row['precio']);?></span></td>
+                              <td><?php echo ($row['hora_cliente']);?>:<?php echo ($row['minutos_cliente']);?></td>
+                              <td>$ <span class="valor_precio_cliente"><?php echo ($row['precio']);?></span></td>
                               <td>$ <span class="valor_costo_presupuestado"><?php echo ($row['costo_presupuestado']);?></span></td>
                               <!-- <td>$ <span class="valor_saldo_total"><?php echo ($row['saldo']);?></span></td> -->
                               <td><button type="button" class="btn btn-default editar" data-toggle="modal" data-id="<?php echo ($row['id']);?>"><i class="icon wb-edit" aria-hidden="true"></i></button></td>
@@ -397,39 +396,39 @@
                 <div class="col-md-2">
                   <div class="form-group">
                       <h4>Fecha de Entrega Interna</h4>
-                      <input type="date" id="nuevo_fecha_entrega" class="form-control datepicker_fecha_entrega"  aria-label="Default" aria-describedby="inputGroup-sizing-default" >
+                      <input type="text" id="nuevo_fecha_entrega" class="form-control datepicker_fecha_entrega"  aria-label="Default" aria-describedby="inputGroup-sizing-default" data-plugin="datepicker">
                   </div>
                 </div>
                 <div class="col-md-1">
                   <div class="form-group">
                       <h4>Hora</h4>
-                      <input type="time" id="hora_interno" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                      <input type="number" id="hora_interno" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
                   </div>
                 </div>
-                <!--<div class="col-md-1">
+                <div class="col-md-1">
                   <div class="form-group">
                       <h4>Minutos</h4>
                       <input type="number" id="minutos_interno" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
                   </div>
-                </div>-->
+                </div>
                 <div class="col-md-2">
                   <div class="form-group">
                       <h4>Fecha de Entrega a Cliente</h4>
-                      <input type="date" id="nuevo_fecha_envio" class="form-control datepicker_fecha_envio"  aria-label="Default" aria-describedby="inputGroup-sizing-default" >
+                      <input type="text" id="nuevo_fecha_envio" class="form-control datepicker_fecha_envio"  aria-label="Default" aria-describedby="inputGroup-sizing-default" data-plugin="datepicker">
                   </div>
                 </div>
                 <div class="col-md-1">
                   <div class="form-group">
                       <h4>Hora</h4>
-                      <input type="time" id="hora_cliente" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                      <input type="number" id="hora_cliente" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
                   </div>
                 </div>
-                <!--<div class="col-md-1">
+                <div class="col-md-1">
                   <div class="form-group">
                       <h4>Minutos</h4>
                       <input type="number" id="minutos_cliente" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
                   </div>
-                </div>-->
+                </div>
                 <div class="col-md-3">
                   <div class="form-group">
                       <h4>Producto</h4>
@@ -513,7 +512,7 @@
                       <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                       </div>
-                      <input  type="number"  class="form-control form-control-lg "  id="nuevo_precio_cliente">
+                      <input type="number" data-type="currency" class="form-control form-control-lg "  id="nuevo_precio_cliente">
                     </div>
                   </div>
                 </div>
@@ -524,7 +523,7 @@
                       <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                       </div>
-                      <input  type="number"  class="form-control form-control-lg "  id="nuevo_costo_presupuestado">
+                      <input type="number" data-type="currency" class="form-control form-control-lg "  id="nuevo_costo_presupuestado">
                     </div>
                   </div>
                 </div>
@@ -586,39 +585,39 @@
                   <div class="col-md-2">
                     <div class="form-group">
                         <h4>Fecha de Entrega Interna</h4>
-                        <input type="date" id="fecha_entrega_editar_proyecto" class="form-control datepicker_fecha_entrega_editar"  aria-label="Default" aria-describedby="inputGroup-sizing-default" >
+                        <input type="text" id="fecha_entrega_editar_proyecto" class="form-control datepicker_fecha_entrega_editar"  aria-label="Default" aria-describedby="inputGroup-sizing-default" data-plugin="datepicker">
                     </div>
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-md-1">
                     <div class="form-group">
                         <h4>Hora</h4>
-                        <input type="time" id="hora_interno_editar" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        <input type="number" id="hora_interno_editar" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
                     </div>
                   </div>
-                  <!--<div class="col-md-1">
+                  <div class="col-md-1">
                     <div class="form-group">
                         <h4>Minutos</h4>
                         <input type="number" id="minutos_interno_editar" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
                     </div>
-                  </div>-->
+                  </div>
                   <div class="col-md-2">
                     <div class="form-group">
                         <h4>Fecha de Entrega a Cliente</h4>
-                        <input type="date" id="fecha_envio_editar_proyecto" class="form-control datepicker_fecha_envio_editar"  aria-label="Default" aria-describedby="inputGroup-sizing-default" >
+                        <input type="text" id="fecha_envio_editar_proyecto" class="form-control datepicker_fecha_envio_editar"  aria-label="Default" aria-describedby="inputGroup-sizing-default" data-plugin="datepicker">
                     </div>
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-md-1">
                     <div class="form-group">
                         <h4>Hora</h4>
-                        <input type="time" id="hora_cliente_editar" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        <input type="number" id="hora_cliente_editar" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
                     </div>
                   </div>
-                 <!-- <div class="col-md-1">
+                  <div class="col-md-1">
                     <div class="form-group">
                         <h4>Minutos</h4>
                         <input type="number" id="minutos_cliente_editar" class="form-control"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
                     </div>
-                  </div>-->
+                  </div>
                   <div class="col-md-3">
                     <div class="form-group">
                         <h4>Producto</h4>
@@ -714,7 +713,7 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text">$</div>
                         </div>
-                        <input class="money" type="text" class="form-control form-control-lg" id="precio_cliente_editar_proyecto">
+                        <input type="text" class="form-control form-control-lg" id="precio_cliente_editar_proyecto">
                       </div>
                     </div>
                   </div>
@@ -725,7 +724,7 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text">$</div>
                         </div>
-                        <input  type="number" class="form-control form-control-lg " id="editar_costo_presupuestado">
+                        <input type="number" class="form-control form-control-lg " id="editar_costo_presupuestado">
                         <input type="number" id="id_editar_proyecto" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" hidden>
                       </div>
                     </div>
@@ -814,9 +813,8 @@
         <script src="design/global/vendor/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     
     <!-- Scripts -->
+    <script src="js/money.js"></script>
     
-
-
     <script src="js/pedido_cotizacion.js"></script>
 
     <script src="design/global/js/Component.js"></script>

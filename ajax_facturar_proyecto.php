@@ -11,9 +11,9 @@
               <th>Proyecto</th>
               <th>Tipo de Proyecto</th>
               <th>Subtipo</th>
+              <th>Costo Objetivo</th>
+              <th>Costo Actual</th>
               <th>Precio</th>
-              <th>Costo</th>
-              <th>Costo + Markup</th>
               <th>Cobro a</th>
               <th>Fecha de Cobro</th>
               <th>% Ocurrencia</th>

@@ -352,7 +352,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                       <h4>Fecha de Factura</h4>
-                      <input type="text" id="fecha_factura" class="form-control datepicker_ff"  aria-label="Default" aria-describedby="inputGroup-sizing-default"data-plugin="datepicker">
+                      <input type="date" id="fecha_factura" class="form-control datepicker_ff"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -370,7 +370,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                       <h4>Fecha de Cobro</h4>
-                      <input type="text" id="fecha_cobro" class="form-control datepicker_fp"  aria-label="Default" aria-describedby="inputGroup-sizing-default"data-plugin="datepicker">
+                      <input type="date" id="fecha_cobro" class="form-control datepicker_fp"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
                   </div>
                 </div>
                 <div class="col-md-2">

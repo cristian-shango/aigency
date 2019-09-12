@@ -421,7 +421,7 @@
         <div class="page-aside-inner">
           <div data-role="container">
             <div data-role="content">
-              <section class="page-aside-section">
+              <section class="page-aside-section" >
                 <?php
             //echo $_GET['id'];
 
@@ -1024,10 +1024,10 @@
                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tab_cargar_proveedor" role="tab" aria-controls="proveedor"
                   aria-selected="false">CARGA DE FACTURAS</a>
               </li>
-              <li class="nav-item">
+              <!--<li class="nav-item">
                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab_editar_pagos" role="tab" aria-controls="pagos"
-                  aria-selected="false">PLAZOS DE PAGO</a>
-              </li>
+                  aria-selected="false">FORMAS DE PAGO</a>
+              </li>-->
             </ul>
             <div class="tab-content" id="TabContent">
             <div class="tab-pane fade show active" id="tab_editar_cotizacion" role="tabpanel" aria-labelledby="editar-tab">
@@ -1192,6 +1192,9 @@
                         </div>
                       </div>
                     </div>
+
+                              
+
                     <div class="col-md-6">
                       <button type="button" class="btn btn-success btn-block" id="boton_editar_cotizacion"><strong>GUARDAR</strong></button>
                     </div>
@@ -1204,7 +1207,47 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                 </div>
+                 <hr>
+                 
+                  <div class="row" id="cotizacion_pagos_avatar">
+                    <div class="col-md-12 cotizacion_pagos_container" data-id_registro="" data-id_proyecto="">
+                      <div class="d-flex justify-content-between" style="margin:1em">
+                          
+                        <h3>Editar Pagos</h3>
+                        
+                        <h3 class="text-right">Total: $<span id="total_cotizacion2" class="numerable subtotal_categoria"></span></h3>
+                      
+                      </div>
+
+                      <div class="col-md-12">
+                        <table class="col-md-12">
+                          <tbody class="cotizacion_pagos_lista">
+                            <tr><th class="gray">Pago</th><th class="gray">Porcentaje</th><th class="gray">Forma</th><th class="gray">Fecha 1</th><th class="gray">Fecha 2</th><th class="gray">Fecha 3</th><th class="gray">Monto</th><th class="gray"></th></tr>
+                            <tr class="cotizacion_pagos_data" data-id_pago="">
+                              <td><select class="form-control cotizacion_pagos_plazo"><option>PLAZO...</option></select></td>
+                              <td><input type="text" class="form-control cotizacion_pagos_porcentaje"></td>
+                              <td><select class="form-control cotizacion_pagos_forma"><option>FORMA...</option></select></td>
+                              <td><input type="date" class="form-control cotizacion_pagos_fecha1" placeholder="fecha 1"></td>
+                              <td><input type="date" class="form-control cotizacion_pagos_fecha2" placeholder="fecha 2"></td>
+                              <td><input type="date" class="form-control cotizacion_pagos_fecha3" placeholder="fecha 3"></td>
+                              <td><input type="text" class="form-control cotizacion_pagos_monto numerable" width="9" readonly></td>
+                              
+                              <td><button type="button" class="btn btn-primary btn-block cotizacion_pagos_borrar"><i class="icon wb-trash" aria-hidden="true"></i></button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <br>
+                        <div class="d-flex justify-content-around align-items-baseline" style="margin:1em">
+                          <button class="cotizacion_pagos_guardar btn col-md-4" data-dismiss="modal">GUARDAR</button>
+                          <button class="cotizacion_pagos_cancelar btn btn-danger col-md-4 " data-dismiss="modal">CANCELAR</button>
+                          <button class="cotizacion_pagos_mostrar_agregar_pago btn btn-info col-md-3">AGREGAR</button>
+                          <br>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    
             </div>
                 <div class="tab-pane fade" id="tab_cargar_proveedor" role="tabpanel" aria-labelledby="proveedor-tab">
 
@@ -1269,24 +1312,16 @@
                             ?>
                           </select>
                           
-                        </div>
-
-                        
-                        
-                        
-
-                        <div class="col-md-2">          
+                        </div> 
+                        <div class="col-md-1"> 
+                        <br><br> 
+                            <button type="button" class="btn btn-success btn-block" id="boton_guardar_proveedor_nombre" style="display:none"><strong><i class="icon wb-check" aria-hidden="true"></i></strong></button>            
+                        </div>      
+                          <div class="col-md-1">          
                           <br><br>
-                          <button type="button" class="btn btn-success btn-block" id="agregar_proveedor" ><strong>AGREGAR PROVEEDOR</strong></button>
-                            
-                            <div class="col-md-6">
-                            <button type="button" class="btn btn-success btn-block" id="boton_guardar_proveedor_nombre" style="display:none"><strong><i class="icon wb-check" aria-hidden="true"></i></strong></button>
-                            </div>  
-                            <div class="col-md-6">
-                            <span><button type="button" class="btn btn-danger btn-block" data-dismiss="modal" id="boton_cancelar_proveedor_nombre" style="display:none"><strong><i class="fas fa-times"></i></strong></button></span>
-                            </div>
-                         
-                        </div>
+                          <button type="button" class="btn btn-primary" id="agregar_proveedor" ><strong><i class="fas fa-sync"></i></strong></button>
+                          </div>  
+                          
 
                         
 
@@ -1370,7 +1405,7 @@
                         <div class="col-md-4">
                           <div class="form-group">
                               <h4>Fecha de Factura</h4>
-                              <input type="text" id="fecha_facturacion" class="form-control datepicker_ff"  aria-label="Default" aria-describedby="inputGroup-sizing-default"data-plugin="datepicker">
+                              <input type="date" id="fecha_facturacion" class="form-control "  aria-label="Default" aria-describedby="inputGroup-sizing-default">
                           </div>
                         </div>
                         <div class="col-md-4">
@@ -1388,7 +1423,7 @@
                         <div class="col-md-4">
                           <div class="form-group">
                               <h4>Fecha de Pago</h4>
-                              <input type="text" id="fecha_pago" class="form-control datepicker_fp"  aria-label="Default" aria-describedby="inputGroup-sizing-default" data-plugin="datepicker">
+                              <input type="date" id="fecha_pago" class="form-control "  aria-label="Default" aria-describedby="inputGroup-sizing-default" >
                           </div>
                         </div>
                         <div class="col-md-2">
@@ -1498,15 +1533,22 @@
                   </form>
                 </div>
                 <!-- Tab de carga y edicion de pagos -->
-                <div class="tab-pane fade" id="tab_editar_pagos" role="tabpanel" aria-labelledby="pagos-tab">
+                <!--<div class="tab-pane fade" id="tab_editar_pagos" role="tabpanel" aria-labelledby="pagos-tab">
                   <div class="modal-body">
                     <div class="row" id="cotizacion_pagos_avatar">
                         <div class="col-md-12 cotizacion_pagos_container" data-id_registro="" data-id_proyecto="">
-                          <div class="col-md-12"><h3>Editar Pagos</h3></div>
+                          <div class="d-flex justify-content-between">
+                            
+                          <h3>Editar Pagos</h3>
+                          
+                          <h3 class="text-right">Total: $<span id="total_cotizacion2" class="numerable subtotal_categoria"></span></h3>
+                       
+                        </div>
+
                             <div class="col-md-12">
                               <table class="col-md-12">
                                 <tbody class="cotizacion_pagos_lista">
-                                  <tr><th class="gray">Pago</th><th class="gray">Porcentaje</th><th class="gray">Forma</th><th class="gray">Fecha 1</th><th class="gray">Fecha 2</th><th class="gray">Fecha 3</th><th class="gray">Monto</th><th class="gray">Total</th><th class="gray"></th></tr>
+                                  <tr><th class="gray">Pago</th><th class="gray">Porcentaje</th><th class="gray">Forma</th><th class="gray">Fecha 1</th><th class="gray">Fecha 2</th><th class="gray">Fecha 3</th><th class="gray">Monto</th><th class="gray"></th></tr>
                                   <tr class="cotizacion_pagos_data" data-id_pago="">
                                     <td><select class="form-control cotizacion_pagos_plazo"><option>PLAZO...</option></select></td>
                                     <td><input type="text" class="form-control cotizacion_pagos_porcentaje"></td>
@@ -1515,27 +1557,31 @@
                                     <td><input type="text" class="form-control cotizacion_pagos_fecha2" placeholder="fecha 2"></td>
                                     <td><input type="text" class="form-control cotizacion_pagos_fecha3" placeholder="fecha 3"></td>
                                     <td><input type="text" class="form-control cotizacion_pagos_monto numerable" width="9" readonly></td>
-                                    <td><input type="text" id="cotizacion_pagos_total" class="form-control cotizacion_pagos_total" width="9" readonly></td>
+                                   
                                     <td><button type="button" class="btn btn-primary btn-block cotizacion_pagos_borrar"><i class="icon wb-trash" aria-hidden="true"></i></button></td>
                                   </tr>
                                 </tbody>
                               </table>
-                              <span><button class="cotizacion_pagos_guardar btn col-md-5" data-dismiss="modal">GUARDAR</button></span>
-                              <span><button class="cotizacion_pagos_cancelar btn btn-danger col-md-4" data-dismiss="modal">CANCELAR</button></span>
-                              <span><button class="cotizacion_pagos_mostrar_agregar_pago btn btn-info col-md-3">AGREGAR</button></span>
+                              <br><br>
+                              <div class="d-flex justify-content-around">
+                              <button class="cotizacion_pagos_guardar btn col-md-4" data-dismiss="modal">GUARDAR</button>
+                              <button class="cotizacion_pagos_cancelar btn btn-danger col-md-4 " data-dismiss="modal">CANCELAR</button>
+                              <button class="cotizacion_pagos_mostrar_agregar_pago btn btn-info col-md-4">AGREGAR</button>
+                              </div>
                             </div>
                           </div>
                       </div>
                   </div>
-                </div>
+                </div>-->
             </div>
         </div>
       </div>
     </div>
 
 
-    <!-- Core  -->
-    <script src="design/global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
+
+     <!-- Core  -->
+     <script src="design/global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
     <script src="design/global/vendor/bootstrap/bootstrap.js"></script>
     <script src="design/global/vendor/animsition/animsition.js"></script>
     <script src="design/global/vendor/mousewheel/jquery.mousewheel.js"></script>
@@ -1766,9 +1812,9 @@
             $("#nombre_fantasia").toggle({
             duration: 25,
         });
-        $("#agregar_proveedor").toggle({
+        /*$("#agregar_proveedor").toggle({
             duration: 25,
-        });
+        });*/
         $("#boton_guardar_proveedor_nombre").toggle({
             duration: 25,
         });  
@@ -1777,6 +1823,8 @@
         });
           
         });
+
+        
 
         
         
@@ -1875,6 +1923,7 @@
           }
         });
       });
+
 
       $('.cambio_estado_mensaje').click(function(){
         var texto_estado = $(this).text();
@@ -1984,7 +2033,7 @@
            data: 'id_registro='+ id_registro+'&rubro='+ rubro+'&categoria='+ categoria+'&item='+ item+'&id_item='+ id_item+'&condicion='+ condicion+'&detalle='+ detalle+'&jornadas='+ jornadas+'&cantidad='+ cantidad+'&importe_neto='+ importe_neto+'&importe_total='+ importe_total+'&proveedor='+ proveedor+'&forma_pago='+ forma_pago+'&dias_pago='+ dias_pago,
 			success:function(data){
               $('#modal_editar_registro').modal('hide');
-              $('#modal_cargar_proveedor').modal('hide');
+              /*$('#modal_cargar_proveedor').modal('hide');*/
               /*proyecto = document.getElementById('ingreso_id').innerHTML;
               $.ajax({
                 url:"ajax_cotizaciones_1.php",
@@ -2273,6 +2322,7 @@
         total_cotizacion = total_cotizacion.toFixed(2);
 
         $('#total_cotizacion').html(total_cotizacion);
+        
         $('#consumible_total').html(total_cotizacion);
       }
 
@@ -2392,7 +2442,11 @@
           });
         });
 
-        
+        $(document).keydown(function(event) { 
+         if (event.keyCode == 27) { 
+          $('#modal_cargar_proveedor').modal('hide');
+           }
+          });
 
         $('#ingreso_condicion').change(function(){
           var condicion = $(this).val();
@@ -2606,7 +2660,7 @@
            data: 'id_registro='+ id_registro+'&rubro='+ rubro+'&categoria='+ categoria+'&item='+ item+'&id_item='+ id_item+'&condicion='+ condicion+'&detalle='+ detalle+'&jornadas='+ jornadas+'&cantidad='+ cantidad+'&importe_neto='+ importe_neto+'&importe_total='+ importe_total+'&proveedor='+ proveedor+'&forma_pago='+ forma_pago+'&dias_pago='+ dias_pago,
            success:function(data){
             $('#modal_editar_registro').modal('hide');
-            $('#modal_cargar_proveedor').hide();
+            //$('#modal_cargar_proveedor').hide();
             $.ajax({
                 url:"ajax_cotizaciones_1.php",
                 method:"POST",
@@ -2848,6 +2902,7 @@
                 $('#tipo_item').val(data.nombre_item_cotizacion);
                 $('#detalle').val(data.detalle_registro);
                 $('#importe_neto').val(data.importe_total);
+                $('#total_cotizacion2').html(data.importe_total);
                 $('#forma_pago_nuevo').val(data.forma_pago);
                 $('#tiempo_pago').val(data.tiempo_pago);
                 $('.upload_file').attr('data-default-file',data.archivo_adjunto);
