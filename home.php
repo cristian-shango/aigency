@@ -1,4 +1,5 @@
 <?php
+  include 'conexion.php';
   include "session.php";
   mysql_set_charset('utf8');
 ?>
@@ -27,16 +28,22 @@
     <link rel="stylesheet" href="design/global/vendor/switchery/switchery.css">
     <link rel="stylesheet" href="design/global/vendor/intro-js/introjs.css">
     <link rel="stylesheet" href="design/global/vendor/slidepanel/slidePanel.css">
-    <link rel="stylesheet" href="design/global/vendor/flag-icon-css/flag-icon.css">
-        <link rel="stylesheet" href="design/global/vendor/chartist/chartist.css">
+    <link rel="stylesheet" href="design/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
         <link rel="stylesheet" href="design/global/vendor/aspieprogress/asPieProgress.css">
-        <link rel="stylesheet" href="design/assets/examples/css/dashboard/v2.css">
+        <link rel="stylesheet" href="design/global/vendor/jquery-selective/jquery-selective.css">
+        <link rel="stylesheet" href="design/global/vendor/bootstrap-datepicker/bootstrap-datepicker.css">
+        <link rel="stylesheet" href="design/global/vendor/asscrollable/asScrollable.css">
+        <link rel="stylesheet" href="design/assets/examples/css/dashboard/team.css">
+        
+        <link rel="stylesheet" href="design/global/vendor/aspieprogress/asPieProgress.css">
+       <link rel="stylesheet" href="design/assets/examples/css/dashboard/ecommerce.css">
 
 
     <!-- Fonts -->
+    <link rel="stylesheet" href="design/global/fonts/font-awesome/font-awesome.css">
     <link rel="stylesheet" href="design/global/fonts/web-icons/web-icons.min.css">
     <link rel="stylesheet" href="design/global/fonts/brand-icons/brand-icons.min.css">
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
 
     <!--[if lt IE 9]>
     <script src="design/global/vendor/html5shiv/html5shiv.min.js"></script>
@@ -148,182 +155,258 @@
       </div>
     </nav>
     <?php require "barra_lateral.php"; echo $html_barra_lateral; ?>
-    <!--div class="site-menubar">
-      <div class="site-menubar-body">
-        <div>
-          <div>
-            <ul class="site-menu" data-plugin="menu">
-              <li class="site-menu-category">Menú Principal</li>
-              <li class="site-menu-item has-sub">
-                <a href="home.php">
-                  <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
-                  <span class="site-menu-title">Home</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="agenda.php">
-                  <i class="site-menu-icon wb-calendar" aria-hidden="true"></i>
-                  <span class="site-menu-title">Agenda</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="proyectos.php">
-                  <i class="site-menu-icon wb-list-bulleted" aria-hidden="true"></i>
-                  <span class="site-menu-title">Proyectos</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="pedido_cotizacion.php">
-                  <i class="site-menu-icon wb-add-file" aria-hidden="true"></i>
-                  <span class="site-menu-title">Pedido de Cotización</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="cotizaciones.php">
-                  <i class="site-menu-icon wb-order" aria-hidden="true"></i>
-                  <span class="site-menu-title">Carga de Cotizaciones</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="javascript:void(0)">
-                        <i class="site-menu-icon wb-extension" aria-hidden="true"></i>
-                        <span class="site-menu-title">Administración</span>
-                                <span class="site-menu-arrow"></span>
-                    </a>
-                    <ul class="site-menu-sub">
-                      <li class="site-menu-item">
-                        <a class="animsition-link" href="#">
-                          <span class="site-menu-title">Cobros</span>
-                        </a>
-                      </li>
-                      <li class="site-menu-item">
-                        <a class="animsition-link" href="#">
-                          <span class="site-menu-title">Pagos</span>
-                        </a>
-                      </li>
-                      <li class="site-menu-item">
-                        <a class="animsition-link" href="#">
-                          <span class="site-menu-title">Facturación</span>
-                        </a>
-                      </li>
-                      <li class="site-menu-item">
-                        <a class="animsition-link" href="bancos.php">
-                          <span class="site-menu-title">Bancos</span>
-                        </a>
-                      </li>
-                      <li class="site-menu-item">
-                        <a class="animsition-link" href="#">
-                          <span class="site-menu-title">Gastos</span>
-                        </a>
-                      </li>
-                      <li class="site-menu-item">
-                        <a class="animsition-link" href="#">
-                          <span class="site-menu-title">Sueldos</span>
-                        </a>
-                      </li>
-                    </ul>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="proyeccion.php">
-                  <i class="site-menu-icon wb-graph-up" aria-hidden="true"></i>
-                  <span class="site-menu-title">Proyección</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="proveedores.php">
-                  <i class="site-menu-icon wb-hammer" aria-hidden="true"></i>
-                  <span class="site-menu-title">Proveedores</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="clientes.php">
-                  <i class="site-menu-icon wb-wrench" aria-hidden="true"></i>
-                  <span class="site-menu-title">Clientes</span>
-                </a>
-              </li>
-              <li class="site-menu-item has-sub">
-                <a href="usuarios.php">
-                  <i class="site-menu-icon wb-user" aria-hidden="true"></i>
-                  <span class="site-menu-title">Usuarios</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="site-menubar-footer">
-        <a href="javascript: void(0);" class="fold-show" data-placement="top" data-toggle="tooltip"
-          data-original-title="Settings">
-          <span class="icon wb-settings" aria-hidden="true"></span>
-        </a>
-        <a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Lock">
-          <span class="icon wb-eye-close" aria-hidden="true"></span>
-        </a>
-        <a href="php/logout.php" data-placement="top" data-toggle="tooltip" data-original-title="Logout">
-          <span class="icon wb-power" aria-hidden="true"></span>
-        </a>
-      </div></div-->    <div class="site-gridmenu">
-      <div>
-        <div>
-          <ul>
-            <li>
-              <a href="../../apps/mailbox/mailbox.html">
-                <i class="icon wb-envelope"></i>
-                <span>Mailbox</span>
-              </a>
-            </li>
-            <li>
-              <a href="../../apps/calendar/calendar.html">
-                <i class="icon wb-calendar"></i>
-                <span>Calendar</span>
-              </a>
-            </li>
-            <li>
-              <a href="../../apps/contacts/contacts.html">
-                <i class="icon wb-user"></i>
-                <span>Contacts</span>
-              </a>
-            </li>
-            <li>
-              <a href="../../apps/media/overview.html">
-                <i class="icon wb-camera"></i>
-                <span>Media</span>
-              </a>
-            </li>
-            <li>
-              <a href="../../apps/documents/categories.html">
-                <i class="icon wb-order"></i>
-                <span>Documents</span>
-              </a>
-            </li>
-            <li>
-              <a href="../../apps/projects/projects.html">
-                <i class="icon wb-image"></i>
-                <span>Project</span>
-              </a>
-            </li>
-            <li>
-              <a href="../../apps/forum/forum.html">
-                <i class="icon wb-chat-group"></i>
-                <span>Forum</span>
-              </a>
-            </li>
-            <li>
-              <a href="../../index.html">
-                <i class="icon wb-dashboard"></i>
-                <span>Dashboard</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
 
     <!-- Page -->
     <div class="page">
-      <div class="page-content container-fluid">
+      <div class="page-header">
+        <h1 class="page-title font-size-26 font-weight-100">Estado de Cotizaciones</h1>
+      </div>
 
+      <div class="page-content container-fluid">
+        <div class="row">
+          <!-- First Row -->
+          <?php
+            $sql_area = "SELECT estado FROM proyectos";
+            mysql_query("SET NAMES 'utf8'");
+            $nuevas = 0;
+            $cotizandose = 0;
+            $entregadas = 0;
+            $confirmadas = 0;
+            $aprobadas = 0;
+            $total = 0;
+            if($result_area = mysqli_query($conexion, $sql_area)){
+                if(mysqli_num_rows($result_area) > 0){
+                    $i = 0;
+                    while($row_area = mysqli_fetch_array($result_area)){
+                      if ($row_area['estado'] = "1"){
+                        $nuevas = $nuevas + 1;
+                      }
+
+                      if ($row_area['estado'] = "2"){
+                        $cotizandose = $cotizandose + 1;
+                      }
+
+                      if ($row_area['estado'] = "3"){
+                        $entregadas = $entregadas + 1;
+                      }
+
+                      if ($row_area['estado'] = "4"){
+                        $confirmadas = $confirmadas + 1;
+                      }
+
+                      if ($row_area['estado'] = "5"){
+                        $aprobadas = $aprobadas + 1;
+                      }
+                      $total = $total + 1;
+          ?>
+          
+          <?php
+                    }
+                    mysqli_free_result($result_area);
+                } else{
+                    echo "<strong style='font-size: 1.2em;'>No hay cotizaciones cargadas.</strong>";
+                }
+            } else{
+                    echo "ERROR: Could not able to execute $sql_area. " . mysqli_error($conexion);
+              }
+          ?>
+          <div class='col-xl-4 col-md-6 info-panel'>
+            <div class='card card-shadow'>
+              <div class='card-block bg-white p-20'>
+                <button type='button' class='btn btn-floating btn-sm btn-default'></button>
+                <span class='ml-15 font-weight-400'>TOTALES</span>
+                <div class='content-text text-center mb-0'>
+                  <span class='font-size-40 font-weight-100'><?php echo $total ?></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 info-panel">
+            <div class="card card-shadow">
+              <div class="card-block bg-white p-20">
+                <button type="button" class="btn btn-floating btn-sm btn-danger"></button>
+                <span class="ml-15 font-weight-400">NUEVAS</span>
+                <div class="content-text text-center mb-0">
+                  <span class="font-size-40 font-weight-100"><?php echo $nuevas ?></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 info-panel">
+            <div class="card card-shadow">
+              <div class="card-block bg-white p-20">
+                <button type="button" class="btn btn-floating btn-sm btn-primary"></button>
+                <span class="ml-15 font-weight-400">COTIZANDOSE</span>
+                <div class="content-text text-center mb-0">
+                  <span class="font-size-40 font-weight-100"><?php echo $cotizandose ?></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 info-panel">
+            <div class="card card-shadow">
+              <div class="card-block bg-white p-20">
+                <button type="button" class="btn btn-floating btn-sm btn-success"></button>
+                <span class="ml-15 font-weight-400">ENTREGADAS</span>
+                <div class="content-text text-center mb-0">
+                  <span class="font-size-40 font-weight-100"><?php echo $entregadas ?></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 info-panel">
+            <div class="card card-shadow">
+              <div class="card-block bg-white p-20">
+                <button type="button" class="btn btn-floating btn-sm btn-success"></button>
+                <span class="ml-15 font-weight-400">CONFIRMADAS</span>
+                <div class="content-text text-center mb-0">
+                  <span class="font-size-40 font-weight-100"><?php echo $confirmadas ?></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 info-panel">
+            <div class="card card-shadow">
+              <div class="card-block bg-white p-20">
+                <button type="button" class="btn btn-floating btn-sm btn-success"></button>
+                <span class="ml-15 font-weight-400">APROBADAS</span>
+                <div class="content-text text-center mb-0">
+                  <span class="font-size-40 font-weight-100"><?php echo $aprobadas ?></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+          <!-- End First Row -->
+
+          <!-- second Row -->
+          
+          <!-- End Second Row -->
+
+          <!-- Third Row -->
+          <!-- Third Left -->
+          <div class="col-lg-8" id="ecommerceRecentOrder">
+            <div class="card card-shadow table-row">
+              <div class="card-header card-header-transparent py-20">
+                <div class="btn-group dropdown">
+                  <a href="#" class="text-body dropdown-toggle blue-grey-700" data-toggle="dropdown">RECENT ORDER</a>
+                  <div class="dropdown-menu animate" role="menu">
+                    <a class="dropdown-item" href="#" role="menuitem">Sales</a>
+                    <a class="dropdown-item" href="#" role="menuitem">Total sales</a>
+                    <a class="dropdown-item" href="#" role="menuitem">profit</a>
+                  </div>
+                </div>
+              </div>
+              <div class="card-block bg-white table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Image</th>
+                      <th>Product</th>
+                      <th>Customer</th>
+                      <th>Purchased On</th>
+                      <th>Status</th>
+                      <th>Tracking No#</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <img src="design/assets/examples/images/products/imac.png"
+                          alt="iMac" />
+                      </td>
+                      <td>iMac</td>
+                      <td>Russell</td>
+                      <td>22/08/2018</td>
+                      <td>
+                        <span class="badge badge-success font-weight-100">Paid</span>
+                      </td>
+                      <td>#98BC85SD84</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <img src="design/assets/examples/images/products/iphone.png"
+                          alt="iPhone" />
+                      </td>
+                      <td>iPhone</td>
+                      <td>Carol</td>
+                      <td>15/07/2018</td>
+                      <td>
+                        <span class="badge badge-warning font-weight-100">Pending</span>
+                      </td>
+                      <td>#98SA3C9SC</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <img src="design/assets/examples/images/products/applewatch.png"
+                          alt="apple_watch" />
+                      </td>
+                      <td>apple Watch</td>
+                      <td>Austin Pena</td>
+                      <td>10/07/2018</td>
+                      <td>
+                        <span class="badge badge-success font-weight-100">Paid</span>
+                      </td>
+                      <td>#98BC85SD84</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <img src="design/assets/examples/images/products/macmouse.png"
+                          alt="mac_mouse" />
+                      </td>
+                      <td>mac Mouse</td>
+                      <td>Randy</td>
+                      <td>22/04/2018</td>
+                      <td>
+                        <span class="badge badge-default font-weight-100">Failed</span>
+                      </td>
+                      <td>#98SA3C9SC</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- End Third Left -->
+
+          <!-- Third Right -->
+          <div class="col-lg-4" id="ecommerceRevenue">
+            <div class="card card-shadow text-center pt-10">
+              <h3 class="card-header card-header-transparent blue-grey-700 font-size-14 mt-0">REVENUE</h3>
+              <div class="card-block bg-white">
+                <div class="ct-chart barChart"></div>
+                <div class="pie-view row">
+                  <div class="col-6 pie-left text-center">
+                    <h5 class="blue-grey-500 font-size-14 font-weight-100">GROS REVENUE</h5>
+                    <p class="font-size-20 blue-grey-700">
+                      9,362,74
+                    </p>
+                    <div class="pie-progress pie-progress-sm" data-plugin="pieProgress" data-valuemax="100"
+                      data-valuemin="0" data-barcolor="#a57afa" data-size="100" data-barsize="4"
+                      data-goal="60" aria-valuenow="60" role="progressbar">
+                      <span class="pie-progress-number">60%</span>
+                    </div>
+                  </div>
+                  <div class="col-6 pie-right text-center">
+                    <h5 class="blue-grey-500 font-size-14 font-weight-100">NET REVENUE</h5>
+                    <p class="font-size-20 blue-grey-700">
+                      6,734,58
+                    </p>
+                    <div class="pie-progress pie-progress-sm" data-plugin="pieProgress" data-valuemax="100"
+                      data-valuemin="0" data-barcolor="#28c0de" data-size="100" data-barsize="4"
+                      data-goal="78" aria-valuenow="78" role="progressbar">
+                      <span class="pie-progress-number">78%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Third Right -->
+          <!-- End Third Row -->
+        </div>
       </div>
     </div>
     <!-- End Page -->
@@ -347,41 +430,39 @@
     <script src="design/global/vendor/asscrollbar/jquery-asScrollbar.js"></script>
     <script src="design/global/vendor/asscrollable/jquery-asScrollable.js"></script>
     <script src="design/global/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
-
+    
     <!-- Plugins -->
     <script src="design/global/vendor/switchery/switchery.js"></script>
     <script src="design/global/vendor/intro-js/intro.js"></script>
     <script src="design/global/vendor/screenfull/screenfull.js"></script>
     <script src="design/global/vendor/slidepanel/jquery-slidePanel.js"></script>
         <script src="design/global/vendor/chartist/chartist.min.js"></script>
-        <script src="design/global/vendor/gmaps/gmaps.js"></script>
-        <script src="design/global/vendor/matchheight/jquery.matchHeight-min.js"></script>
-
+        <script src="design/global/vendor/aspieprogress/jquery-asPieProgress.js"></script>
+        <script src="design/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.js"></script>
+    
     <!-- Scripts -->
     <script src="design/global/js/Component.js"></script>
     <script src="design/global/js/Plugin.js"></script>
     <script src="design/global/js/Base.js"></script>
     <script src="design/global/js/Config.js"></script>
-
+    
     <script src="design/assets/js/Section/Menubar.js"></script>
     <script src="design/assets/js/Section/GridMenu.js"></script>
     <script src="design/assets/js/Section/Sidebar.js"></script>
     <script src="design/assets/js/Section/PageAside.js"></script>
     <script src="design/assets/js/Plugin/menu.js"></script>
-
+    
     <script src="design/global/js/config/colors.js"></script>
     <script src="design/assets/js/config/tour.js"></script>
     <script>Config.set('assets', 'design/assets');</script>
-
+    
     <!-- Page -->
     <script src="design/assets/js/Site.js"></script>
     <script src="design/global/js/Plugin/asscrollable.js"></script>
     <script src="design/global/js/Plugin/slidepanel.js"></script>
     <script src="design/global/js/Plugin/switchery.js"></script>
-        <script src="design/global/js/Plugin/gmaps.js"></script>
-        <script src="design/global/js/Plugin/matchheight.js"></script>
-        <script src="design/global/js/Plugin/asscrollable.js"></script>
-
-        <script src="design/assets/examples/js/dashboard/v2.js"></script>
+        <script src="design/global/js/Plugin/aspieprogress.js"></script>
+    
+        <script src="design/assets/examples/js/dashboard/ecommerce.js"></script>
   </body>
 </html>

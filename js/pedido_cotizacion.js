@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     var suma_costo_presupuestado = 0;
     $('.valor_costo_presupuestado').each(function(){
         suma_costo_presupuestado += parseFloat($(this).text());  // Or this.innerHTML, this.innerText
@@ -22,7 +22,7 @@ $(document).ready(function(){
         var this_input_box = document.getElementById("precio_total");
       this_input_box.placeholder = valor_precio_cliente;
     });
-  });
+  });*/
 
   $("#boton_volver").click(function(){
     window.location.href = "home.php";
