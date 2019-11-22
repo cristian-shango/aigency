@@ -30,7 +30,9 @@
     <link rel="stylesheet" href="design/global/vendor/intro-js/introjs.css">
     <link rel="stylesheet" href="design/global/vendor/slidepanel/slidePanel.css">
     <link rel="stylesheet" href="design/global/vendor/flag-icon-css/flag-icon.css">
-        <link rel="stylesheet" href="design/global/vendor/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="design/global/vendor/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="design/global/vendor/footable/footable.core.css">
+    <link rel="stylesheet" href="design/assets/examples/css/tables/footable.css">
     
     
     <!-- Fonts -->
@@ -344,114 +346,75 @@
                 <!-- Example Basic Columns -->
                 <div class="example-wrap">
                   <div class="example table-responsive">
-                    <table class="table table-hover">
+                    <table id="exampleCustomFilter" class="table table-hover" data-paging="true" data-sorting="true" data-filtering="true">
                       <thead>
                         <tr>
-						<th scope="col" style="width: 2%"></th>
-									<th scope="col" style="width: 9%">Servicio</th>
-									<th scope="col" style="width: 9%">Descripción</th>
-									<th scope="col" style="width: 9%">Razón Social</th>
-
-									<th scope="col" style="width: 11%">Contacto</th>
-									<th scope="col" style="width: 12%">Telefono</th>
-									<th scope="col" style="width: 16%">Celular</th>
-									<th scope="col" style="width: 16%">Mail</th>
-									<th scope="col" style="width: 15%">Disponibilidad</th>
-                          
-                          <th colspan="4">Acciones</th>
-                          
+							<th data-name="#" scope="col">#</th>
+							<th data-name="servicio" scope="col" style="width: 10%">Servicio</th>
+							<th data-name="descripcion" scope="col" style="width: 10%">Descripción</th>
+							<th data-name="razon_social" scope="col" style="width: 20%">Razón Social</th>
+							<th data-name="contacto" scope="col" style="width: 10%">Contacto</th>
+							<th data-name="telefono" scope="col" style="width: 10%">Telefono</th>
+							<th data-name="celular" scope="col" style="width: 20%">Celular</th>
+							<th data-name="mail" scope="col" style="width: 20%">Mail</th>
                         </tr>
                       </thead>
                       <tbody>
 					  <?php
-									// Attempt select query execution
-									$sql = "SELECT * FROM proveedores ORDER BY servicio";
-									mysql_query("SET NAMES 'utf8'");
-									if($result = mysqli_query($conexion, $sql)){
-									    if(mysqli_num_rows($result) > 0){
-									        $i = 0;
-									        while($row = mysqli_fetch_array($result)){
-								?>
-										<tr>
-											<td></td>
-											<td scope="row"><?php echo (($row['servicio']));?></td>
-											<td><?php echo (($row['descripcion']));?></td>
-											<td><?php echo (($row['razon_social']));?></td>
+						// Attempt select query execution
+						$sql = "SELECT * FROM proveedores ORDER BY servicio";
+						mysql_query("SET NAMES 'utf8'");
+						if($result = mysqli_query($conexion, $sql)){
+						    if(mysqli_num_rows($result) > 0){
+						        $i = 0;
+						        while($row = mysqli_fetch_array($result)){
+						?>
+									<tr class="editar" data-toggle="modal" data-id="<?php echo ($row['id_proveedor']);?>" style="cursor: pointer;">
+										<td>
+											<?php
+												if($row['disponibilidad'] == "DISPONIBLE"){
+											?>
+												<span class="dot-disponible"></span>
+											<?php
+												}
+												if($row['disponibilidad'] == "OCUPADO"){
+											?>
+												<span class="dot-ocupado"></span>
+											<?php
+												}
+												if($row['disponibilidad'] == "DESCARTADO"){
+											?>
+												<span class="dot-descartado"></span>
+											<?php
+												}
+												if($row['disponibilidad'] == ""){
+											?>
+												<span class="dot-disponible"></span>
+											<?php
+												}
+											?></td>
+										<td scope="row"><?php echo (($row['servicio']));?></td>
+										<td><?php echo (($row['descripcion']));?></td>
+										<td><?php echo (($row['razon_social']));?></td>
 
-											<td><?php echo (($row['contacto']));?></td>
+										<td><?php echo (($row['contacto']));?></td>
 
-											<td><?php echo (($row['telefono']));?></td>
-											<td><?php echo (($row['celular']));?></td>
-											<td><a href="mailto:<?php echo (($row['mail']));?>"><?php echo (($row['mail']));?></a></td>
-											<td>
-												<?php
-													if($row['disponibilidad'] == "DISPONIBLE"){
-												?>
-													<select class="disponibilidad_proveedor" data-id="<?php echo (($row['id_proveedor']));?>">
-														<option value="">Seleccionar</option>
-														<option value="DISPONIBLE" selected="selected">DISPONIBLE</option>
-														<option value="OCUPADO">OCUPADO</option>
-														<option value="DESCARTADO">DESCARTADO</option>
-													</select>
-												<?php
-													}
-													if($row['disponibilidad'] == "OCUPADO"){
-												?>
-													<select class="disponibilidad_proveedor" data-id="<?php echo (($row['id_proveedor']));?>">
-														<option value="">Seleccionar</option>
-														<option value="DISPONIBLE">DISPONIBLE</option>
-														<option value="OCUPADO" selected="selected">OCUPADO</option>
-														<option value="DESCARTADO">DESCARTADO</option>
-													</select>
-												<?php
-													}
-													if($row['disponibilidad'] == "DESCARTADO"){
-												?>
-													<select class="disponibilidad_proveedor" data-id="<?php echo (($row['id_proveedor']));?>">
-														<option value="">Seleccionar</option>
-														<option value="DISPONIBLE">DISPONIBLE</option>
-														<option value="OCUPADO">OCUPADO</option>
-														<option value="DESCARTADO" selected="selected">DESCARTADO</option>
-													</select>
-												<?php
-													}
-													if($row['disponibilidad'] == ""){
-												?>
-													<select class="disponibilidad_proveedor" data-id="<?php echo (($row['id_proveedor']));?>">
-														<option value="" selected="selected">Seleccionar</option>
-														<option value="DISPONIBLE">DISPONIBLE</option>
-														<option value="OCUPADO">OCUPADO</option>
-														<option value="DESCARTADO">DESCARTADO</option>
-													</select>
-												<?php
-													}
-												?>
-											</td>
-
-											<td>
-											<button type="button" class="btn btn-success ver2 " data-toggle="modal" data-id="<?php echo ($row['id_proveedor']);?>"><i class="icon wb-eye" aria-hidden="true"></i></button>
-											</td>
-											
-											
-											<td><button type="button" class="btn btn-default editar" data-toggle="modal" data-id="<?php echo ($row['id_proveedor']);?>"><i class="icon wb-edit" aria-hidden="true"></i></button></td>
-											
-											
-											<td>
-                                			<button type="button" class="btn btn-info eliminar" data-id="<?php echo ($row['id_proveedor']);?>"><i class="icon wb-trash" aria-hidden="true"></i></button>
-                              				</td>
-										</tr>
-								<?php
-									        }
-									        // Free result set
-									        mysqli_free_result($result);
-									    } else{
-									        echo "No hay datos para mostrar.";
-									    }
-									} else{
-									    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conexion);
-									}
-								?>
-							</tbody>
+										<td><?php echo (($row['telefono']));?></td>
+										<td><?php echo (($row['celular']));?></td>
+										<td><a href="mailto:<?php echo (($row['mail']));?>"><?php echo (($row['mail']));?></a></td>
+									</tr>
+							<?php
+								        }
+								        // Free result set
+								        mysqli_free_result($result);
+								    } else{
+								        echo "No hay datos para mostrar.";
+								    }
+								} else{
+								    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conexion);
+								}
+							?>
+						</tbody>
                     </table>
                   </div>
                 </div>
@@ -471,139 +434,6 @@
       </div>
     </div>
     <!-- End Page -->
-
-   <!-- Modal Ver -->
-   <div class="modal fade" id="modal_ver" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form method="POST" id="actualizar_cliente">
-								<div class="row">
-									<div class="col-md-12"><h2>Datos del Proveedor</h2></div>
-									<div class="col-md-4">
-										<div class="form-group">
-										    <h4>Servicio</h4>
-										    <input type="text" id="ver_servicio" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
-										</div>
-									</div>
-									<div class="col-md-8">
-										<div class="form-group">
-										    <h4>Descripción</h4>
-										    <input type="text" id="ver_descripcion" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-										    <h4>Razón Social</h4>
-										    <input type="text" id="ver_razon_social" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-										    <h4>Nombre Fantasia</h4>
-										    <input type="text" id="ver_nombre_fantasia" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-										    <h4>CUIT</h4>
-										    <input type="text" id="ver_cuit" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-										    <h4>Contacto</h4>
-										    <input type="text" id="ver_contacto" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-										    <h4>Teléfono</h4>
-										    <input type="text" id="ver_telefono" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-										    <h4>Celular</h4>
-										    <input type="text" id="ver_celular" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-										    <h4>Mail</h4>
-										    <input type="text" id="ver_mail" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-										    <h4>Sitio Web</h4>
-										    <input type="url" id="ver_web" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-										    <h4>Observaciones</h4>
-										    <input type="text" id="ver_observaciones" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-										    <h4>Ubicación</h4>
-										    <input type="text" id="ver_ubicacion" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div class="form-group">
-										    <h4>ISO</h4>
-										    <input type="text" id="ver_iso" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-										    <h4>Forma de Pago</h4>
-										    <select class="form-control" id="ver_forma_pago" >
-								      	<option value="">Seleccionar</option>
-							    		<?php
-											// Attempt select query execution
-											$sql1 = "SELECT * FROM forma_pago";
-											mysql_query("SET NAMES 'utf8'");
-											if($result1 = mysqli_query($conexion, $sql1)){
-											    if(mysqli_num_rows($result1) > 0){
-											        $i = 0;
-											        while($row1 = mysqli_fetch_array($result1)){
-											        	?>
-											        		<option value="<?php echo ($row1['id']);?>" SELECTED><?php echo (utf8_encode($row1['tipo']));?></option>
-											        	<?php
-											        }
-											        // Free result set
-											        mysqli_free_result($result1);
-											    } else{
-											        echo "No hay datos para mostrar.";
-											    }
-											} else{
-											    echo "ERROR: Could not able to execute $sql1. " . mysqli_error($conexion);
-											}
-										?>
-									</select>
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-										    <h4>Descripción de Pago</h4>
-										    <input type="text" id="ver_descripcion_pago" class="form-control" aria-label="Default" aria-describeby="inputGroup-sizing-default" readonly>
-										</div>
-									</div>
-		      					</div>
-		      				</form>
-      					</div>
-					</div>
-				</div>
-			</div>
 
 			<!-- Modal Nuevo Ultimo -->
 			<div class="modal fade" id="modal_nuevo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -786,226 +616,6 @@
 					</div>
 				</div>
 			</div>
-
-		
-
-		<script type="text/javascript">
-			$('#boton_volver, #boton_volver_abajo').click(function(){
-				window.location.href = 'home.php';
-			});
-
-			$('#boton_nuevo_proveedor, #boton_nuevo_proveedor_abajo').click(function(){
-				console.log("popup proveedor");
-				$('#id_editar_en_nuevo').val(-1);
-				$('#modal_nuevo').modal('show');
-			});
-
-			$('.editar').click(function(){
-				var id = $(this).attr('data-id');
-				console.log(id);
-				$.ajax({
-	                url:"cargar_proveedor.php",
-	                method:"POST",
-	                data:{id:id},
-	                dataType:"json",
-	                success:function(data){
-										console.log(data);
-										/*
-	                     $('#nombre_cliente_editar').val(data.nombre);
-	                     $('#razon_social_cliente_editar').val(data.razon_social);
-	                     $('#cuit_cliente_editar').val(data.cuit);
-	                     $('#tiempo_pago_cliente_editar').val(data.tiempo_pago);
-	                     $('#dropdown_forma_pago_editar').val(data.forma_pago);
-	                     $('#porcentaje_ocurrencia_editar').val(data.porcentaje_ocurrencia);
-										*/
-											 $('#id_editar_en_nuevo').val(id);
-											 $('#servicio_nuevo').val(data.servicio);
-											 $('#descripcion_nuevo').val(data.descripcion);
-											 $('#razon_social_nuevo').val(data.razon_social);
-											 $('#nombre_fantasia_nuevo').val(data.nombre_fantasia);
-											 $('#cuit_nuevo').val(data.cuit);
-											 $('#contacto_nuevo').val(data.contacto);
-											 $('#telefono_nuevo').val(data.telefono);
-											 $('#celular_nuevo').val(data.celular);
-											 $('#mail_nuevo').val(data.mail);
-											 $('#web_nuevo').val(data.website);
-											 $('#ubicacion_nuevo').val(data.ubicacion);
-											 $('#observaciones_nuevo').val(data.observaciones);
-											 $('#iso_nuevo').val(data.iso);
-											 $('#forma_pago_nuevo').val(data.forma_pago);
-											 $('#tiempo_cobro_nuevo').val(data.tiempo_cobro);
-											 $('#obligatoriedad_nuevo').val(data.obligatoriedad);
-											 $('#descripcion_pago_nuevo').val(data.descripcion_pago);
-	                     $('#modal_nuevo').modal('show');
-	                     console.log("id del proveedor: ", data.id_proveedor, id);
-	                },
-									error: function(error){
-										console.log(error);
-									},
-									beforeSend: function(){
-										console.log(this.url);
-									}
-	           });
-			});
-
-			function escapar(cadena){
-				return cadena.replace(/&/g,'%26');
-			}
-
-
-			$('#guardar_nuevo_proveedor').click(function(event){
-				var id = $("#id_editar_en_nuevo").val();
-				var servicio = escapar($("#servicio_nuevo").val());
-				var descripcion = escapar($("#descripcion_nuevo").val());
-				var razon_social = escapar($("#razon_social_nuevo").val());
-				var nombre_fantasia = escapar($("#nombre_fantasia_nuevo").val());
-				var cuit = $("#cuit_nuevo").val();
-				var contacto = escapar($("#contacto_nuevo").val());
-				var telefono = $("#telefono_nuevo").val();
-				var celular = $("#celular_nuevo").val();
-				var mail = $("#mail_nuevo").val();
-				var web = $("#web_nuevo").val();
-				var observaciones = escapar($("#observaciones_nuevo").val());
-				var ubicacion = escapar($("#ubicacion_nuevo").val());
-				var iso = $("#iso_nuevo").val();
-				var forma_pago = escapar($("#forma_pago_nuevo").val());
-				var descripcion_pago = escapar($("#descripcion_pago_nuevo").val());
-				var tiempo_cobro = $("#tiempo_cobro_nuevo").val();
-				var obligatoriedad = $("#obligatoriedad_nuevo").val();
-				console.log("Id ",id);
-
-				var url = (id < 0) ? "agregar_proveedor.php" : "editar_proveedor.php";
-				console.log("url ", url);
-
-				var dataString = 'id='+id+'&servicio='+servicio+'&descripcion='+descripcion+'&razon_social='+razon_social+'&nombre_fantasia='+nombre_fantasia+'&cuit='+cuit+'&contacto='+contacto+'&telefono='+telefono+'&celular='+celular+'&mail='+mail+'&web='+web+'&observaciones='+observaciones+'&ubicacion='+ubicacion+'&iso='+iso+'&forma_pago='+forma_pago+'&descripcion_pago='+descripcion_pago+'&tiempo_cobro='+tiempo_cobro+'&obligatoriedad='+obligatoriedad;
-
-				console.log(dataString);
-				$.ajax({
-                     url:url,
-                     method:"POST",
-                     data: dataString,
-                     success:function(data){
-												$('#modal_nuevo').modal('hide');
-												window.location.reload(true);
-                     },
-										 beforeSend:function(){
-											 console.log("Enviando datos a ", this.url);
-										 }
-                });
-			});
-
-			$('.eliminar').click(function(){
-				$('#modal_eliminar').modal('show');
-				var id = $(this).attr('data-id');
-				$('#boton_eliminar_cliente').click(function(){
-					console.log(id);
-					$.ajax({
-		                url:"eliminar_proveedor.php",
-		                method:"POST",
-		                data:{id:id},
-		                success:function(data){
-		                	$('#modal_eliminar').modal('hide');
-											window.location.reload();
-		                },
-										error:function(error){
-											console.log(error);
-										},
-										beforeSend:function(){
-											console.log("eliminando ",this.url);
-										}
-		           });
-				});
-			});
-
-			$(".disponibilidad_proveedor").change(function(){
-				var id_proveedor = $(this).attr('data-id');
-				var disponibilidad = $(this).val();
-				$.ajax({
-	                url:"disponibilidad_proveedor.php",
-	                method:"POST",
-	                data:'id_proveedor='+id_proveedor+'&disponibilidad='+disponibilidad,
-	                success:function(data){
-
-	                }
-	           });
-			});
-
-			$('.ver2').click(function(){
-			    var id = $(this).attr('data-id');
-			    console.log("Click id: ",id);
-			    $.ajax({
-	                url:"cargar_proveedor.php",
-	                method:"POST",
-	                data:{id:id},
-	                dataType:"json",
-	                success:function(data){
-	                    $('#ver_servicio').val(data.servicio);
-	                    $('#ver_descripcion').val(data.descripcion);
-	                    $('#ver_razon_social').val(data.razon_social);
-						$('#ver_nombre_fantasia').val(data.nombre_fantasia);
-	                    $('#ver_cuit').val(data.cuit);
-	                    $('#ver_contacto').val(data.contacto);
-	                    $('#ver_telefono').val(data.telefono);
-	                    $('#ver_celular').val(data.celular);
-	                    $('#ver_mail').val(data.mail);
-	                    $('#ver_web').val(data.website);
-	                    $('#ver_observaciones').val(data.observaciones);
-	                    $('#ver_ubicacion').val(data.ubicacion);
-	                    $('#ver_iso').val(data.iso);
-	                    $('#ver_forma_pago').val(data.forma_pago);
-	                    $('#ver_forma_pago').attr("disabled", true);
-	                    $('#ver_descripcion_pago').val(data.descripcion_pago);
-
-	                    $("#boton_enviar_mail").click(function(){
-	                    	window.location="mailto:"+data.mail;
-	                    });
-
-	                    $("#boton_visitar_sitio").click(function(){
-	                    	window.location.href=data.website;
-	                    });
-
-	                    $('#modal_ver').modal('show');
-	                }
-	           });
-			});
-		</script>
-		<script type="text/javascript">
-
-			$(document).ready(function() {
-			    $('#tabla_ordenar').DataTable( {
-			        "paging": false,
-			        columnDefs: [ {
-			            orderable: false,
-			            className: 'select-checkbox',
-			            targets:   0
-			        } ],
-			        select: {
-			            style:    'multi',
-			            selector: 'td:first-child'
-			        },
-			        language: {
-				        "decimal": "",
-				        "emptyTable": "No hay información",
-				        "info": "Mostrando _START_ a _END_ de _TOTAL_ proveedores",
-				        "infoEmpty": "Mostrando 0 to 0 of 0 proveedores",
-				        "infoFiltered": "(Filtrado de _MAX_ total proveedores)",
-				        "infoPostFix": "",
-				        "thousands": ",",
-				        "lengthMenu": "Mostrar _MENU_ proveedores",
-				        "loadingRecords": "Cargando...",
-				        "processing": "Procesando...",
-				        "search": "Buscar:",
-				        "zeroRecords": "Sin resultados encontrados",
-				        "paginate": {
-				            "first": "Primero",
-				            "last": "Ultimo",
-				            "next": "Siguiente",
-				            "previous": "Anterior"
-				        }
-				    }
-			    } );
-			} );
-		</script>
    
     <!-- Core  -->
     <script src="design/global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
@@ -1021,8 +631,8 @@
     <script src="design/global/vendor/intro-js/intro.js"></script>
     <script src="design/global/vendor/screenfull/screenfull.js"></script>
     <script src="design/global/vendor/slidepanel/jquery-slidePanel.js"></script>
-        <script src="design/global/vendor/bootstrap-table/bootstrap-table.min.js"></script>
-        <script src="design/global/vendor/bootstrap-table/extensions/mobile/bootstrap-table-mobile.js"></script>
+    	<script src="design/global/vendor/moment/moment.min.js"></script>
+        <script src="design/global/vendor/footable/footable.min.js"></script>
     
     <!-- Scripts -->
     <script src="design/global/js/Component.js"></script>
@@ -1045,7 +655,15 @@
     <script src="design/global/js/Plugin/asscrollable.js"></script>
     <script src="design/global/js/Plugin/slidepanel.js"></script>
     <script src="design/global/js/Plugin/switchery.js"></script>
+    <script src="js/proveedores.js"></script>
+    <script src="design/assets/examples/js/tables/bootstrap.js"></script>
+    	<script src="design/assets/examples/js/tables/footable.js"></script>
+
+    <!--<script type="text/javascript">
+    	jQuery(function($){
+			$('.table').footable();
+		});
+    </script>-->
     
-        <script src="design/assets/examples/js/tables/bootstrap.js"></script>
   </body>
 </html>

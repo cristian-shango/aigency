@@ -11698,3 +11698,27 @@ th, td{
   text-decoration: none;
   color: #FFFFFF;
 }
+
+.dot-disponible {
+  height: 15px;
+  width: 15px;
+  background-color: #28a745;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-ocupado {
+  height: 15px;
+  width: 15px;
+  background-color: #ffc107;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-descartado {
+  height: 15px;
+  width: 15px;
+  background-color: #dc3545;
+  border-radius: 50%;
+  display: inline-block;
+}
