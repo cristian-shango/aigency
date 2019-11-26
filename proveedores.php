@@ -31,9 +31,6 @@
     <link rel="stylesheet" href="design/global/vendor/slidepanel/slidePanel.css">
     <link rel="stylesheet" href="design/global/vendor/flag-icon-css/flag-icon.css">
     <link rel="stylesheet" href="design/global/vendor/bootstrap-table/bootstrap-table.css">
-    <link rel="stylesheet" href="design/global/vendor/footable/footable.core.css">
-    <link rel="stylesheet" href="design/assets/examples/css/tables/footable.css">
-    
     
     <!-- Fonts -->
     <link rel="stylesheet" href="design/global/fonts/web-icons/web-icons.min.css">
@@ -346,17 +343,17 @@
                 <!-- Example Basic Columns -->
                 <div class="example-wrap">
                   <div class="example table-responsive">
-                    <table id="exampleCustomFilter" class="table table-hover" data-paging="true" data-sorting="true" data-filtering="true">
+                    <table id="tabla_proveedores" class="table table-hover table-bordered table-responsive">
                       <thead>
                         <tr>
-							<th data-name="#" scope="col">#</th>
-							<th data-name="servicio" scope="col" style="width: 10%">Servicio</th>
-							<th data-name="descripcion" scope="col" style="width: 10%">Descripción</th>
-							<th data-name="razon_social" scope="col" style="width: 20%">Razón Social</th>
-							<th data-name="contacto" scope="col" style="width: 10%">Contacto</th>
-							<th data-name="telefono" scope="col" style="width: 10%">Telefono</th>
-							<th data-name="celular" scope="col" style="width: 20%">Celular</th>
-							<th data-name="mail" scope="col" style="width: 20%">Mail</th>
+							<th scope="col"></th>
+							<th scope="col" style="width: 10%">Servicio</th>
+							<th scope="col" style="width: 10%">Descripción</th>
+							<th scope="col" style="width: 20%">Razón Social</th>
+							<th scope="col" style="width: 10%">Contacto</th>
+							<th scope="col" style="width: 10%">Telefono</th>
+							<th scope="col" style="width: 20%">Celular</th>
+							<th scope="col" style="width: 20%">Mail</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -370,7 +367,7 @@
 						        while($row = mysqli_fetch_array($result)){
 						?>
 									<tr class="editar" data-toggle="modal" data-id="<?php echo ($row['id_proveedor']);?>" style="cursor: pointer;">
-										<td>
+										<th scope="row">
 											<?php
 												if($row['disponibilidad'] == "DISPONIBLE"){
 											?>
@@ -392,8 +389,8 @@
 												<span class="dot-disponible"></span>
 											<?php
 												}
-											?></td>
-										<td scope="row"><?php echo (($row['servicio']));?></td>
+											?></th>
+										<td><?php echo (($row['servicio']));?></td>
 										<td><?php echo (($row['descripcion']));?></td>
 										<td><?php echo (($row['razon_social']));?></td>
 
@@ -632,7 +629,6 @@
     <script src="design/global/vendor/screenfull/screenfull.js"></script>
     <script src="design/global/vendor/slidepanel/jquery-slidePanel.js"></script>
     	<script src="design/global/vendor/moment/moment.min.js"></script>
-        <script src="design/global/vendor/footable/footable.min.js"></script>
     
     <!-- Scripts -->
     <script src="design/global/js/Component.js"></script>
@@ -656,14 +652,46 @@
     <script src="design/global/js/Plugin/slidepanel.js"></script>
     <script src="design/global/js/Plugin/switchery.js"></script>
     <script src="js/proveedores.js"></script>
-    <script src="design/assets/examples/js/tables/bootstrap.js"></script>
-    	<script src="design/assets/examples/js/tables/footable.js"></script>
+    <script src="design/assets/examples/js/tables/bootstrap.js"></script> 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.css"/>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>   	
 
-    <!--<script type="text/javascript">
-    	jQuery(function($){
-			$('.table').footable();
+    <script type="text/javascript">
+    	$(document).ready(function() {
+		    $('.table').DataTable( {
+		        "paging": false,
+		        columnDefs: [ {
+		            orderable: false,
+		            className: 'select-checkbox',
+		            targets:   0
+		        } ],
+		        select: {
+		            style:    'multi',
+		            selector: 'td:first-child'
+		        },
+		        language: {
+			        "decimal": "",
+			        "emptyTable": "No hay información",
+			        "info": "Mostrando _START_ a _END_ de _TOTAL_ proveedores",
+			        "infoEmpty": "Mostrando 0 to 0 of 0 proveedores",
+			        "infoFiltered": "(Filtrado de _MAX_ total proveedores)",
+			        "infoPostFix": "",
+			        "thousands": ",",
+			        "lengthMenu": "Mostrar _MENU_ proveedores",
+			        "loadingRecords": "Cargando...",
+			        "processing": "Procesando...",
+			        "search": "Buscar:",
+			        "zeroRecords": "Sin resultados encontrados",
+			        "paginate": {
+			            "first": "Primero",
+			            "last": "Ultimo",
+			            "next": "Siguiente",
+			            "previous": "Anterior"
+			        }
+			    }
+		    } );
 		});
-    </script>-->
+    </script>
     
   </body>
 </html>

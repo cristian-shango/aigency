@@ -269,7 +269,7 @@
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <h5>Costo Real</h5>
+                      <h5>Costo Presupuestado</h5>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">$</div>
