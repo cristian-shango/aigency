@@ -154,7 +154,7 @@
             });
   });
 
-  $('.eliminar').click(function(){
+  $('#boton_eliminar_proyecto').click(function(){
     $('#modal_eliminar').modal('show');
     var id = $(this).attr('data-id');
     var nombre = $(this).attr('data-nombre');
@@ -290,42 +290,3 @@
     lang: 'es_ar',
     autogrow: true
   });
-
-
-
-  document.getElementById("nuevo_precio_cliente").onblur =function (){    
-    this.value = parseFloat(this.value.replace(/,/g, ""))
-                    .toFixed(2)
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");  
-    
-    
-}
-alert()
-
-document.getElementById("nuevo_costo_presupuestado").onblur =function (){    
-    this.value = parseFloat(this.value.replace(/,/g, ""))
-                    .toFixed(2)
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");  
-    
-    
-}
-
-document.getElementById("precio_cliente_editar_proyecto").onblur =function (){    
-    this.value = parseFloat(this.value.replace(/,/g, ""))
-                    .toFixed(2)
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");  
-    
-    
-}
-
-document.getElementById("editar_costo_presupuestado").onblur =function (){    
-    this.value = parseFloat(this.value.replace(/,/g, ""))
-                    .toFixed(2)
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");  
-    
-    
-}

@@ -28,8 +28,12 @@
   $descripcion_pago = $_POST["descripcion_pago"];
   $tiempo_cobro = $_POST["tiempo_cobro"];
   $obligatoriedad = $_POST["obligatoriedad"];
+  $ranking_tiempo = $_POST["ranking_tiempo"];
+  $ranking_calidad = $_POST["ranking_calidad"];
+  $ranking_precio = $_POST["ranking_precio"];
+  $ranking = $_POST["ranking"];
 
-  $sql = "UPDATE proveedores SET servicio = '$servicio', descripcion = '$descripcion', razon_social = '$razon_social',nombre_fantasia = '$nombre_fantasia', cuit = '$cuit', contacto = '$contacto', telefono = '$telefono', celular = '$celular', mail = '$mail', website = '$web', observaciones = '$observaciones', ubicacion = '$ubicacion', iso = '$iso', forma_pago = '$forma_pago', descripcion_pago = '$descripcion_pago', tiempo_cobro = '$tiempo_cobro', obligatoriedad = '$obligatoriedad' WHERE id_proveedor = '$id'";
+  $sql = "UPDATE proveedores SET servicio = '$servicio', descripcion = '$descripcion', razon_social = '$razon_social',nombre_fantasia = '$nombre_fantasia', cuit = '$cuit', contacto = '$contacto', telefono = '$telefono', celular = '$celular', mail = '$mail', website = '$web', observaciones = '$observaciones', ubicacion = '$ubicacion', iso = '$iso', forma_pago = '$forma_pago', descripcion_pago = '$descripcion_pago', tiempo_cobro = '$tiempo_cobro', obligatoriedad = '$obligatoriedad', ranking_tiempo = '$ranking_tiempo', ranking_calidad = '$ranking_calidad', ranking_precio = '$ranking_precio', ranking = '$ranking' WHERE id_proveedor = '$id'";
 
   if(mysqli_query($conexion, $sql)){
     echo "Registro creado.";

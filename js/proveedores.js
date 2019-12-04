@@ -44,6 +44,15 @@ $('.editar').click(function(){
 								 $('#tiempo_cobro_nuevo').val(data.tiempo_cobro);
 								 $('#obligatoriedad_nuevo').val(data.obligatoriedad);
 								 $('#descripcion_pago_nuevo').val(data.descripcion_pago);
+								 $('#ranking_tiempo').text(data.ranking_tiempo);
+								 $('#ranking_calidad').text(data.ranking_calidad);
+								 $('#ranking_precio').text(data.ranking_precio);
+								 $('.my-rating-10').starRating('setRating', data.ranking_calidad); 
+								 $('.my-rating-11').starRating('setRating', data.ranking_precio);
+								 $(".my-rating-9").starRating('setRating', data.ranking_tiempo);
+								 console.log(data.ranking_tiempo);
+								 console.log(data.ranking_calidad);
+								 console.log(data.ranking_precio);
              $('#modal_nuevo').modal('show');
              console.log("id del proveedor: ", data.id_proveedor, id);
         },
@@ -80,12 +89,15 @@ $('#guardar_nuevo_proveedor').click(function(event){
 	var descripcion_pago = escapar($("#descripcion_pago_nuevo").val());
 	var tiempo_cobro = $("#tiempo_cobro_nuevo").val();
 	var obligatoriedad = $("#obligatoriedad_nuevo").val();
+	var ranking_tiempo =parseFloat( $('#ranking_tiempo').text());
+	var ranking_calidad =parseFloat($("#ranking_calidad").text());
+	var ranking_precio =parseFloat($("#ranking_precio").text());
 	console.log("Id ",id);
-
+	var ranking =((ranking_tiempo + ranking_calidad + ranking_precio) / 3).toFixed(1);
 	var url = (id < 0) ? "agregar_proveedor.php" : "editar_proveedor.php";
 	console.log("url ", url);
 
-	var dataString = 'id='+id+'&servicio='+servicio+'&descripcion='+descripcion+'&razon_social='+razon_social+'&nombre_fantasia='+nombre_fantasia+'&cuit='+cuit+'&contacto='+contacto+'&telefono='+telefono+'&celular='+celular+'&mail='+mail+'&web='+web+'&observaciones='+observaciones+'&ubicacion='+ubicacion+'&iso='+iso+'&forma_pago='+forma_pago+'&descripcion_pago='+descripcion_pago+'&tiempo_cobro='+tiempo_cobro+'&obligatoriedad='+obligatoriedad;
+	var dataString = 'id='+id+'&servicio='+servicio+'&descripcion='+descripcion+'&razon_social='+razon_social+'&nombre_fantasia='+nombre_fantasia+'&cuit='+cuit+'&contacto='+contacto+'&telefono='+telefono+'&celular='+celular+'&mail='+mail+'&web='+web+'&observaciones='+observaciones+'&ubicacion='+ubicacion+'&iso='+iso+'&forma_pago='+forma_pago+'&descripcion_pago='+descripcion_pago+'&tiempo_cobro='+tiempo_cobro+'&obligatoriedad='+obligatoriedad+'&ranking_tiempo='+ranking_tiempo +'&ranking_calidad='+ranking_calidad +'&ranking_precio='+ranking_precio +'&ranking='+ranking;
 
 	console.log(dataString);
 	$.ajax({
@@ -163,7 +175,7 @@ $('.ver2').click(function(){
             $('#ver_forma_pago').val(data.forma_pago);
             $('#ver_forma_pago').attr("disabled", true);
             $('#ver_descripcion_pago').val(data.descripcion_pago);
-
+			
             $("#boton_enviar_mail").click(function(){
             	window.location="mailto:"+data.mail;
             });
@@ -176,3 +188,4 @@ $('.ver2').click(function(){
         }
    });
 });
+

@@ -44,7 +44,7 @@
     <script src="js/popper.min.js"></script>
     <script src="js/trumbowyg/dist/trumbowyg.min.js"></script>
     <script type="text/javascript" src="js/trumbowyg/dist/langs/es_ar.min.js"></script>  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/currencyformatter.js/2.2.0/currencyFormatter.js" integrity="sha256-lCXqGxPAQbTux1a9+jYZBXKJwb4amDg9c2MbtVk0Sec=" crossorigin="anonymous"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/currencyformatter.js/2.2.0/currencyFormatter.js"></script>  
          
       <link rel="stylesheet" href="js/trumbowyg/dist/ui/trumbowyg.min.css">
 
@@ -192,7 +192,7 @@
                           <th>Hora Cliente</th>
                           <th>Precio</th>
                           <th>Costo</th>
-                          <th colspan="4">Acciones</th>
+                          <th>Revisar</th>
                           <th style="text-align: center;">Estado</th>
                         </tr>
                       </thead>
@@ -206,7 +206,7 @@
                                   $i = 0;
                                   while($row = mysqli_fetch_array($result)){
                         ?>
-                            <tr>
+                            <tr class="editar" data-id="<?php echo ($row['id']);?>" style="cursor: pointer;">
                               <td><?php echo ($row['id']);?></td>
                               <td scope="row"><?php echo ($row['nombre']);?></td>
                               <td><?php echo ($row['producto_proyecto']);?></td>
@@ -220,12 +220,11 @@
                               <td>$ <span class="valor_precio_cliente"><?php echo  ($row['precio']);?></span></td>
                               <td>$ <span class="valor_costo_presupuestado"><?php echo ($row['costo_presupuestado']);?></span></td>
                               <!-- <td>$ <span class="valor_saldo_total"><?php echo ($row['saldo']);?></span></td> -->
-                              <td><button type="button" class="btn btn-default editar" data-toggle="modal" data-id="<?php echo ($row['id']);?>"><i class="icon wb-edit" aria-hidden="true"></i></button></td>
                               <?php
                                 if($row['estado'] == 3 OR $row['estado'] == 4 OR $row['estado'] == 5 OR $row['estado'] == 6 OR $row['estado'] == 7 OR $row['estado'] == 8 OR $row['estado'] == 9){
                               ?>
                                   <td>
-                                    <button type="button" class="btn btn-success ver" data-toggle="modal" data-id="<?php echo ($row['id']);?>" data-estado="<?php echo ($row['estado']);?>"><i class="icon wb-eye" aria-hidden="true"></i></button>
+                                    <button type="button" class="btn btn-success ver" data-toggle="modal" data-id="<?php echo ($row['id']);?>" data-estado="<?php echo ($row['estado']);?>"><i class="icon wb-check" aria-hidden="true"></i></button>
                                   </td>
                               <?php
                                 } else{
@@ -234,27 +233,11 @@
                               <?php
                                 }
                               ?>
-                              <?php
-                                if($row['adicional'] == 1){
-                              ?>
-                                  <td>
-                                    <button type="button" class="btn btn-warning click_adicional" data-id="<?php echo ($row['id']);?>"><i class="icon wb-plus" aria-hidden="true"></i></button>
-                              <?php
-                                } else{
-                              ?>
-                                  <td></td>
-                              <?php
-                                }
-                              ?>
-                              <td>
-                                <button type="button" class="btn btn-info eliminar" data-id="<?php echo ($row['id']);?>"><i class="icon wb-trash" aria-hidden="true"></i></button>
-                              </td>
                               <td style="font-weight: bold; text-align: center !important;">
                                 <?php
                                   $estado = $row['estado'];
                                   $nombre_estado = $row['nombre_estado'];
                                   
-
                                   switch($estado){
                                     case "1":
                                       echo "<span class='badge badge-danger'>".$nombre_estado."</span>";
@@ -714,7 +697,7 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text">$</div>
                         </div>
-                        <input class="money" type="text" class="form-control form-control-lg" id="precio_cliente_editar_proyecto">
+                        <input type="number" class="form-control form-control-lg" id="precio_cliente_editar_proyecto">
                       </div>
                     </div>
                   </div>
@@ -725,7 +708,7 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text">$</div>
                         </div>
-                        <input  type="number" class="form-control form-control-lg " id="editar_costo_presupuestado">
+                        <input type="number" class="form-control form-control-lg" id="editar_costo_presupuestado">
                         <input type="number" id="id_editar_proyecto" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" hidden>
                       </div>
                     </div>
@@ -744,8 +727,11 @@
                   <div class="col-md-6">
                     <button type="button" class="btn btn-success btn-block" id="boton_editar_proyecto"><strong>GUARDAR</strong></button>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                     <button type="button" class="btn btn-danger btn-block " data-dismiss="modal"><strong>CANCELAR</strong></button>
+                  </div>
+                  <div class="col-md-2">
+                    <button type="button" class="btn btn-info btn-block" id="boton_eliminar_proyecto"><strong>ELIMINAR</strong></button>
                   </div>
                     </div>
                   </form>

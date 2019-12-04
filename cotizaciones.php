@@ -192,14 +192,14 @@
                                   while($row = mysqli_fetch_array($result)){
                                     $detalle = strlen($row['detalle']) > 50 ? substr($row['detalle'],0,50)."..." : $row['detalle'];
                         ?>
-                            <tr>
-                              <td><a href="cargar_cotizaciones.php?id=<?php echo ($row['id']);?>"><?php echo ($row['id']);?></a></td>
+                            <tr id="cargar_cotizaciones" data-id="<?php echo ($row['id']);?>" style="cursor: pointer;">
+                              <td><?php echo ($row['id']);?></td>
                               <td scope="row"><?php echo ($row['nombre']);?></td>
                               <td><?php echo ($row['nombre_proyecto']);?></td>
                               <td><?php echo ($row['producto_proyecto']);?></td>
                               <td><?php echo utf8_encode($row['nombre_subtipo']);?></td>
                               <!-- <td style="text-align: left;"><?php echo ($detalle);?></td> -->
-                              <td><?php echo ($row['fecha_entrega']);?> - <?php echo ($row['hora_interno']);?>:<?php echo ($row['minutos_interno']);?></td>
+                              <td><?php echo ($row['fecha_entrega']);?> - <?php echo ($row['hora_interno']);?></td>
                               <td>$ <span class="valor_costo_presupuestado"><?php echo ($row['costo_presupuestado']);?></span></td>
                               <td>$ <span class="valor_saldo"><?php echo ($row['saldo']);?></span></td>
                               <td style="font-weight: bold; text-align: center !important;">
@@ -293,5 +293,11 @@
     <script src="design/global/js/Plugin/switchery.js"></script>
     
         <script src="design/assets/examples/js/tables/bootstrap.js"></script>
+    <script type="text/javascript">
+      $("#cargar_cotizaciones").click(function(){
+        let id = $(this).attr('data-id');
+        window.location.href = "cargar_cotizaciones.php?id="+id;
+      });
+    </script>
   </body>
 </html>

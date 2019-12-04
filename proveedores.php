@@ -22,7 +22,11 @@
     <link rel="stylesheet" href="design/global/css/bootstrap-extend.min.css">
     <link rel="stylesheet" href="design/assets/css/site.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" type="text/css" href="design/global/css/star-rating-svg.css">
     
+  
+  <link rel="stylesheet" href="design/global/css/proveedores.css">
     <!-- Plugins -->
     <link rel="stylesheet" href="design/global/vendor/animsition/animsition.css">
     <link rel="stylesheet" href="design/global/vendor/asscrollable/asScrollable.css">
@@ -43,7 +47,9 @@
     <script src="js/trumbowyg/dist/trumbowyg.min.js"></script>
     <script type="text/javascript" src="js/trumbowyg/dist/langs/es_ar.min.js"></script>            
       <link rel="stylesheet" href="js/trumbowyg/dist/ui/trumbowyg.min.css">
-
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script> 
+      <script src="design/global/js/jquery.star-rating-svg.js"></script>
+      
     <!--[if lt IE 9]>
     <script src="design/global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
@@ -350,10 +356,10 @@
 							<th scope="col" style="width: 10%">Servicio</th>
 							<th scope="col" style="width: 10%">Descripción</th>
 							<th scope="col" style="width: 20%">Razón Social</th>
-							<th scope="col" style="width: 10%">Contacto</th>
-							<th scope="col" style="width: 10%">Telefono</th>
-							<th scope="col" style="width: 20%">Celular</th>
-							<th scope="col" style="width: 20%">Mail</th>
+							<th scope="col" style="width: 10%">Contacto</th>							
+							<th scope="col" style="width: 10%">Celular</th>
+              <th scope="col" style="width: 15%">Mail</th>
+              <th scope="col" style="width: 20%">Valoración</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -366,7 +372,7 @@
 						        $i = 0;
 						        while($row = mysqli_fetch_array($result)){
 						?>
-									<tr class="editar" data-toggle="modal" data-id="<?php echo ($row['id_proveedor']);?>" style="cursor: pointer;">
+									<tr >
 										<th scope="row">
 											<?php
 												if($row['disponibilidad'] == "DISPONIBLE"){
@@ -390,15 +396,16 @@
 											<?php
 												}
 											?></th>
-										<td><?php echo (($row['servicio']));?></td>
-										<td><?php echo (($row['descripcion']));?></td>
-										<td><?php echo (($row['razon_social']));?></td>
+										<td class="editar" data-toggle="modal" data-id="<?php echo ($row['id_proveedor']);?>" style="cursor: pointer;"><?php echo (($row['servicio']));?></td>
+										<td class="editar" data-toggle="modal" data-id="<?php echo ($row['id_proveedor']);?>" style="cursor: pointer;"><?php echo (($row['descripcion']));?></td>
+										<td class="editar" data-toggle="modal" data-id="<?php echo ($row['id_proveedor']);?>" style="cursor: pointer;"><?php echo (($row['razon_social']));?></td>
 
-										<td><?php echo (($row['contacto']));?></td>
-
-										<td><?php echo (($row['telefono']));?></td>
-										<td><?php echo (($row['celular']));?></td>
-										<td><a href="mailto:<?php echo (($row['mail']));?>"><?php echo (($row['mail']));?></a></td>
+										<td class="editar" data-toggle="modal" data-id="<?php echo ($row['id_proveedor']);?>" style="cursor: pointer;"><?php echo (($row['contacto']));?></td>										
+										<td class="editar" data-toggle="modal" data-id="<?php echo ($row['id_proveedor']);?>" style="cursor: pointer;"><?php echo (($row['celular']));?></td>
+                    <td class="editar" data-toggle="modal" data-id="<?php echo ($row['id_proveedor']);?>" style="cursor: pointer;"><a href="mailto:<?php echo (($row['mail']));?>"><?php echo (($row['mail']));?></a></td>
+                    <td >                                        
+                    <div class="my-rating" data-rating="<?php echo (($row['ranking']));?>"></div><p><?php echo (($row['ranking']));?></p>            
+                      </td>
 									</tr>
 							<?php
 								        }
@@ -441,6 +448,8 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
+
+            
 						<div class="modal-body">
 							<form method="POST" id="nuevo_proveedor">
 								<input type="number" id="id_editar_en_nuevo" hidden>
@@ -586,7 +595,58 @@
 										    <h4>Descripción de Pago</h4>
 										    <input type="text" id="descripcion_pago_nuevo" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
 										</div>
-									</div>
+                  </div>                
+             
+
+                  <div class="col-md-12">
+										<div class="form-group">
+                        <h4>Calificación</h4>
+                        <div class="calificacion_proveedor">
+                        <div>
+                        <h4>Tiempo</h4>
+                        <span class="my-rating-9" data-rating="0"> </span>
+                        <span id="ranking_tiempo" class="live-rating" > </span>
+                        <!--<select class="form-control" id="ranking_tiempo">
+										      	<option value="">Seleccionar</option>
+												<option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>-->
+                    </div>
+                     <div>
+                        <h4>Calidad</h4>
+                        <span class="my-rating-10" data-rating="0"> </span>
+                        <span id="ranking_calidad" class="live-rating" > </span>
+                        <!--<select class="form-control" id="ranking_calidad" >
+										      	<option value="">Seleccionar</option>
+												<option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>-->
+                    </div>
+                     <div>
+                        <h4>Precio</h4>
+                        <span class="my-rating-11" data-rating="0"> </span>
+                        <span id="ranking_precio" class="live-rating" > </span>
+                        <!--<select class="form-control" id="ranking_precio" >
+										      	<option value="">Seleccionar</option>
+												<option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>-->
+                    </div>
+                     </div>
+										</div>
+                  </div>
+                 
+                  
+
 									<div class="col-md-6">
 										<button type="button" class="btn btn-success btn-block" id="guardar_nuevo_proveedor"><strong id="texto_guardar">GUARDAR</strong></button>
 									</div>
@@ -691,7 +751,49 @@
 			    }
 		    } );
 		});
-    </script>
+    </script>   
     
+    <script>
+    $(".my-rating").starRating({
+    starSize: 25,
+    readOnly: true,    
+});
+
+$(".my-rating-9").starRating({
+    initialRating: 0,
+    starSize: 25,
+    disableAfterRate: false,
+    onHover: function(currentIndex, currentRating, $el){
+      $('#ranking_tiempo').text(currentIndex);
+    },
+    onLeave: function(currentIndex, currentRating, $el){
+      $('#ranking_tiempo').text(currentRating);
+    }
+  });
+
+  $(".my-rating-10").starRating({
+    initialRating: 0,
+    starSize: 25,
+    disableAfterRate: false,
+    onHover: function(currentIndex, currentRating, $el){
+      $('#ranking_calidad').text(currentIndex);
+    },
+    onLeave: function(currentIndex, currentRating, $el){
+      $('#ranking_calidad').text(currentRating);
+    }
+  });
+
+  $(".my-rating-11").starRating({
+    initialRating: 0,
+    starSize: 25,
+    disableAfterRate: false,
+    onHover: function(currentIndex, currentRating, $el){
+      $('#ranking_precio').text(currentIndex);
+    },
+    onLeave: function(currentIndex, currentRating, $el){
+      $('#ranking_precio').text(currentRating);
+    }
+  });
+</script>
   </body>
 </html>

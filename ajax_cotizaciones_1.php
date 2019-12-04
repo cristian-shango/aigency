@@ -121,16 +121,16 @@
 
       echo "<tbody>
             <tr>
-              <th scope='col' class='gray' width='2%;'>#</th>
+              <th scope='col' class='gray' width='1%;'>#</th>
               <th scope='col' class='gray' width='10%;'>Rubro</th>
               <th scope='col' class='gray' width='10%;'>Categoría</th>
-              <th scope='col' class='gray' width='25%;'>Item</th>
-              <th scope='col' class='gray' width='8%;'>Condición</th>
-              <th scope='col' class='gray' width='7%;'>Jornadas</th>
+              <th scope='col' class='gray' width='10%;'>Item</th>
+              <th scope='col' class='gray' width='5%;'>Condición</th>
+              <th scope='col' class='gray' width='4%;'>Jornadas</th>
               <th scope='col' class='gray' width='10%;'>Cant.</th>
               <th scope='col' class='gray' width='10%;'>Valor</th>
               <th scope='col' class='gray' width='10%;'>Total</th>
-              <th scope='col' class='gray' width='50%;'>Proveedor</th>
+              <th scope='col' class='gray' width='20%;'>Proveedor</th>
               <th scope='col' class='gray' width='10%;'>Editar</th>
             </tr>";
       $sql_registros = "SELECT * FROM registros r
@@ -168,6 +168,12 @@
                   $rubro_actual = $row_registros['rubro_cotizacion'];
                   $categoria_actual = $row_registros['categoria_cotizacion'];
                   $item_actual = $row_registros['item'];
+                  $condicion_actual = $row_registros['condicion_registro'];
+                  $jornadas_actual = $row_registros['jornadas_registro'];
+                  $cantidad_actual = $row_registros['cantidad'];
+                  $valor_actual = $row_registros['importe_neto'];
+                  $total_actual = $row_registros['importe_total'];
+                  $proveedor_actual = $row_registros['id_proveedor'];
 
                   $conteo_item += 1;
                   $prom_item = $merge_rubros[$rubro_actual][$categoria_actual][$item_actual]['prom'];
@@ -229,6 +235,12 @@
                   $data = "data-rubro='$rubro_actual'
                             data-categoria='$categoria_actual'
                             data-item='$item_actual'
+                            data-condicion='$condicion_actual'
+                            data-jornadas='$jornadas_actual'
+                            data-cantidad='$cantidad_actual'
+                            data-valor='$valor_actual'
+                            data-total='$total_actual'
+                            data-proveedor='$proveedor_actual'
                             data-id_registro='".$row_registros['id']."'";
                   $checked = $row_registros['registro_seleccionado'] == 0 ? "" : "checked";
               // if ($row_registros['registro_seleccionado'] == 0) {
@@ -265,8 +277,9 @@
           echo "<td>$<span class='valor_precio_cliente numerable'>".$row_registros['importe_neto']."</span></td>";
           echo "<td>$<span class='valor_promedio numerable cotizacion_pagos_total' data-registro='".$row['id_catcot']."' data-valor='".$row_registros['importe_total']."'>".$row_registros['importe_total']."</span></td>";
           echo "<td>".$row_registros['razon_social']." | ".$row_registros['contacto']."</td>";
-          echo "<td>";
-              echo "<button type='button' class='btn btn-default cargar_proveedor_cotizacion' data-toggle='modal' data-id='".$row_registros['id']."' data-check='".$row_registros['registro_seleccionado']."'><i class='icon wb-edit' aria-hidden='true'></i></button>";
+          echo "<td contenteditable='false'>";
+              echo "<button type='button' class='btn btn-default editar_proveedor_cotizacion' data-toggle='modal' data-id='".$row_registros['id']."' data-check='".$row_registros['registro_seleccionado']."'><i class='icon wb-edit' aria-hidden='true'></i></button>";
+              echo "<button type='button' class='btn btn-default cargar_proveedor_cotizacion' data-toggle='modal' data-id='".$row_registros['id']."' data-check='".$row_registros['registro_seleccionado']."'><i class='icon wb-info' aria-hidden='true'></i></button>";
               echo "<button type='button' class='btn btn-default'><i class='icon wb-plus seleccion_item' data-rubro='".$row_registros['id_rubros_cotizaciones']."' data-categoria='".$row_registros['id_catcot']."' data-item='".$row_registros['nombre_item_cotizacion']."' data-id_registro='".$row_registros['id']."'></i></button>";
           echo "</td>";
         echo "</tr>";
@@ -287,10 +300,11 @@
               <th scope='col' class='gray' width='10%;'>Categoría</th>
               <th scope='col' class='gray' width='5%;'>Item</th>
               <th scope='col' class='gray' width='5%;'>Condición</th>
-              <th scope='col' class='gray' width='7%;'>Jornadas</th>
-              <th scope='col' class='gray' width='7%;'>Cant.</th>
-              <th scope='col' class='gray' width='15%;'>Valor</th>
-              <th scope='col' class='gray' width='14%;'>Total</th>
+              <th scope='col' class='gray' width='5%;'>Jornadas</th>
+              <th scope='col' class='gray' width='5%;'>Cant.</th>
+              <th scope='col' class='gray' width='10%;'>Valor</th>
+              <th scope='col' class='gray' width='10%;'>Total</th>
+              <th scope='col' class='gray' width='30%;'>Proveedor</th>
               <th scope='col' class='gray' width='10%;'>Guardar</th>
             </tr>";
     echo "<tr id='tr_mostrar' class='cotizacion_pagos_group'>";
@@ -386,7 +400,29 @@
       echo "<td class='hidden'>";
       echo modal_cotizacion_pagos("guardable", $proyecto);
       echo "</td>";
-      echo "<td><button type='button' class='btn btn-success' id='boton_guardar_cotizacion'><i class='icon wb-check' aria-hidden='true'></i></button></td>";
+
+      echo "<td>";
+        echo "<select class='form-control dropdown_proveedor' id='ingreso_proveedor' data-plugin='select2' style='width: 100%;'>";
+          echo "<option value=''>Proveedor</option>";
+            $sql_proveedor_dropdown = 'SELECT * FROM proveedores ORDER BY razon_social ASC';
+            mysql_query("SET NAMES 'utf8'");
+            if($result_proveedor_dropdown = mysqli_query($conexion, $sql_proveedor_dropdown)){
+                if(mysqli_num_rows($result_proveedor_dropdown) > 0){
+                    $i = 0;
+                    while ($row_proveedor_dropdown = mysqli_fetch_array($result_proveedor_dropdown)){
+            echo "<option value='".utf8_encode($row_proveedor_dropdown['id_proveedor'])."'>".utf8_encode($row_proveedor_dropdown['contacto'])."</option>";
+                    }
+                    mysqli_free_result($result_proveedor_dropdown);
+                } else{
+                    echo 'No hay datos para mostrar.';
+                }
+            } else{
+                echo 'ERROR: Could not able to execute $sql_proveedor_dropdown. ' . mysqli_error($conexion);
+            }
+        echo "</select>";
+      echo "</td>";
+
+      echo "<td><button type='button' class='btn btn-success boton_guardar_cotizacion'><i class='icon wb-check' aria-hidden='true'></i></button></td>";
       //echo "<td></td>";
     echo "</tr>";
     echo "</tbody>";
