@@ -7,11 +7,12 @@
 <html class="no-js css-menubar" lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
-    
+    <meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">
     <title>AiGency | Proveedores</title>
     
     <link rel="apple-touch-icon" href="design/assets/images/apple-touch-icon.png">
@@ -47,9 +48,9 @@
     <script src="js/trumbowyg/dist/trumbowyg.min.js"></script>
     <script type="text/javascript" src="js/trumbowyg/dist/langs/es_ar.min.js"></script>            
       <link rel="stylesheet" href="js/trumbowyg/dist/ui/trumbowyg.min.css">
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script> 
-      <script src="design/global/js/jquery.star-rating-svg.js"></script>
-      
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script> 
+      <script src="design/global/js/jquery.star-rating-svg.js"></script>      
+      <script src="js/tableToExcel.js"></script>
     <!--[if lt IE 9]>
     <script src="design/global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
@@ -349,7 +350,7 @@
                 <!-- Example Basic Columns -->
                 <div class="example-wrap">
                   <div class="example table-responsive">
-                    <table id="tabla_proveedores" class="table table-hover table-bordered table-responsive">
+                    <table id="tabla_proveedores" class="table table-hover table-bordered table-responsive table2excel table2excel_with_colors" data-tableName="Test Table 3">
                       <thead>
                         <tr>
 							<th scope="col"></th>
@@ -420,6 +421,8 @@
 							?>
 						</tbody>
                     </table>
+                    
+                    <input type="button" onclick="tableToExcel('tabla_proveedores', 'Proveedores')" value="Export to Excel">
                   </div>
                 </div>
                 <!-- End Example Basic Columns -->
@@ -712,9 +715,14 @@
     <script src="design/global/js/Plugin/slidepanel.js"></script>
     <script src="design/global/js/Plugin/switchery.js"></script>
     <script src="js/proveedores.js"></script>
+    
     <script src="design/assets/examples/js/tables/bootstrap.js"></script> 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.css"/>
-	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>   	
+	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
+
+
+  
+
 
     <script type="text/javascript">
     	$(document).ready(function() {
@@ -751,9 +759,7 @@
 			    }
 		    } );
 		});
-    </script>   
     
-    <script>
     $(".my-rating").starRating({
     starSize: 25,
     readOnly: true,    
@@ -795,5 +801,7 @@ $(".my-rating-9").starRating({
     }
   });
 </script>
+
+
   </body>
 </html>

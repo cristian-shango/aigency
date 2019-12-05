@@ -1788,6 +1788,20 @@
         //abandonar(result);
       };
 
+      function calculate_linea() {
+        //puntear(document.getElementById('ingreso_importe_neto'));
+        var myBox1 = parseFloat(document.getElementById('ingreso_cantidad_linea').value);
+        var myBox2 = parseFloat(document.getElementById('ingreso_importe_neto_linea').value);
+        var myBox3 = parseFloat(document.getElementById('ingreso_jornadas_linea').value);
+        var result = document.getElementById('ingreso_importe_total_linea');
+        var myResult = myBox1 * myBox2 * myBox3;
+        console.log(myResult);
+        result.value = myResult;
+        //console.log("en calculate: ", result.value);
+        //abandonar(result);
+
+      };
+
       $('#guardar_categoria').click(function(){
         var id_proyecto = document.getElementById('ingreso_id').innerHTML;
         var categoria = $("#ingreso_categoria").val();
@@ -2487,14 +2501,19 @@
           var valor = $(this).parents("tr").attr("data-valor");
           var total = $(this).parents("tr").attr("data-total");
           var proveedor = $(this).parents("tr").attr("data-proveedor");
+          var id_registro = $(this).parents("tr").attr("data-id_registro");
       
-          $(this).parents("tr").find("td:eq(6)").html('<input type="number" id="ingreso_jornadas_linea" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" oninput="calculate();" value="'+jornadas+'">');
-          $(this).parents("tr").find("td:eq(7)").html('<input type="number" id="ingreso_cantidad_linea" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" oninput="calculate();" value="'+cantidad+'">');
-          $(this).parents("tr").find("td:eq(8)").html('<input type="number" id="ingreso_importe_neto_linea" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" oninput="calculate();" value="'+valor+'">');
+          $(this).parents("tr").find("td:eq(6)").html('<input type="number" id="ingreso_jornadas_linea" name="jornadas_linea" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" oninput="calculate_linea();" value="'+jornadas+'">');
 
-          $(this).parents("tr").find("td:eq(10)").html('<select class="form-control dropdown_proveedor_linea" id="ingreso_proveedor" data-plugin="select" style="width: 100%;"></select>');
+          $(this).parents("tr").find("td:eq(7)").html('<input type="number" id="ingreso_cantidad_linea" name="cantidad_linea" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" oninput="calculate_linea();" value="'+cantidad+'">');
 
-          $(this).parents("tr").find("td:eq(11)").prepend("<button type='button' class='btn btn-success boton_guardar_cotizacion_linea'><i class='icon wb-check' aria-hidden='true'></i></button>")
+          $(this).parents("tr").find("td:eq(8)").html('<input type="number" id="ingreso_importe_neto_linea" name="importe_linea" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" oninput="calculate_linea();" value="'+valor+'">');
+
+          $(this).parents("tr").find("td:eq(9)").html('<input type="number" id="ingreso_importe_total_linea" name="total_linea" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'+total+'">');
+
+          $(this).parents("tr").find("td:eq(10)").html('<select class="form-control dropdown_proveedor_linea" id="ingreso_proveedor_linea"  name="proveedor_linea" data-plugin="select" style="width: 100%;"></select>');
+
+          $(this).parents("tr").find("td:eq(11)").prepend("<button type='button' class='btn btn-success boton_guardar_cotizacion_linea' data-registro='"+id_registro+"'><i class='icon wb-check' aria-hidden='true'></i></button>");
           $(this).hide();
 
           $.ajax({
@@ -2574,67 +2593,43 @@
         });
 
         $('#tabla_cotizaciones').on('click', '.boton_guardar_cotizacion_linea', function(){
-          console.log("Guardar cotizacion en linea");
+
           $(this).parents("tr").find(".editar_proveedor_cotizacion").show();
           $(this).parents("tr").find(".boton_guardar_cotizacion_linea").remove();
 
-          var jornadas = $(this).parents("tr").find("input[id='ingreso_jornadas_linea']").val();
-          var cantidad = $(this).parents("tr").find("input[id='ingreso_cantidad_linea']").val();
-          var valor = $(this).parents("tr").find("input[id='ingreso_importe_neto_linea']").val();
-          var proveedor = $(this).parents("tr").find("input[id='ingreso_proveedor_linea']").val();
+          let proyecto = '<?php echo $_GET['id'];?>';         
+          let registro = $(this).attr('data-registro');
+          let jornadas = $("#ingreso_jornadas_linea").val();
+          let cantidad = $("#ingreso_cantidad_linea").val();
+          let valor = $("#ingreso_importe_neto_linea").val();
+          let total = $("#ingreso_importe_total_linea").val();
+          let proveedor = $("#ingreso_proveedor_linea").val();
+
+          console.log("Registro: ",registro);
+          console.log("Jornadas: ",jornadas);
+          console.log("Cantidad: ",cantidad);
+          console.log("Valor: ",valor);
+          console.log("Total: ",total);
+          console.log("Proveedor: ",proveedor);
 
           $.ajax({
-            url:"ajax_cotizaciones_1.php",
+            url:"agregar_cotizacion_linea.php",
             method:"POST",
-            data:'proyecto='+proyecto,
-            success:function(data){
-              $('#tabla_cotizaciones').html(data);
-              funciones_cotizaciones();
-              total_cotizacion();
-            $('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
-              //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
-            }
-          });
-
-          /*var proyecto = '<?php echo $_GET['id'];?>';
-          var rubro = $("#ingreso_rubro").val();
-          var nombre_rubro = $("#ingreso_rubro option:selected").text();
-          var categoria = $("#ingreso_categoria").val();
-          var item = $("#ingreso_item").val();
-          var condicion = $("#ingreso_condicion").val();
-          var detalle = $("#ingreso_detalle_cotizacion").val();
-          var jornada = $("#ingreso_jornadas").val();
-          var cantidad = pasarafloat($("#ingreso_cantidad").val());
-          var importe_neto = pasarafloat($("#ingreso_importe_neto").val());
-          var importe_total = pasarafloat($("#ingreso_importe_total").val());
-          var proveedor = $("#ingreso_proveedor").val();
-          
-          $.ajax({
-            url:"comprobar_rubro_cotizacion.php",
-            method:"POST",
-            data: 'rubro='+ rubro+'&nombre_rubro='+ nombre_rubro,
-            success:function(data){  
+            data: 'registro='+ registro+'&jornadas='+ jornadas+'&cantidad='+ cantidad+'&valor='+ valor+'&total='+ total+'&proveedor='+ proveedor,
+            success:function(rubro){
               $.ajax({
-                url:"agregar_cotizacion_manual.php",
+                url:"ajax_cotizaciones_1.php",
                 method:"POST",
-                data: 'proyecto='+ proyecto+'&rubro='+ rubro+'&nombre_rubro='+ nombre_rubro+'&categoria='+ categoria+'&item='+ item+'&condicion='+ condicion+'&detalle='+ detalle+'&jornada='+ jornada+'&cantidad='+ cantidad+'&importe_neto='+ importe_neto+'&importe_total='+ importe_total,//+'&pagos=' + pagos,
-                success:function(rubro){
-                  console.log("Este es el RUBRO: ",rubro);
-                  $.ajax({
-                    url:"ajax_cotizaciones_1.php",
-                    method:"POST",
-                    data:'proyecto='+proyecto,
-                    success:function(data){
-                      $('#tabla_cotizaciones').html(data);
-                      funciones_cotizaciones();
-                      total_cotizacion();
-                      $('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
-                    }
-                  });
+                data:'proyecto='+proyecto,
+                success:function(data){
+                  $('#tabla_cotizaciones').html(data);
+                  funciones_cotizaciones();
+                  total_cotizacion();
+                  $('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
                 }
               });
             }
-          });*/
+          });
         });
 
         $('#boton_guardar_proveedor_cotizacion').click(function(){
