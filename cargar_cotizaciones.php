@@ -2558,32 +2558,40 @@
           var importe_neto = pasarafloat($("#ingreso_importe_neto").val());
           var importe_total = pasarafloat($("#ingreso_importe_total").val());
           var proveedor = $("#ingreso_proveedor").val();
+          var nombre_proveedor = $("#ingreso_proveedor option:selected").text();
           //var forma_pago = $("#ingreso_forma_pago").val();
           //var dias_pago = $("#ingreso_dias").val();
           //var pagos = cotizacion_pagos.guardable();
           //var pagos = '{"0":{"plazo":"90","porcentaje":"100","forma":"3","fecha1":"","fecha2":"undefined"}}';
           $.ajax({
-            url:"comprobar_rubro_cotizacion.php",
+            url:"comprobar_proveedor_cotizacion.php",
             method:"POST",
-            data: 'rubro='+ rubro+'&nombre_rubro='+ nombre_rubro,
-            success:function(data){  
+            data: 'proveedor='+ proveedor+'&nombre_proveedor='+ nombre_proveedor,
+            success:function(data){ 
               $.ajax({
-                url:"agregar_cotizacion_manual.php",
+                url:"comprobar_rubro_cotizacion.php",
                 method:"POST",
-                data: 'proyecto='+ proyecto+'&rubro='+ rubro+'&nombre_rubro='+ nombre_rubro+'&categoria='+ categoria+'&item='+ item+'&condicion='+ condicion+'&detalle='+ detalle+'&jornada='+ jornada+'&cantidad='+ cantidad+'&importe_neto='+ importe_neto+'&importe_total='+ importe_total,//+'&pagos=' + pagos,
-                success:function(rubro){
-                    console.log("Este es el RUBRO: ",rubro);
-                  //window.location.reload(true);
+                data: 'rubro='+ rubro+'&nombre_rubro='+ nombre_rubro,
+                success:function(data){  
                   $.ajax({
-                    url:"ajax_cotizaciones_1.php",
+                    url:"agregar_cotizacion_manual.php",
                     method:"POST",
-                    data:'proyecto='+proyecto,
-                    success:function(data){
-                      $('#tabla_cotizaciones').html(data);
-                      funciones_cotizaciones();
-                      total_cotizacion();
-                    $('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
-                      //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
+                    data: 'proyecto='+ proyecto+'&rubro='+ rubro+'&nombre_rubro='+ nombre_rubro+'&categoria='+ categoria+'&item='+ item+'&condicion='+ condicion+'&detalle='+ detalle+'&jornada='+ jornada+'&cantidad='+ cantidad+'&importe_neto='+ importe_neto+'&importe_total='+ importe_total+'&proveedor='+ proveedor+'&nombre_proveedor='+ nombre_proveedor,//+'&pagos=' + pagos,
+                    success:function(rubro){
+                        console.log("Este es el RUBRO: ",rubro);
+                      //window.location.reload(true);
+                      $.ajax({
+                        url:"ajax_cotizaciones_1.php",
+                        method:"POST",
+                        data:'proyecto='+proyecto,
+                        success:function(data){
+                          $('#tabla_cotizaciones').html(data);
+                          funciones_cotizaciones();
+                          total_cotizacion();
+                        $('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
+                          //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
+                        }
+                      });
                     }
                   });
                 }

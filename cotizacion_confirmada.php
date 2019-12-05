@@ -350,7 +350,24 @@
                   <div class="example-wrap">
                     <div class="example table-responsive">
                       <!-- NUEVA TABLA -->
-                      <table class="table border-tabla" id="tabla_cotizaciones"></table>
+                      <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tab_cotizacion_confirmada" role="tab" aria-controls="editar"
+                            aria-selected="true">COTIZACIÓN CONFIRMADA</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tab_cotizacion_cliente" role="tab" aria-controls="proveedor"
+                            aria-selected="false">COTIZACIÓN A ENVIAR AL CLIENTE</a>
+                        </li>
+                      </ul>
+                      <div class="tab-content" id="TabContent">
+                        <div class="tab-pane fade show active" id="tab_cotizacion_confirmada" role="tabpanel" aria-labelledby="editar-tab">
+                          <table class="table border-tabla" id="tabla_confirmada"></table>
+                        </div>
+                        <div class="tab-pane fade" id="tab_cotizacion_cliente" role="tabpanel" aria-labelledby="proveedor-tab">
+                          <table class="table border-tabla" id="tabla_cliente_markup"></table>
+                        </div>
+                      </div>
                       <!-- NUEVA TABLA -->
                       <!-- <table class="table" id="table_adicionales"></table> -->
                     </div>
@@ -578,31 +595,37 @@
 
         proyecto = document.getElementById('ingreso_id').innerHTML;
         let id = <?php echo $_GET['id']; ?>;
-
         $.ajax({  
             url:"ajax/mostrar_cotizaciones_confirmadas.php",
             method:"POST",  
             data:'proyecto='+proyecto,
             success:function(data){
-                $('#tabla_cotizaciones').html(data);
-                MergeCommonRows($('#tabla_cotizaciones'));
-                funciones_cotizaciones();
-                $(".numerable").each(function(){abandonar(this);});
-                $.ajax({  
-                  url:"ajax/comprobar_cambios_registros.php",  
-                  method:"POST",
-                  data: 'id='+id,
-                  success:function(response){
-                    console.log(response);
-                    if (response == 'NO'){
-                      $('#modal_sin_cambios_registros').modal('show');
-                    } else {
-                      $('#modal_cambios_registros').modal('show');
-                    }
+              $('#tabla_confirmada').html(data);
+              $.ajax({  
+                  url:"ajax/mostrar_cotizaciones_cliente_markup.php",
+                  method:"POST",  
+                  data:'proyecto='+proyecto,
+                  success:function(data){
+                    $('#tabla_cliente_markup').html(data);
+                    $(".numerable").each(function(){abandonar(this);});
+                    $.ajax({  
+                      url:"ajax/comprobar_cambios_registros.php",  
+                      method:"POST",
+                      data: 'id='+id,
+                      success:function(response){
+                        funciones_cotizaciones();
+                        console.log(response);
+                        if (response == 'NO'){
+                          $('#modal_sin_cambios_registros').modal('show');
+                        } else {
+                          $('#modal_cambios_registros').modal('show');
+                        }
+                      }  
+                    }); 
                   }  
-                }); 
-            }  
-        });
+              });
+            }
+          });
 
         /*proyecto = document.getElementById('ingreso_id').innerHTML;
         $.ajax({  
@@ -713,7 +736,8 @@
 
       function funciones_cotizaciones(){
 
-        MergeCommonRows($('#tabla_cotizaciones'));
+        MergeCommonRows($('#tabla_cliente_markup'));
+        MergeCommonRows($('#tabla_confirmada'));
 
         $('#guardar_categoria').click(function(){
           var id_proyecto = document.getElementById('ingreso_id').innerHTML;
@@ -769,12 +793,12 @@
             success:function(data){  
               $('#modal_cambios_registros').modal('hide');
               $.ajax({  
-                url:"ajax/mostrar_cotizaciones_confirmadas.php",
+                url:"ajax/mostrar_cotizaciones_cliente_markup.php",
                 method:"POST",  
                 data:'proyecto='+proyecto,
                 success:function(data){
-                  $('#tabla_cotizaciones').html(data);
-                  MergeCommonRows($('#tabla_cotizaciones'));
+                  $('#tabla_cliente_markup').html(data);
+                  MergeCommonRows($('#tabla_cliente_markup'));
                   funciones_cotizaciones();
                 }  
               });
@@ -870,7 +894,7 @@
         });
 
         $(function () {
-            var $tblrows = $("#tabla_cotizaciones tbody tr");
+            var $tblrows = $("#tabla_cliente_markup tbody tr");
 
             $tblrows.each(function (index) {
                 var $tblrow = $(this);

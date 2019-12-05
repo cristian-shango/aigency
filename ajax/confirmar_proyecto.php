@@ -16,8 +16,11 @@
   if ($check_proyecto->num_rows == 0){
     
     $sql = "INSERT INTO registros_confirmados SELECT * FROM registros WHERE id_proyecto = $id_proyecto AND registro_seleccionado = 1";
+
+    $sql_markup = "INSERT INTO registros_markup SELECT * FROM registros WHERE id_proyecto = $id_proyecto AND registro_seleccionado = 1";
     if(mysqli_query($conexion, $sql)){ 
-      echo "Proyecto creado."; 
+      echo "Proyecto creado.";
+      mysqli_query($conexion, $sql_markup);
     } else { 
       echo "ERROR: Could not able to execute $sql. "  
       . mysqli_error($conexion); 
