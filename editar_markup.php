@@ -18,7 +18,7 @@
   $costo_total = $_POST["costo_total"];
   $id_proyecto = $_POST["id_proyecto"];
 
-  $sql = "UPDATE registros_confirmados SET tipo_markup= '$tipo_markup', valor_markup= '$ingreso_markup', total_markup= '$valor' WHERE id= '$registro'";
+  $sql = "UPDATE registros_markup SET tipo_markup= '$tipo_markup', valor_markup= '$ingreso_markup', total_markup= '$valor' WHERE id= '$registro'";
 
   $sql2 = "UPDATE proyectos SET precio_markup= '$costo_total' WHERE id= '$id_proyecto'";
   //$sql3 = "UPDATE proyectos_aprobados SET precio_markup= '$costo_total' WHERE id= '$id_proyecto'";

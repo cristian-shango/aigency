@@ -302,7 +302,7 @@
                   </div> -->
                   <div class="col-md-12">
                     <div class="form-group">
-                      <h5>Precio</h5>
+                      <h5>Precio Objetivo</h5>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">$</div>
@@ -350,10 +350,10 @@
                   <div class="example-wrap">
                     <div class="example table-responsive">
                       <!-- NUEVA TABLA -->
-                      <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
+                      <ul class="nav nav-tabs nav-tabs-line tabs-line-top" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
                           <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tab_cotizacion_confirmada" role="tab" aria-controls="editar"
-                            aria-selected="true">COTIZACIÓN CONFIRMADA</a>
+                            aria-selected="true">COTIZACIÓN CONFIRMADA <span class="badge badge-pill badge-danger">5</span></a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tab_cotizacion_cliente" role="tab" aria-controls="proveedor"
@@ -614,8 +614,9 @@
                       data: 'id='+id,
                       success:function(response){
                         funciones_cotizaciones();
-                        console.log(response);
-                        if (response == 'NO'){
+                        data = jQuery.parseJSON(response);
+                        console.log(data);
+                        if (data.result == false){
                           $('#modal_sin_cambios_registros').modal('show');
                         } else {
                           $('#modal_cambios_registros').modal('show');
