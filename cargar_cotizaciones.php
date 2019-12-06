@@ -659,8 +659,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <h4>Mensaje</h4>
-                    <textarea row="10" id="escribir_mensaje_item" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" maxlength="140"></textarea><br>
-                    <input type="file" id="archivo_comentario">
+                    <textarea row="10" id="escribir_mensaje_item" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" maxlength="140"></textarea>
                   </div>
                 </div>
               </div>
@@ -2356,14 +2355,16 @@
 
           if(mensaje == 0){
             $('#modal_mensaje_item').modal('show');
+            
             $('#boton_mensaje_item').click(function(){
               let texto_mensaje = document.getElementById('escribir_mensaje_item').value;
-              let archivo_comentario= document.getElementById('archivo_comentario').files[0].name;
               
+              console.log("Click boton ENVIAR");
+
               $.ajax({
                 url:"ajax/guardar_mensaje_cotizacion.php",
                 method:"POST",
-                data:'registro='+registro+'&texto_mensaje='+texto_mensaje+'&archivo_comentario='+archivo_comentario,
+                data:'registro='+registro+'&texto_mensaje='+texto_mensaje,
                 success:function(data){
                   $.ajax({
                     url:"ajax_cotizaciones_1.php",
@@ -2389,7 +2390,7 @@
               dataType:"json",
               data:'registro='+registro,
               success:function(data){
-                $("#mostrar_mensaje_item").val(data.texto_mensaje_cotizacion);
+                $("#mostrar_mensaje_item").val(data.mensaje_cotizacion_item);
                 $('#modal_mostrar_mensaje_item').modal('show');
               }
             });

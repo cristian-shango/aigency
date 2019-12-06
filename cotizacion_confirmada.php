@@ -352,6 +352,10 @@
                       <!-- NUEVA TABLA -->
                       <ul class="nav nav-tabs nav-tabs-line tabs-line-top" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
+                          <a class="nav-link" id="home-tab" data-toggle="tab" href="#tab_cotizacion_produccion" role="tab" aria-controls="editar"
+                            aria-selected="true">COTIZACIÓN PRODUCCIÓN</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
                           <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tab_cotizacion_confirmada" role="tab" aria-controls="editar"
                             aria-selected="true">COTIZACIÓN CONFIRMADA <span class="badge badge-pill badge-danger">5</span></a>
                         </li>
@@ -361,8 +365,13 @@
                         </li>
                       </ul>
                       <div class="tab-content" id="TabContent">
+                        <div class="tab-pane fade" id="tab_cotizacion_produccion" role="tabpanel" aria-labelledby="proveedor-tab">
+                          <table class="table border-tabla" id="tabla_cotizaciones"></table>
+                        </div>
                         <div class="tab-pane fade show active" id="tab_cotizacion_confirmada" role="tabpanel" aria-labelledby="editar-tab">
                           <table class="table border-tabla" id="tabla_confirmada"></table>
+                          
+                          <div id="mostrar_cambios"></div>
                         </div>
                         <div class="tab-pane fade" id="tab_cotizacion_cliente" role="tabpanel" aria-labelledby="proveedor-tab">
                           <table class="table border-tabla" id="tabla_cliente_markup"></table>
@@ -606,6 +615,18 @@
                   method:"POST",  
                   data:'proyecto='+proyecto,
                   success:function(data){
+
+                    $.ajax({
+                        url:"ajax/mostrar_cotizaciones_actuales.php",
+                        method:"POST",
+                        data:'proyecto='+proyecto,
+                        success:function(data){
+                            $('#tabla_cotizaciones').html(data);
+                            //if ($(data).find("tr").length>2) $('#cargaExcel').hide();
+                            MergeCommonRows($('#tabla_cotizaciones'));
+                            $('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
+                        }
+                    });  
                     $('#tabla_cliente_markup').html(data);
                     $(".numerable").each(function(){abandonar(this);});
                     $.ajax({  
@@ -616,10 +637,95 @@
                         funciones_cotizaciones();
                         data = jQuery.parseJSON(response);
                         console.log(data);
+
+                        var main = $('#tabla_cotizaciones tbody');
+                        var first = $("#tab_cotizacion_confirmada tbody");
+                        var mainRows = main.children();
+                        var anotherRows = first.children();
+
+                        mainRows.each(function(rowNumber, mainRow) {
+                          var anotherRow = anotherRows.eq(rowNumber),
+                            anotherCells = anotherRow.children(),
+                            mainCells = $(mainRow).children();
+
+                          mainCells.each(function(colNumber, cell) {
+                            var anotherCell = anotherCells.eq(colNumber);
+                            anotherCell.toggleClass("highlight", anotherCell.text() !== $(cell).text());
+                            console.log(anotherCell);
+                          })
+                        })
+
                         if (data.result == false){
                           $('#modal_sin_cambios_registros').modal('show');
                         } else {
-                          $('#modal_cambios_registros').modal('show');
+  
+                            var noOfContacts = data.length;
+                            
+                            if(noOfContacts>0){
+                              
+                         
+                              // CREATE DYNAMIC TABLE.
+                              var table = document.createElement("table");
+                              table.style.width = '100%';
+                              table.setAttribute('border', '1');
+                              table.setAttribute('cellspacing', '0');
+                              table.setAttribute('cellpadding', '5');
+                              
+                              // retrieve column header ('Name', 'Email', and 'Mobile')
+                         
+                              var col = []; // define an empty array
+                              for (var i = 0; i < noOfContacts; i++) {
+                                for (var key in data[i]) {
+                                  if (col.indexOf(key) === -1) {
+                                    col.push(key);
+                                  }
+                                }
+                              }
+                              
+                              // CREATE TABLE HEAD .
+                              var tHead = document.createElement("thead");  
+                                
+                              
+                              // CREATE ROW FOR TABLE HEAD .
+                              var hRow = document.createElement("tr");
+                              
+                              // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
+                              for (var i = 0; i < col.length; i++) {
+                                  var th = document.createElement("th");
+                                  th.innerHTML = col[i];
+                                  hRow.appendChild(th);
+                              }
+                              tHead.appendChild(hRow);
+                              table.appendChild(tHead);
+                              
+                              // CREATE TABLE BODY .
+                              var tBody = document.createElement("tbody");  
+                              
+                              // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
+                              for (var i = 0; i < noOfContacts; i++) {
+                              
+                                  var bRow = document.createElement("tr"); // CREATE ROW FOR EACH RECORD .
+                                  
+                                  
+                                  for (var j = 0; j < col.length; j++) {
+                                    var td = document.createElement("td");
+                                    td.innerHTML = data[i][col[j]];
+                                    bRow.appendChild(td);
+                                  }
+                                  tBody.appendChild(bRow)
+                         
+                              }
+                              table.appendChild(tBody); 
+                              
+                              
+                              // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+                              var divContainer = document.getElementById("mostrar_cambios");
+                              divContainer.innerHTML = "";
+                              divContainer.appendChild(table);
+                              
+                            } 
+                          
+                          //$('#modal_cambios_registros').modal('show');
                         }
                       }  
                     }); 

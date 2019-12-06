@@ -5,7 +5,7 @@
   include "conexion.php"; 
   mysql_set_charset('utf8');
 
-  $sql = "SELECT * FROM registros_confirmados INNER JOIN item_cotizacion ON registros_confirmados.item = item_cotizacion.id_item_cotizacion LEFT JOIN registros ON registros_confirmados.id = registros.id WHERE registros.id_proyecto = '$id' AND registros.id IS NULL OR (registros_confirmados.cantidad <> registros.cantidad OR registros_confirmados.jornadas_registro <> registros.jornadas_registro OR registros_confirmados.importe_neto <> registros.importe_neto);";
+  $sql = "SELECT registros.rubro_cotizacion, registros.categoria_cotizacion, registros.item, registros.condicion_registro, registros.jornadas_registro, registros.cantidad, registros.importe_neto, registros.importe_total FROM registros INNER JOIN item_cotizacion ON registros.item = item_cotizacion.id_item_cotizacion LEFT JOIN registros_confirmados ON registros_confirmados.id = registros.id WHERE registros.id_proyecto = '$id' AND registros.id IS NULL OR (registros_confirmados.cantidad <> registros.cantidad OR registros_confirmados.jornadas_registro <> registros.jornadas_registro OR registros_confirmados.importe_neto <> registros.importe_neto);";
   //$sql2 ="UPDATE proyectos_aprobados SET estado= 'A FACTURAR'";
   //echo ($sql);
 
@@ -28,7 +28,7 @@
   $rows = array();
 if($result) {
     while($row = mysqli_fetch_assoc($result)) {
-      $rows['CambiosRegistros'][] = $row;
+      $rows[] = $row;
     }
 }else {
     echo 'MySQL Error: ' . mysqli_error();

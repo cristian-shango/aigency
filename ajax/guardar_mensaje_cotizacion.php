@@ -12,11 +12,10 @@
 
   $registro = $_POST["registro"];
   $texto_mensaje = $_POST["texto_mensaje"];
-  $archivo_comentario=$_POST["archivo_comentario"];
 
   $sql = "UPDATE registros SET mensaje_cotizacion= 1 WHERE id= '$registro'";
 
-  $sql_mensaje = "INSERT INTO mensajes_cotizaciones (id_cotizacion, texto_mensaje_cotizacion,archivo_comentario) VALUES ('$registro', '$texto_mensaje','$archivo_comentario')";
+  $sql_mensaje = "INSERT INTO mensajes_cotizaciones (id_cotizacion, mensaje_cotizacion_item) VALUES ('$registro', '$texto_mensaje')";
 
   if(mysqli_query($conexion, $sql)){ 
     echo $sql; 
