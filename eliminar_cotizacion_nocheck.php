@@ -12,7 +12,8 @@
 
   $id = $_POST["id"];
 
-  $sql = "DELETE FROM registros WHERE id = '$id'";
+  //$sql = "DELETE FROM registros WHERE id = '$id'";
+  $sql = "UPDATE registros SET estado_registro = 3 WHERE id = '$id'";
 
   if(mysqli_query($conexion, $sql)){
     echo "Registro $id eliminado."; 

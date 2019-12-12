@@ -49,18 +49,17 @@
 
           echo "<td>".$row_proyectos['cotizaciones_pagos']." días</td>";
           echo "<td style='font-weight: bold; text-align: center !important;'>";
-            if ($row_proyectos['estado_registro'] == 1){
+            if ($row_proyectos['estado_registro'] == 4){
               echo "<span class='badge badge-danger'>POR PAGAR</span>";
-            }
-            elseif ($row_proyectos['estado_registro'] == 2) {
+            } elseif ($row_proyectos['estado_registro'] == 5) {
               echo "<span class='badge badge-warning'>PAGO DEMORADO</span>";
-            } else {
+            } elseif ($row_proyectos['estado_registro'] == 6) {
               echo "<span class='badge badge-success'>PAGADO</span>";
             }
           echo "</td>";
         echo "</tr>";
               }
-              mysqli_free_result($result_proyectos);
+              mysqli_free_result($ressult_proyectos);
           } else{
               echo '<strong>No hay cotizaciones cargadas.</strong>';
           }

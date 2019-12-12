@@ -25,7 +25,7 @@
   $forma_pago = $_POST["forma_pago"];
   $dias_pago = $_POST["dias_pago"];
 
-  $sql = "UPDATE registros SET rubro_cotizacion= '$rubro', categoria_cotizacion= '$categoria', condicion_registro= '$condicion', detalle_registro= '$detalle', jornadas_registro = '$jornadas', cantidad = '$cantidad',importe_neto= '$importe_neto', importe_total= '$importe_total', id_proveedor= '$proveedor', forma_pago = '$forma_pago', tiempo_pago = '$dias_pago' WHERE id= '$id_registro'";
+  $sql = "UPDATE registros SET rubro_cotizacion= '$rubro', categoria_cotizacion= '$categoria', condicion_registro= '$condicion', detalle_registro= '$detalle', jornadas_registro = '$jornadas', cantidad = '$cantidad',importe_neto= '$importe_neto', importe_total= '$importe_total', id_proveedor= '$proveedor', forma_pago = '$forma_pago', tiempo_pago = '$dias_pago', estado_registro = 2 WHERE id= '$id_registro'";
 
   $sql2 = "UPDATE item_cotizacion SET nombre_item_cotizacion= '$item' WHERE id_item_cotizacion= '$id_item'";
   $sql3 = "SELECT id FROM registros_confirmados WHERE id = '$id_registro'";

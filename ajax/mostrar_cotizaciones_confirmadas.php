@@ -83,7 +83,7 @@
 
       echo "<tbody>
             <tr>
-              <th scope='col' class='gray' width='2%;'>#</th>
+              <th scope='col' class='gray' width='2%;'>Estado</th>
               <th scope='col' class='gray' width='10%;'>Rubro</th>
               <th scope='col' class='gray' width='10%;'>Categoría</th>
               <th scope='col' class='gray' width='30%;'>Item</th>
@@ -184,6 +184,12 @@
                   } else {
                       $tr_subtotal_rubro = "";
                   }
+                  
+                  $id_registro = $row_registros['id'];
+
+                  $sql_modificacion = "SELECT * FROM registros WHERE id = '$id_registro'";
+                  $resultado_modificacion = mysqli_query($conexion, $sql_modificacion);
+                  $datos_modificacion = mysqli_fetch_assoc($resultado_modificacion);
 
                   $data = "data-rubro='$rubro_actual'
                             data-categoria='$categoria_actual'
@@ -191,31 +197,76 @@
                             data-id_registro='".$row_registros['id']."'";
                   /*$checked = $row_registros['registro_seleccionado'] == 0 ? "" : "checked";*/
               // if ($row_registros['registro_seleccionado'] == 0) {
+              if ($datos_modificacion['estado_registro'] <> 3){  
                 echo "<tr class='cotizacion_pagos_group' $data>";
-                echo "<td></td>";
+                $estado = $datos_modificacion['estado_registro'];
+                  switch ($estado){
+                    case 0:
+                      echo "<td><span class='badge badge-primary'>NUEVO</span></td>";
+                      break;
+
+                    case 1:
+                      echo "<td><span class='badge badge-success'>ACTUALIZADO</span></td>";
+                      break;
+
+                    case 2:
+                      echo "<td><span class='badge badge-warning'>MODIFICADO</span></td>";
+                      break;
+
+                    case 3:
+                      echo "<td><span class='badge badge-danger'>ELIMINADO</span></td>";
+                      break;
+                  };
               // } else {
               //   echo "<tr class='cotizacion_pagos_group' data-id_registro='".$row_registros['id']."'>";
               //     echo "<td>";
               //       echo "<input class='form-check-input position-static mostrar_checkbox checkbox cotizacion_pagos_checked' type='checkbox' name='radio_cotizacion_".$row['id_catcot']."' id='radio_cotizacion' value='".$row_registros['importe_total']."' data-registro='".$row_registros['id']."' data-pago='".$row_registros['tiempo_pago']."' data-item='".$row_registros['item']."' checked></td>";
               // }
-
-          echo "<td scope='row' style='font-weight: bolder;' $attr_rubro>".utf8_encode($row_registros['nombre_rubros'])."</td>";
-          echo "<td scope='row' style='font-weight: bolder;' $attr_categoria data-conteo='$conteo_categoria'>".utf8_encode($row_registros['nombre_catcot'])."</td>";
-          echo "<td>".$row_registros['nombre_item_cotizacion']."</td>";
-          echo "<td scope='row'>".utf8_encode($row_registros['nombre_concot'])."</td>";
-          //echo "<td>".($row_registros['detalle_registro'])."</td>";
-          echo "<td>".($row_registros['jornadas_registro'])."</td>";
-          echo "<td>".$row_registros['cantidad']."</td>";
-          echo "<td>$<span class='valor_precio_cliente numerable'>".$row_registros['importe_neto']."</span></td>";
-          echo "<td>$<span class='valor_promedio numerable cotizacion_pagos_total' data-registro='".$row['id_catcot']."' data-valor='".$row_registros['importe_total']."'>".$row_registros['importe_total']."</span></td>";
-        echo "</tr>";
-        echo $tr_subtotal_categoria;
-        echo $tr_subtotal_rubro;
-    }
-              mysqli_free_result($result_registros);
-          } else{
-              echo '<strong>No hay cotizaciones cargadas.</strong>';
+            
+              if ($datos_modificacion['estado_registro'] == 2){
+                echo "<td scope='row' style='font-weight: bolder;' $attr_rubro>".utf8_encode($row_registros['nombre_rubros'])."</td>";
+                echo "<td scope='row' style='font-weight: bolder;' $attr_categoria data-conteo='$conteo_categoria'>".utf8_encode($row_registros['nombre_catcot'])."</td>";
+                echo "<td>".$row_registros['nombre_item_cotizacion']."</td>";
+                echo "<td scope='row'>".utf8_encode($row_registros['nombre_concot'])."</td>";
+                //echo "<td>".($row_registros['detalle_registro'])."</td>";
+                echo "<td>".($row_registros['jornadas_registro'])."</td>";
+                echo "<td>".$row_registros['cantidad']."</td>";
+                echo "<td>$<span class='valor_precio_cliente numerable'>".$row_registros['importe_neto']."</span></td>";
+                echo "<td>$<span class='valor_promedio numerable cotizacion_pagos_total' data-registro='".$row['id_catcot']."' data-valor='".$row_registros['importe_total']."'>".$row_registros['importe_total']."</span></td>";
+              echo "</tr>";
+              echo "<tr style='color:#ff0000; font-weight:bold;'>";
+                echo "<td scope='row' style='font-weight: bolder;' $attr_rubro>".utf8_encode($datos_modificacion['nombre_rubros'])."</td>";
+                echo "<td scope='row' style='font-weight: bolder;' $attr_categoria data-conteo='$conteo_categoria'>".utf8_encode($datos_modificacion['nombre_catcot'])."</td>";
+                echo "<td>".$datos_modificacion['nombre_item_cotizacion']."</td>";
+                echo "<td scope='row'>".utf8_encode($datos_modificacion['nombre_concot'])."</td>";
+                //echo "<td>".($datos_modificacion['detalle_registro'])."</td>";
+                echo "<td>".($datos_modificacion['jornadas_registro'])."</td>";
+                echo "<td>".$datos_modificacion['cantidad']."</td>";
+                echo "<td>$<span class='valor_precio_cliente numerable'>".$datos_modificacion['importe_neto']."</span></td>";
+                echo "<td>$<span class='valor_promedio numerable cotizacion_pagos_total' data-registro='".$row['id_catcot']."' data-valor='".$datos_modificacion['importe_total']."'>".$datos_modificacion['importe_total']."</span></td>";
+              echo "</tr>";
+              echo $tr_subtotal_categoria;
+              echo $tr_subtotal_rubro;
+              } else {
+                echo "<td scope='row' style='font-weight: bolder;' $attr_rubro>".utf8_encode($row_registros['nombre_rubros'])."</td>";
+                echo "<td scope='row' style='font-weight: bolder;' $attr_categoria data-conteo='$conteo_categoria'>".utf8_encode($row_registros['nombre_catcot'])."</td>";
+                echo "<td>".$row_registros['nombre_item_cotizacion']."</td>";
+                echo "<td scope='row'>".utf8_encode($row_registros['nombre_concot'])."</td>";
+                //echo "<td>".($row_registros['detalle_registro'])."</td>";
+                echo "<td>".($row_registros['jornadas_registro'])."</td>";
+                echo "<td>".$row_registros['cantidad']."</td>";
+                echo "<td>$<span class='valor_precio_cliente numerable'>".$row_registros['importe_neto']."</span></td>";
+                echo "<td>$<span class='valor_promedio numerable cotizacion_pagos_total' data-registro='".$row['id_catcot']."' data-valor='".$row_registros['importe_total']."'>".$row_registros['importe_total']."</span></td>";
+              echo "</tr>";
+              echo $tr_subtotal_categoria;
+              echo $tr_subtotal_rubro;
+              }
+            }
           }
+            mysqli_free_result($result_registros);
+        } else{
+            echo '<strong>No hay cotizaciones cargadas.</strong>';
+        }
       } else{
               echo 'ERROR: Could not able to execute $sql_registros. ' . mysqli_error($conexion);
         }

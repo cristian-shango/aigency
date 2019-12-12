@@ -24,7 +24,7 @@
     }
 
     $sql_merge_categorias = "SELECT rubro_cotizacion AS rubro, categoria_cotizacion AS categoria, COUNT(*) AS merge
-                            	FROM registros WHERE id_proyecto = '$proyecto' AND estado_registro <> 3
+                            	FROM registros WHERE id_proyecto = '$proyecto'
                                 GROUP BY rubro_cotizacion, categoria_cotizacion;";
 
     mysql_query("SET NAMES 'utf8'");
@@ -139,7 +139,7 @@
                         INNER JOIN condicion_cotizacion concot ON r.condicion_registro = concot.id_concot
                         LEFT JOIN item_cotizacion ic ON r.item = ic.id_item_cotizacion
                         LEFT JOIN proveedores p ON r.id_proveedor = p.id_proveedor
-                        WHERE id_proyecto = '$proyecto' AND estado_registro <> 3
+                        WHERE id_proyecto = '$proyecto'
                         ORDER BY rubro_cotizacion ASC, nombre_catcot ASC, nombre_item_cotizacion ASC, item ASC;";
       //echo $sql_registros."<br>";
       mysql_query("SET NAMES 'utf8'");
@@ -255,9 +255,9 @@
           echo "<td scope='row' style='font-weight: bolder;' $attr_rubro>".utf8_encode($row_registros['nombre_rubros'])."</td>";
           echo "<td scope='row' style='font-weight: bolder;' $attr_categoria data-conteo='$conteo_categoria'>".utf8_encode($row_registros['nombre_catcot'])."</td>";
           if ($row_registros['mensaje_cotizacion'] == 0){
-            echo "<td scope='row' $attr_item class='triangulo_mensaje_off mensaje_items $class_item' data-item='".$row_registros['item']."' data-mensaje='".$row_registros['mensaje_cotizacion']."' data-registro='".$row_registros['id']."'>";
+            echo "<td scope='row' $attr_item class='triangulo_mensaje_off mensaje_item $class_item' data-item='".$row_registros['item']."' data-mensaje='".$row_registros['mensaje_cotizacion']."' data-registro='".$row_registros['id']."'>";
           } else {
-            echo "<td scope='row' $attr_item class='triangulo_mensaje_on mensaje_items $class_item' data-item='".$row_registros['item']."' data-mensaje='".$row_registros['mensaje_cotizacion']."' data-registro='".$row_registros['id']."'>";
+            echo "<td scope='row' $attr_item class='triangulo_mensaje_on mensaje_item $class_item' data-item='".$row_registros['item']."' data-mensaje='".$row_registros['mensaje_cotizacion']."' data-registro='".$row_registros['id']."'>";
           }
             echo "<table border='0' cellspacing='0' cellpadding='0' width='100%' style='border: 3px solid #fff !important;'>";
               echo "<tbody>";
@@ -281,7 +281,6 @@
               echo "<button type='button' class='btn btn-default editar_proveedor_cotizacion' data-toggle='modal' data-id='".$row_registros['id']."' data-check='".$row_registros['registro_seleccionado']."'><i class='icon wb-edit' aria-hidden='true'></i></button>";
               echo "<button type='button' class='btn btn-default cargar_proveedor_cotizacion' data-toggle='modal' data-id='".$row_registros['id']."' data-check='".$row_registros['registro_seleccionado']."'><i class='icon wb-info' aria-hidden='true'></i></button>";
               echo "<button type='button' class='btn btn-default'><i class='icon wb-plus seleccion_item' data-rubro='".$row_registros['id_rubros_cotizaciones']."' data-categoria='".$row_registros['id_catcot']."' data-item='".$row_registros['nombre_item_cotizacion']."' data-id_registro='".$row_registros['id']."'></i></button>";
-              echo "<button type='button' class='btn btn-default mensaje_cotizacion' data-toggle='modal' data-id='".$row_registros['id']."'><i class='icon wb-chat-text' aria-hidden='true'></i></button>";
           echo "</td>";
         echo "</tr>";
         echo $tr_subtotal_categoria;

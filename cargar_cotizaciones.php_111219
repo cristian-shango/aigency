@@ -628,38 +628,12 @@
     <div class="modal fade" id="modal_mensaje" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-center" role="document">
         <div class="modal-content">
-
-        <!--<div class="chat chat-left">
-                      <div class="chat-avatar">
-                        <a class="avatar" data-toggle="tooltip" href="#" data-placement="left" title="" data-original-title="Edward Fletcher">
-                          <img src="design/global/portraits/5.jpg" alt="Edward Fletcher">
-                        </a>
-                      </div>
-                      <div class="chat-body">
-                        <div class="chat-content">
-                          <p>
-                            Hola...                          </p>
-                          <p>Estado: 3</p>
-                          <time class="chat-time" datetime="2019-12-05 17:49:10">2019-12-05 17:49:10</time>
-                        </div>
-                      </div>
-                    </div>-->
-
-            
           <form name="formulario_mensaje">
             <div class="modal-body">
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
                     <h4>Comentarios:</h4>
-                    <label for="rubro"><input type="checkbox" id="rubro" value="1">Rubro</label>
-                    <label for="categoria"><input type="checkbox" id="categoria" value="1">Categoría</label>
-                    <label for="item"><input type="checkbox" id="item" value="1">Item</label>
-                    <label for="condicion"><input type="checkbox" id="condicion" value="1">Condición</label>
-                    <label for="jornadas"><input type="checkbox" id="jornadas" value="1">Jornadas</label>
-                    <label for="cantidad"><input type="checkbox" id="cantidad" value="1">Cantidad</label>
-                    <label for="valor"><input type="checkbox" id="valor" value="1">Valor</label>
-                    <label for="total"><input type="checkbox" id="total" value="1">Total</label>
                     <textarea row="8" id="motivo_cambio_estado" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"></textarea>
                     <input type="text" name="estado" id="estado_cotizacion" hidden data-estado="0">
                   </div>
@@ -676,7 +650,7 @@
     </div>
 
     <!-- MODAL ESCRIBIR MENSAJE ITEM -->
-    <!--<div class="modal fade" id="modal_mensaje" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="modal_mensaje_item" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-center" role="document">
         <div class="modal-content">
           <form name="formulario_mensaje">
@@ -685,30 +659,22 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <h4>Mensaje</h4>
-                    <label for="rubro"><input type="checkbox" id="rubro" value="1">Rubro</label>
-                    <label for="rubro"><input type="checkbox" id="rubro" value="1">Rubro</label>
-                    <label for="rubro"><input type="checkbox" id="rubro" value="1">Rubro</label>
-                    <label for="rubro"><input type="checkbox" id="rubro" value="1">Rubro</label>
-                    <label for="rubro"><input type="checkbox" id="rubro" value="1">Rubro</label>
-                    <label for="rubro"><input type="checkbox" id="rubro" value="1">Rubro</label>
-                    <label for="rubro"><input type="checkbox" id="rubro" value="1">Rubro</label>
-                    <label for="rubro"><input type="checkbox" id="rubro" value="1">Rubro</label>
-                    <textarea row="10" id="escribir_mensaje" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" maxlength="140"></textarea>
+                    <textarea row="10" id="escribir_mensaje_item" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" maxlength="140"></textarea>
                   </div>
                 </div>
               </div>
             </div>
           </form>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" id="boton_mensaje">Enviar</button>
+            <button type="button" class="btn btn-success" id="boton_mensaje_item">Enviar</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
           </div>
         </div>
       </div>
-    </div>-->
+    </div>
 
     <!-- MODAL MOSTRAR MENSAJE ITEM -->
-    <!--<div class="modal fade" id="modal_mostrar_mensaje_item" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="modal_mostrar_mensaje_item" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-center" role="document">
         <div class="modal-content">
           <form name="formulario_mensaje">
@@ -728,7 +694,7 @@
           </div>
         </div>
       </div>
-    </div>-->
+    </div>
 
       <!-- Modal Editar Cotización -->
       <!--div class="modal fade" id="modal_editar_registro" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -1980,7 +1946,7 @@
         var texto_estado = $(this).text();
         var estado = $(this).attr("data-estado");
         console.log(estado);
-        /*if(estado == "3"){
+        if(estado == "3"){
           let proyecto = '<?php echo $_GET['id'];?>';
           console.log("Cambio de estado: ",proyecto);
           $.ajax({
@@ -1998,10 +1964,10 @@
               }
             }
           });
-        } else {*/
+        } else {
           $('#modal_mensaje').modal('show');
           $("#estado_cotizacion").val(estado);
-        //}
+        }
       });
 
       $('#boton_mensaje').click(function(){
@@ -2379,33 +2345,57 @@
 
       function funciones_cotizaciones(){
 
-        $('.mensaje_cotizacion').click(function(){
-          let registro = $(this).attr('data-registro');          
+        $('.mensaje_item').click(function(e){
+          let registro = $(this).attr('data-registro');
+          let item = $(this).attr('data-item');
           let mensaje = $(this).attr('data-mensaje');
           let proyecto = '<?php echo $_GET['id'];?>';
 
           console.log("Proyecto: ",proyecto);
 
-          
-            $('#modal_mensaje').modal('show');
+          if(mensaje == 0){
+            $('#modal_mensaje_item').modal('show');
             
-            $('#boton_mensaje').click(function(){             
+            $('#boton_mensaje_item').click(function(){
+              let texto_mensaje = document.getElementById('escribir_mensaje_item').value;
+              
               console.log("Click boton ENVIAR");
-              let proyecto = '<?php echo $_GET['id'];?>';
-              let rubro_msg= $("#rubro").val();
-              let categoria_msg= $("#categoria").val();
-              let item_msg= $("#item").val();
-              let condicion_msg= $("#condicion").val();
-              let jornadas_msg= $("#jornadas").val();
-              let cantidad_msg= $("#cantidad").val();
-              let valor_msg= $("#valor").val();
-              let total_msg= $("#total").val();
-              let mensaje_msg=$("#motivo_cambio_estado").val();
 
-
+              $.ajax({
+                url:"ajax/guardar_mensaje_cotizacion.php",
+                method:"POST",
+                data:'registro='+registro+'&texto_mensaje='+texto_mensaje,
+                success:function(data){
+                  $.ajax({
+                    url:"ajax_cotizaciones_1.php",
+                    method:"POST",
+                    data:'proyecto='+proyecto,
+                    success:function(data){
+                      $('#escribir_mensaje_item').val('');
+                      $('#modal_mensaje_item').modal('hide');
+                      $('#tabla_cotizaciones').html(data);
+                      funciones_cotizaciones();
+                      total_cotizacion();
+                $('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
+                      //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
+                    }
+                  });
+                }
+              });
             });
+          } else {
+            $.ajax({
+              url:"ajax/cargar_mensaje_cotizacion.php",
+              method:"POST",
+              dataType:"json",
+              data:'registro='+registro,
+              success:function(data){
+                $("#mostrar_mensaje_item").val(data.mensaje_cotizacion_item);
+                $('#modal_mostrar_mensaje_item').modal('show');
+              }
+            });
+          }
         });
-
 
         var proyecto = document.getElementById('ingreso_id').innerHTML;
 
