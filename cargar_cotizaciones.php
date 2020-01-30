@@ -554,10 +554,10 @@
             }
           ?>
           <div class="col-md-12">
-            <button class="btn btn-block btn btn-danger clickable cambio_estado_mensaje" data-estado="1" style="cursor: pointer;">NUEVO</button>
-            <button class="btn btn-block btn btn-primary clickable cambio_estado_mensaje" data-estado="2" style="cursor: pointer;">COTIZANDO</button>
-            <button class="btn btn-block btn btn-success clickable cambio_estado_mensaje" data-estado="3" style="cursor: pointer;">ENTREGADO</button>
-            <button class="btn btn-block btn btn-info clickable cambio_estado_mensaje" data-estado="8" style="cursor: pointer;">STAND BY</button>
+            <button class="btn btn-block btn btn-danger clickable cambio_estado" data-estado="1" style="cursor: pointer;">NUEVO</button>
+            <button class="btn btn-block btn btn-primary clickable cambio_estado" data-estado="2" style="cursor: pointer;">COTIZANDO</button>
+            <button class="btn btn-block btn btn-success clickable cambio_estado" data-estado="3" style="cursor: pointer;">ENTREGADO</button>
+            <button class="btn btn-block btn btn-info clickable cambio_estado" data-estado="8" style="cursor: pointer;">STAND BY</button>
             <button class="btn btn-block btn-outline btn-warning clickable actualizar_cotizacion" id="boton_actualizar" style="cursor: pointer; opacity: 0;">ACTUALIZAR</button>
             <!-- <?php
               $sql_contar_adicionales = "SELECT count(*) as total from adicionales WHERE aprobado_adicional = 0 AND id_proyecto_adicional = '".$_GET['id']."'";
@@ -651,15 +651,15 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <h4>Comentarios:</h4>
-                    <label for="rubro"><input type="checkbox" id="rubro" value="1">Rubro</label>
-                    <label for="categoria"><input type="checkbox" id="categoria" value="1">Categoría</label>
-                    <label for="item"><input type="checkbox" id="item" value="1">Item</label>
-                    <label for="condicion"><input type="checkbox" id="condicion" value="1">Condición</label>
-                    <label for="jornadas"><input type="checkbox" id="jornadas" value="1">Jornadas</label>
-                    <label for="cantidad"><input type="checkbox" id="cantidad" value="1">Cantidad</label>
-                    <label for="valor"><input type="checkbox" id="valor" value="1">Valor</label>
-                    <label for="total"><input type="checkbox" id="total" value="1">Total</label>
+                    <h4>Comentario</h4>
+                    <label for="rubro"><input type="checkbox" id="rubro" value="1"> Rubro</label>
+                    <label for="categoria"><input type="checkbox" id="categoria" value="1"> Categoría</label>
+                    <label for="item"><input type="checkbox" id="item" value="1"> Item</label>
+                    <label for="condicion"><input type="checkbox" id="condicion" value="1"> Condición</label>
+                    <label for="jornadas"><input type="checkbox" id="jornadas" value="1"> Jornadas</label>
+                    <label for="cantidad"><input type="checkbox" id="cantidad" value="1"> Cantidad</label>
+                    <label for="valor"><input type="checkbox" id="valor" value="1"> Valor</label>
+                    <label for="total"><input type="checkbox" id="total" value="1"> Total</label>
                     <textarea row="8" id="motivo_cambio_estado" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"></textarea>
                     <input type="text" name="estado" id="estado_cotizacion" hidden data-estado="0">
                   </div>
@@ -669,7 +669,7 @@
           </form>
           <div class="modal-footer">
             <button type="button" class="btn btn-success" id="boton_mensaje">Enviar</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
           </div>
         </div>
       </div>
@@ -1235,7 +1235,7 @@
                         <button type="button" class="btn btn-danger btn-block" data-dismiss="modal"><strong>CANCELAR</strong></button>
                             </div>
                                 <div class="col-md-1">
-                                      <button type="button" class="btn btn-primary btn-block" id="boton_eliminar_cotizacion_" data-dismiss="modal"><i class='icon wb-trash' aria-hidden='true'></i></button>
+                                      <button type="button" class="btn btn-primary btn-block" id="boton_eliminar_cotizacion_" data-dismiss="modal" data-registro=""><i class='icon wb-trash' aria-hidden='true'></i></button>
                                 </div>
                             </div>
                         </div>
@@ -2020,6 +2020,21 @@
         });
       });
 
+      $('.cambio_estado').click(function(){
+        let id = document.getElementById('ingreso_id').innerHTML;
+        let estado = $(this).attr('data-estado');
+        let costo_objetivo = document.getElementById('total_cotizacion').innerHTML;
+        console.log(estado);
+        $.ajax({
+          url:"cambiar_estado.php",
+          method:"POST",
+          data:'id='+id+'&estado='+estado,
+          success:function(data){
+            window.location.reload(true);
+          }
+        });
+      });
+
       $('.editar_cotizacion').click(function(){
           var id_registro = $(this).attr('data-id');
           cargar_editar_cotizacion(id_registro);
@@ -2373,7 +2388,6 @@
         total_cotizacion = total_cotizacion.toFixed(2);
 
         $('#total_cotizacion').html(total_cotizacion);
-        
         $('#consumible_total').html(total_cotizacion);
       }
 
@@ -2721,7 +2735,7 @@
         });
 
         $('#boton_eliminar_cotizacion_').click(function(){
-          var id = $(this).closest('[data-registro]').data('registro');
+          var id = $(this).attr('data-registro');
           console.log(id);
           $.ajax({
             url:"eliminar_cotizacion_nocheck.php",
@@ -3055,6 +3069,7 @@
                 $("#percepcion").val(data.percepcion);
                 $("#importe_bruto").val(data.importe_bruto);
                 $("#cotizacion_pagos_avatar .cotizacion_pagos_container").attr("data-id_registro", id);
+                $("#boton_eliminar_cotizacion_").attr("data-registro", id);
                 cotizacion_pagos.cargar_avatar();
               }
           });

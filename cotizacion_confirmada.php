@@ -357,15 +357,18 @@
                         </li>
                         <li class="nav-item" role="presentation">
                           <?php
-                          $id = $_GET['id'];
-                          $sql_cantidad_cambios = "SELECT COUNT(*) AS cantidad_cambios FROM registros WHERE estado_registro <> 1 AND id_proyecto = '$id'";
+                            $id = $_GET['id'];
+                            $sql_cantidad_cambios = "SELECT COUNT(*) AS cambios FROM registros WHERE estado_registro = 2 AND id_proyecto = '$id'";
+                            
+                            $resultado_cantidad_cambios = mysqli_query($conexion, $sql_cantidad_cambios);
+                            $datos_cantidad_cambios = mysqli_fetch_assoc($resultado_cantidad_cambios);
 
-                          $resultado_cantidad_cambios = mysqli_query($conexion, $sql_cantidad_cambios);
-                          $datos_cantidad_cambios = mysqli_fetch_assoc($resultado_cantidad_cambios);
+                            $cambios = $datos_cantidad_cambios['cambios'];
+
+                            echo "<a class='nav-link active' id='home-tab' data-toggle='tab' href='#tab_cotizacion_confirmada' role='tab' aria-controls='editar'
+                            aria-selected='true'>COTIZACIÓN CONFIRMADA <span class='badge badge-pill badge-danger cantidad_cambios'>".$cambios."</span></a>";
 
                           ?>
-                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tab_cotizacion_confirmada" role="tab" aria-controls="editar"
-                            aria-selected="true">COTIZACIÓN CONFIRMADA <span class="badge badge-pill badge-danger cantidad_cambios"><?php echo ($datos_cantidad_cambios['cantidad_cambios']);?></span></a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tab_cotizacion_cliente" role="tab" aria-controls="proveedor"

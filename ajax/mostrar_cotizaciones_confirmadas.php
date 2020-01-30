@@ -168,6 +168,7 @@
                   if ($conteo_rubro == 1) {
                       $attr_rubro = "rowspan = '".$merge_rubros[$rubro_actual]['rowspan']."'";
                   } else {
+                      //$attr_rubro = "";
                       $attr_rubro = "class='hidden'";
                   }
                   if ($conteo_rubro == $merge_rubros[$rubro_actual]['recuento']) {
@@ -229,21 +230,29 @@
                 echo "<td>".$row_registros['nombre_item_cotizacion']."</td>";
                 echo "<td scope='row'>".utf8_encode($row_registros['nombre_concot'])."</td>";
                 //echo "<td>".($row_registros['detalle_registro'])."</td>";
-                echo "<td>".($row_registros['jornadas_registro'])."</td>";
-                echo "<td>".$row_registros['cantidad']."</td>";
-                echo "<td>$<span class='valor_precio_cliente numerable'>".$row_registros['importe_neto']."</span></td>";
-                echo "<td>$<span class='valor_promedio numerable cotizacion_pagos_total' data-registro='".$row['id_catcot']."' data-valor='".$row_registros['importe_total']."'>".$row_registros['importe_total']."</span></td>";
-              echo "</tr>";
-              echo "<tr style='color:#ff0000; font-weight:bold;'>";
-                echo "<td scope='row' style='font-weight: bolder;' $attr_rubro>".utf8_encode($datos_modificacion['nombre_rubros'])."</td>";
-                echo "<td scope='row' style='font-weight: bolder;' $attr_categoria data-conteo='$conteo_categoria'>".utf8_encode($datos_modificacion['nombre_catcot'])."</td>";
-                echo "<td>".$datos_modificacion['nombre_item_cotizacion']."</td>";
-                echo "<td scope='row'>".utf8_encode($datos_modificacion['nombre_concot'])."</td>";
-                //echo "<td>".($datos_modificacion['detalle_registro'])."</td>";
-                echo "<td>".($datos_modificacion['jornadas_registro'])."</td>";
-                echo "<td>".$datos_modificacion['cantidad']."</td>";
-                echo "<td>$<span class='valor_precio_cliente numerable'>".$datos_modificacion['importe_neto']."</span></td>";
-                echo "<td>$<span class='valor_promedio numerable cotizacion_pagos_total' data-registro='".$row['id_catcot']."' data-valor='".$datos_modificacion['importe_total']."'>".$datos_modificacion['importe_total']."</span></td>";
+                if ($row_registros['jornadas_registro'] <> $datos_modificacion['jornadas_registro']){
+                  echo "<td><span style='color:#dc3545; font-weight:bold;'>".$row_registros['jornadas_registro']."</span> / <span style='color:#28a745; font-weight:bold;'>".$datos_modificacion['jornadas_registro']."</span></td>";
+                } else {
+                  echo "<td>".($row_registros['jornadas_registro'])."</td>";
+                }
+                
+                if ($row_registros['cantidad'] <> $datos_modificacion['cantidad']){
+                  echo "<td><span style='color:#dc3545; font-weight:bold;'>".$row_registros['cantidad']."</span> / <span style='color:#28a745; font-weight:bold;'>".$datos_modificacion['cantidad']."</span></td>";
+                } else {
+                  echo "<td>".$row_registros['cantidad']."</td>";
+                }
+                
+                if ($row_registros['importe_neto'] <> $datos_modificacion['importe_neto']){
+                  echo "<td><span style='color:#dc3545; font-weight:bold;'>$".$row_registros['importe_neto']."</span> / <span style='color:#28a745; font-weight:bold;'>$".$datos_modificacion['importe_neto']."</span></td>";
+                } else {
+                  echo "<td>$<span class='valor_precio_cliente numerable'>".$row_registros['importe_neto']."</span></td>";
+                }
+                if ($row_registros['importe_total'] <> $datos_modificacion['importe_total']){    
+                  echo "<td><span style='color:#dc3545; font-weight:bold;'>$".$row_registros['importe_total']."</span> / <span style='color:#28a745; font-weight:bold;'>$".$datos_modificacion['importe_total']."</span></td>";
+                } else {
+                  echo "<td>$<span class='valor_promedio numerable cotizacion_pagos_total' data-registro='".$row['id_catcot']."' data-valor='".$row_registros['importe_total']."'>".$row_registros['importe_total']."</span></td>";
+                }
+
               echo "</tr>";
               echo $tr_subtotal_categoria;
               echo $tr_subtotal_rubro;
