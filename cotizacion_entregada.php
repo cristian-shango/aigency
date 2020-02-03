@@ -388,6 +388,7 @@
         <div class="modal-content">
           <div class="modal-body">
             <h4>¿Confirmar Cotización?</h4>
+            <p>Al confirmar, define el Costo Objetivo para el Productor.</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-success" id="boton_aprobar_cotizacion" data-dismiss="modal">Confirmar</button>

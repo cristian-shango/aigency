@@ -248,9 +248,9 @@
                   echo "<td>$<span class='valor_precio_cliente numerable'>".$row_registros['importe_neto']."</span></td>";
                 }
                 if ($row_registros['importe_total'] <> $datos_modificacion['importe_total']){    
-                  echo "<td><span style='color:#dc3545; font-weight:bold;'>$".$row_registros['importe_total']."</span> / <span style='color:#28a745; font-weight:bold;'>$".$datos_modificacion['importe_total']."</span></td>";
+                  echo "<td><span style='color:#dc3545; font-weight:bold;'>$".$row_registros['importe_total']."</span> / <span style='color:#28a745; font-weight:bold;'>$".$datos_modificacion['importe_total']."</span><br /><button type='button' class='btn btn-success procesar_modificacion' data-registro='".$datos_modificacion['id']."' data-valor='".$datos_modificacion['importe_total']."' data-estado='".$estado."' data-opcion='0'><i class='icon wb-check' aria-hidden='true'></i></button><button type='button' class='btn btn-danger procesar_modificacion' data-registro='".$datos_modificacion['id']."' data-valor='".$datos_modificacion['importe_total']."' data-estado='".$estado."' data-opcion='1'><i class='icon wb-close' aria-hidden='true'></i></button></td>";
                 } else {
-                  echo "<td>$<span class='valor_promedio numerable cotizacion_pagos_total' data-registro='".$row['id_catcot']."' data-valor='".$row_registros['importe_total']."'>".$row_registros['importe_total']."</span></td>";
+                  echo "<td>$<span class='valor_promedio numerable cotizacion_pagos_total' data-registro='".$row['id']."' data-valor='".$row_registros['importe_total']."'>".$row_registros['importe_total']."</span></td>";
                 }
 
               echo "</tr>";

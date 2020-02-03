@@ -12,6 +12,9 @@
     echo "conectado";
   } 
 
+  $sql_costo_objetivo_proyecto = "UPDATE proyectos SET costo_presupuestado = consumido WHERE id = $id_proyecto";
+  mysqli_query($conexion, $sql_costo_objetivo_proyecto);
+
   $sql_estado_registro = "UPDATE registros SET estado_registro = 1 WHERE id_proyecto = $id_proyecto";
   mysqli_query($conexion, $sql_estado_registro);
 

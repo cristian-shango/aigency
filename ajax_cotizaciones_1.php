@@ -281,7 +281,7 @@
               echo "<button type='button' class='btn btn-default editar_proveedor_cotizacion' data-toggle='modal' data-id='".$row_registros['id']."' data-check='".$row_registros['registro_seleccionado']."'><i class='icon wb-edit' aria-hidden='true'></i></button>";
               echo "<button type='button' class='btn btn-default cargar_proveedor_cotizacion' data-toggle='modal' data-id='".$row_registros['id']."' data-check='".$row_registros['registro_seleccionado']."'><i class='icon wb-info' aria-hidden='true'></i></button>";
               echo "<button type='button' class='btn btn-default'><i class='icon wb-plus seleccion_item' data-rubro='".$row_registros['id_rubros_cotizaciones']."' data-categoria='".$row_registros['id_catcot']."' data-item='".$row_registros['nombre_item_cotizacion']."' data-id_registro='".$row_registros['id']."'></i></button>";
-              echo "<button type='button' class='btn btn-default mensaje_cotizacion' data-toggle='modal' data-id='".$row_registros['id']."'><i class='icon wb-chat-text' aria-hidden='true'></i></button>";
+              //echo "<button type='button' class='btn btn-default mensaje_cotizacion' data-toggle='modal' data-id='".$row_registros['id']."'><i class='icon wb-chat-text' aria-hidden='true'></i></button>";
           echo "</td>";
         echo "</tr>";
         echo $tr_subtotal_categoria;

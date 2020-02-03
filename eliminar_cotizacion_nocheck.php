@@ -16,7 +16,7 @@
 
   $sql = "DELETE FROM registros WHERE id = '$id'";
   $sql2 = "DELETE FROM registros_confirmados WHERE id = '$id'";
-  //$sql = "UPDATE registros SET estado_registro = 3 WHERE id = '$id'";
+  $sql3 = "UPDATE registros_eliminados SET estado_registro = 3 WHERE id = '$id'";
 
   if(mysqli_query($conexion, $sql_copiar_tabla_eliminados)){
     echo "Registro $id copiado en tabla Eliminados."; 
@@ -28,6 +28,7 @@
   if(mysqli_query($conexion, $sql)){
     echo "Registro $id eliminado de tabla registros."; 
     mysqli_query($conexion, $sql2);
+    mysqli_query($conexion, $sql3);
   } else {
       echo "ERROR: Could not able to execute $sql. "
       . mysqli_error($conexion);

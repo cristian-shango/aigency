@@ -247,6 +247,7 @@
                 if(mysqli_num_rows($result) > 0){
                     $i = 0;
                     while($row = mysqli_fetch_array($result)){
+                    $estado = $row['nombre_estado'];
           ?>
                 <div>
                   <div class="col-md-12"><h5>Cliente: <span id="ingreso_cliente" style="font-weight: lighter;"><?php echo ($row['nombre']);?></span></h5></div>
@@ -358,15 +359,31 @@
                         <li class="nav-item" role="presentation">
                           <?php
                             $id = $_GET['id'];
-                            $sql_cantidad_cambios = "SELECT COUNT(*) AS cambios FROM registros WHERE estado_registro = 2 AND id_proyecto = '$id'";
+                            $sql_cantidad_cambios = "SELECT COUNT(*) AS cambios FROM registros WHERE estado_registro = 2 OR estado_registro = 0 AND id_proyecto = '$id'";
                             
                             $resultado_cantidad_cambios = mysqli_query($conexion, $sql_cantidad_cambios);
                             $datos_cantidad_cambios = mysqli_fetch_assoc($resultado_cantidad_cambios);
 
-                            $cambios = $datos_cantidad_cambios['cambios'];
+                            $sql_cantidad_eliminados = "SELECT COUNT(*) AS eliminados FROM registros_eliminados WHERE id_proyecto = '$id'";
+                            
+                            $resultado_cantidad_eliminados = mysqli_query($conexion, $sql_cantidad_eliminados);
+                            $datos_cantidad_eliminados = mysqli_fetch_assoc($resultado_cantidad_eliminados);
 
+                            $cambios = $datos_cantidad_cambios['cambios'] + $datos_cantidad_eliminados['eliminados'];
+
+                            if ($estado == "APROBADO"){
+                              $estado = "APROBADA";
+                            } else {
+                              $estado = "CONFIRMADA";
+                            }
+
+                            if ($cambios == 1){
+                              echo "<a class='nav-link active' id='home-tab' data-toggle='tab' href='#tab_cotizacion_confirmada' role='tab' aria-controls='editar'
+                            aria-selected='true'>COTIZACIÓN $estado <span class='badge badge-pill badge-danger cantidad_cambios'>".$cambios." CAMBIO</span></a>";
+                            } else {
                             echo "<a class='nav-link active' id='home-tab' data-toggle='tab' href='#tab_cotizacion_confirmada' role='tab' aria-controls='editar'
-                            aria-selected='true'>COTIZACIÓN CONFIRMADA <span class='badge badge-pill badge-danger cantidad_cambios'>".$cambios."</span></a>";
+                            aria-selected='true'>COTIZACIÓN $estado <span class='badge badge-pill badge-danger cantidad_cambios'>".$cambios." CAMBIOS</span></a>";
+                            }
 
                           ?>
                         </li>
@@ -784,6 +801,26 @@
                   });
         });
 
+        $('.procesar_modificacion').click(function(){
+          let registro = $(this).attr('data-registro');
+          let valor = $(this).attr('data-valor');
+          let estado = $(this).attr('data-estado');
+          let id = <?php echo $_GET['id']; ?>;
+          let proyecto = document.getElementById('ingreso_id').innerHTML;
+          console.log("Registro: ",registro);
+          console.log("Valor: ",valor);
+          console.log("Estado: ",estado);
+          $.ajax({  
+            url:"ajax/procesar_modificacion_cotizacion.php",  
+            method:"POST",
+            data: 'registro='+ registro+'&estado='+ estado,
+            success:function(data){
+              window.location.reload(true);
+            }
+          });
+        }); 
+
+
         $('.cambio_estado_aprobar').click(function(){
           var estado = $(this).attr('data-estado');
           let id=<?php echo $_GET['id']; ?>;
@@ -793,25 +830,24 @@
               if(!$(this).val()){
                 $('#modal_empty_markup').modal('show');  
                 marca = 1;
-                return false;
               } else {
                 marca = 0;
               }
           });
           if (marca == 0){
-            $.ajax({  
+            /*$.ajax({  
               url:"ajax/comprobar_cambios_registros.php",  
               method:"POST",
               data: 'id='+id,
               success:function(response){
                 console.log(response);
-                if (response == 'NO'){
+                if (response == 'NO'){*/
                   $('#modal_aprobar_cotizacion').modal('show');
-                } else {
+               /* } else {
                   $('#modal_cambios_registros').modal('show');
                 }
               }  
-            });
+            });*/
           }
         }); 
 

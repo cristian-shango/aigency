@@ -37,6 +37,8 @@
         <link rel="stylesheet" href="design/assets/examples/css/forms/advanced.css">
         <link rel="stylesheet" href="design/global/vendor/blueimp-file-upload/jquery.fileupload.css">
         <link rel="stylesheet" href="design/global/vendor/dropify/dropify.css">
+        <link rel="stylesheet" href="design/global/vendor/toastr/toastr.css">
+        <link rel="stylesheet" href="design/assets/examples/css/advanced/toastr.css">
 
 
     <!-- Fonts -->
@@ -541,6 +543,23 @@
                 
 
                 <span id="ingreso_id" style="display: none;"><?php echo ($row['id']);?></span>
+                <div class="col-md-12">
+		            <!--<button class="btn btn-block btn btn-danger clickable cambio_estado" data-estado="1" style="cursor: pointer;">NUEVO</button>
+		            <button class="btn btn-block btn btn-primary clickable cambio_estado" data-estado="2" style="cursor: pointer;">COTIZANDO</button>-->
+		        <?php 
+		        	if ($row['estado'] == 3){
+		        ?>
+		        		<button class="btn btn-block btn btn-warning clickable text-center" id="boton_actualizar" data-estado="3" style="cursor: pointer;" data-plugin="toastr" data-message="COTIZACION ACTUALIZADA" data-container-id="toast-topFullWidth" data-position-class="toast-top-full-width" data-show-method="slideDown" data-icon-class="toast-just-text toast-success toast-shadow"data-progress-bar="true">ACTUALIZAR COTIZACION</button>
+		       	<?php
+		        	} else {
+		        ?>
+		        		<button class="btn btn-block btn btn-success clickable cambio_estado" data-estado="3" style="cursor: pointer;">ENTREGAR COTIZACION</button>
+		        <?php
+		        	}
+		        ?>
+		            
+		            <!--<button class="btn btn-block btn btn-info clickable cambio_estado" data-estado="8" style="cursor: pointer;">STAND BY</button>
+		        </div>-->
           <?php
                     }
 
@@ -553,21 +572,6 @@
                 echo "ERROR: Could not able to execute $sql. " . mysqli_error($conexion);
             }
           ?>
-          <div class="col-md-12">
-            <button class="btn btn-block btn btn-danger clickable cambio_estado" data-estado="1" style="cursor: pointer;">NUEVO</button>
-            <button class="btn btn-block btn btn-primary clickable cambio_estado" data-estado="2" style="cursor: pointer;">COTIZANDO</button>
-            <button class="btn btn-block btn btn-success clickable cambio_estado" data-estado="3" style="cursor: pointer;">ENTREGADO</button>
-            <button class="btn btn-block btn btn-info clickable cambio_estado" data-estado="8" style="cursor: pointer;">STAND BY</button>
-            <button class="btn btn-block btn-outline btn-warning clickable actualizar_cotizacion" id="boton_actualizar" style="cursor: pointer; opacity: 0;">ACTUALIZAR</button>
-            <!-- <?php
-              $sql_contar_adicionales = "SELECT count(*) as total from adicionales WHERE aprobado_adicional = 0 AND id_proyecto_adicional = '".$_GET['id']."'";
-              $resultado_contar_adicionales = mysqli_query($conexion, $sql_contar_adicionales);
-              $datos_contar_adicionales=mysqli_fetch_assoc($resultado_contar_adicionales);
-            ?>
-              <button class="btn btn-block btn btn-warning clickable" data-estado="SOLICITAR ADICIONAL" data-proyecto="<?php echo ($_GET['id']); ?>" style="cursor: pointer;" id="solicitar_adicional">SOLICITAR ADICIONAL <strong>(<?php echo ($datos_contar_adicionales['total']);?>)</strong></button>
-              <?php
-              ?> -->
-          </div>
               </section>
             </div>
           </div>
@@ -1632,6 +1636,7 @@
         <script src="design/global/js/Plugin/select2.js"></script>
         <script src="design/global/vendor/dropify/dropify.min.js"></script>
         <script src="design/global/vendor/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+        <script src="design/global/vendor/toastr/toastr.js"></script>
 
     <!-- Scripts -->
     <script src="design/global/js/Component.js"></script>
@@ -1657,6 +1662,7 @@
         <script src="design/assets/examples/js/tables/bootstrap.js"></script>
         <script src="design/global/js/Plugin/bootstrap-datepicker.js"></script>
         <script src="design/global/js/Plugin/dropify.js"></script>
+        <script src="design/global/js/Plugin/toastr.js"></script>
 
     <script>
       (function(document, window, $){
@@ -1745,12 +1751,12 @@
           case "APROBADO":
             $("#tipo_estado").css("background-color", "#218838");
             $("#tipo_estado").css("color", "#FFFFFF");
-            $("#boton_actualizar").css("opacity", "1");
+            //$("#boton_actualizar").css("opacity", "1");
             break;
           case "CONFIRMADO":
             $("#tipo_estado").css("background-color", "#218838");
             $("#tipo_estado").css("color", "#FFFFFF");
-            $("#boton_actualizar").css("opacity", "1");
+            //$("#boton_actualizar").css("opacity", "1");
             break;
           case "RECHAZADO":
             $("#tipo_estado").css("background-color", "#dc3545");
