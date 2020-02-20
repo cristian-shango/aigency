@@ -11543,7 +11543,7 @@ h3.example-title {
   font-weight: bolder;
 }
 
-#modal_nuevo_proyecto .modal-dialog, #modal_editar_proyecto .modal-dialog, #modal_nuevo_registro .modal-dialog, #modal_nuevo .modal-dialog, #modal_editar .modal-dialog, #modal_ver .modal-dialog, #modal_nuevo_proveedor .modal-dialog, #modal_cotizacion .modal-dialog, #modal_editar_registro .modal-dialog, #modal_nuevo_cliente .modal-dialog, #modal_cargar_proveedor .modal-dialog, #modal_facturar_proyecto .modal-dialog, #modal_proveedor .modal-dialog {
+#modal_nuevo_proyecto .modal-dialog, #modal_editar_proyecto .modal-dialog, #modal_nuevo_registro .modal-dialog, #modal_nuevo .modal-dialog, #modal_editar .modal-dialog, #modal_ver .modal-dialog, #modal_nuevo_proveedor .modal-dialog, #modal_cotizacion .modal-dialog, #modal_editar_registro .modal-dialog, #modal_nuevo_cliente .modal-dialog, #modal_cargar_proveedor .modal-dialog, #modal_facturar_proyecto .modal-dialog, #modal_proveedor .modal-dialog, #modal_factura_cotizacion .modal-dialog, #modal_detalle_pago_proveedor .modal-dialog, #modal_reporte_generado .modal-dialog {
   max-width: 80%;
   z-index: 99999999;
 }
@@ -11721,4 +11721,10 @@ th, td{
   background-color: #dc3545;
   border-radius: 50%;
   display: inline-block;
+}
+
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+    overflow-x: hidden;
 }

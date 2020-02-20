@@ -178,13 +178,23 @@
               <!-- Basic Columns -->
               <div class="col-md-12">
                 <!-- Example Basic Columns -->
-                <div class="example-wrap">
+                <div>
                   <div class="example table-responsive">
                     <table class="table border-tabla" id="tabla_proveedores_confirmados"></table>
                     <input type="text" id="id_registro" data-id="<?php echo $_GET['id']; ?>" hidden>
                   </div>
                 </div>
                 <!-- End Example Basic Columns -->
+              </div>
+              <div class="col-md-3">
+                <button type="button" class="btn btn-success btn-block generar_reporte"><i class="icon wb-download" aria-hidden="true"></i><strong>DESCARGAR EXCEL</strong></button>
+              </div>
+              <div class="col-md-7"></div>
+              <div class="col-md-2">
+                <button type="button" class="btn btn-danger btn-block boton_volver"><i class="icon wb-back" aria-hidden="true"></i><strong>VOLVER</strong></button>
+              </div>
+              <div class="col-md-12">
+                <span id="tabla_reporte_generado" style="display: none;"></span>
               </div>
           </div>
         </div>
@@ -193,237 +203,364 @@
     </div>
     <!-- End Page -->
 
-    <!-- Modal de Proveedor -->
-    <div class="modal fade" id="modal_proveedor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- Modal Detalle de Pago a Proveedor-->
+    <div class="modal fade" id="modal_detalle_pago_proveedor" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-center" role="document">
         <div class="modal-content">
-          <form id="formulario_carga_cotizacion">
-                    <div class="modal-body">
-                      <div class="row">
-                        <div class="col-md-12"><h3>Proveedor</h3></div>
-                        <div class="col-md-11">
-                          <h4>Proveedor</h4>
-                          <select class="form-control" id="proveedores">
-                                <option value="">Seleccionar</option>
-                              <?php
-                              // Attempt select query execution
-                              $sql1 = "SELECT * FROM proveedores ORDER BY servicio";
-                              mysql_query("SET NAMES 'utf8'");
-                              if($result1 = mysqli_query($conexion, $sql1)){
-                                  if(mysqli_num_rows($result1) > 0){
-                                      $i = 0;
-                                      while($row1 = mysqli_fetch_array($result1)){
-                                        ?>
-                                          <option value="<?php echo ($row1['id_proveedor']);?>"><?php echo ($row1['servicio']);?> | <?php echo ($row1['descripcion']);?> | <?php echo ($row1['razon_social']);?> | <?php echo ($row1['contacto']);?></option>
-                                        <?php
-                                      }
-                                      // Free result set
-                                      mysqli_free_result($result1);
-                                  } else{
-                                      echo "No hay datos para mostrar.";
-                                  }
-                              } else{
-                                  echo "ERROR: Could not able to execute $sql1. " . mysqli_error($conexion);
-                              }
-                            ?>
-                          </select>
-                        </div>
-                        <div class="col-md-1">
-                          <i class="far fa-plus-square" id="agregar_proveedor"></i>
-                        </div>
-
-                        <div class="col-md-6">
-                          <div class="form-group">
-                              <h4>OT</h4>
-                              <input type="text" class="form-control form-control" id="ot" readonly>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                              <h4>Item</h4>
-                              <input type="text" class="form-control form-control" id="tipo_item" readonly>
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="form-group">
-                              <h4>Detalle</h4>
-                              <textarea row="8" id="detalle" class="form-control" id="detalle" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly></textarea>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                              <h4>Forma de Pago</h4>
-                              <select class="form-control" id="forma_pago_nuevo">
-                                  <option value="">Seleccionar</option>
-                                <?php
-                                // Attempt select query execution
-                                $sql1 = "SELECT * FROM forma_pago";
-                                mysql_query("SET NAMES 'utf8'");
-                                if($result1 = mysqli_query($conexion, $sql1)){
-                                    if(mysqli_num_rows($result1) > 0){
-                                        $i = 0;
-                                        while($row1 = mysqli_fetch_array($result1)){
-                                          ?>
-                                            <option value="<?php echo ($row1['id']);?>"><?php echo (utf8_encode($row1['tipo']));?></option>
-                                          <?php
-                                        }
-                                        // Free result set
-                                        mysqli_free_result($result1);
-                                    } else{
-                                        echo "No hay datos para mostrar.";
-                                    }
-                                } else{
-                                    echo "ERROR: Could not able to execute $sql1. " . mysqli_error($conexion);
-                                }
-                              ?>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                              <h4>Tipo de Factura</h4>
-                              <select class="form-control" id="tipo_factura_nuevo_registro">
-                                  <option value="">Seleccionar</option>
-                                <?php
-                                // Attempt select query execution
-                                $sql1 = "SELECT * FROM tipo_factura ORDER BY tipo_factura";
-                                mysql_query("SET NAMES 'utf8'");
-                                if($result1 = mysqli_query($conexion, $sql1)){
-                                    if(mysqli_num_rows($result1) > 0){
-                                        $i = 0;
-                                        while($row1 = mysqli_fetch_array($result1)){
-                                          ?>
-                                            <option value="<?php echo ($row1['tipo_factura']);?>"><?php echo (utf8_encode($row1['tipo_factura']));?></option>
-                                          <?php
-                                        }
-                                        // Free result set
-                                        mysqli_free_result($result1);
-                                    } else{
-                                        echo "No hay datos para mostrar.";
-                                    }
-                                } else{
-                                    echo "ERROR: Could not able to execute $sql1. " . mysqli_error($conexion);
-                                }
-                              ?>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                              <h4>Número de Factura</h4>
-                              <input type="number" id="numero_factura_nuevo_registro" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                              <h4>Fecha de Factura</h4>
-                              <input type="text" id="fecha_facturacion" class="form-control datepicker_ff"  aria-label="Default" aria-describedby="inputGroup-sizing-default"data-plugin="datepicker">
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                              <h4>Tiempo de Pago</h4>
-                              <div class="input-group">
-                                <input type="text" id="tiempo_pago" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                                <div class="input-group-prepend">
-                                <div class="input-group-text"> días</div>
-                              </div>
-                            </div>
-                              <input type="number" id="id" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" hidden>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                              <h4>Fecha de Pago</h4>
-                              <input type="text" id="fecha_pago" class="form-control datepicker_fp"  aria-label="Default" aria-describedby="inputGroup-sizing-default" data-plugin="datepicker">
-                          </div>
-                        </div>
-                        <div class="col-md-2">
-                          <div class="form-group">
-                              <h4>Importe Neto</h4>
-                            <div class="input-group">
-                              <div class="input-group-prepend">
-                                <div class="input-group-text">$</div>
-                              </div>
-                              <input type="text" class="form-control form-control-lg sumar" id="importe_neto">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-2">
-                          <div class="form-group">
-                              <h4>Tipo IVA</h4>
-                              <select class="form-control form-control-lg" id="tipo_iva">
-                                  <option value="">Seleccionar</option>
-                                <?php
-                                // Attempt select query execution
-                                $sql3 = "SELECT * FROM iva ORDER BY valor_iva ASC";
-                                mysql_query("SET NAMES 'utf8'");
-                                if($result3 = mysqli_query($conexion, $sql3)){
-                                    if(mysqli_num_rows($result3) > 0){
-                                        $i = 0;
-                                        while($row3 = mysqli_fetch_array($result3)){
-                              ?>
-                              <option value="<?php echo ($row3['valor_iva']);?>"><?php echo ($row3['valor_iva']);?>%</option>
-                              <?php
-                                        }
-                                        // Free result set
-                                        mysqli_free_result($result3);
-                                    } else{
-                                        echo "No hay datos para mostrar.";
-                                    }
-                                } else{
-                                    echo "ERROR: Could not able to execute $sql3. " . mysqli_error($conexion);
-                                }
-                              ?>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="col-md-2">
-                          <div class="form-group">
-                              <h4>I.V.A.</h4>
-                            <div class="input-group">
-                              <div class="input-group-prepend">
-                                <div class="input-group-text">$</div>
-                              </div>
-                              <input type="text" class="form-control form-control-lg sumar" id="iva">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-2">
-                          <div class="form-group">
-                              <h4>Percepción</h4>
-                            <div class="input-group">
-                              <div class="input-group-prepend">
-                                <div class="input-group-text">$</div>
-                              </div>
-                              <input type="text" class="form-control form-control-lg sumar" id="percepcion">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                              <h4>Importe Bruto</h4>
-                            <div class="input-group">
-                              <div class="input-group-prepend">
-                                <div class="input-group-text">$</div>
-                              </div>
-                              <input type="text" id="importe_bruto" class="form-control form-control-lg importe_bruto" readonly>
-                            </div>
-                          </div>
-                        </div>
-                <div class="col-md-4">
-                  <button type="button" class="btn btn-danger btn-block" id="boton_guardar_proveedor_cotizacion"><strong>POR PAGAR</strong></button>
+          <div class="modal-body">
+            <div class="row row-lg">
+              <div class="col-md-4">
+                <div class="form-group">
+                    <h4>Proveedor</h4>
+                    <input type="text" class="form-control" id="proveedor_modal" readonly>
                 </div>
-                <div class="col-md-4">
-                  <button type="button" class="btn btn-warning btn-block" data-dismiss="modal"><strong>PAGO DEMORADO</strong></button>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                    <h4>Razón Social</h4>
+                    <input type="text" class="form-control" id="razon_social_modal" readonly>
                 </div>
-                <div class="col-md-4">
-                  <button type="button" class="btn btn-success btn-block" data-dismiss="modal"><strong>PAGADO</strong></button>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                    <h4>CUIT</h4>
+                    <input type="text" class="form-control" id="cuit_modal" readonly>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                    <h4>OP (Orden de Pago)</h4>
+                    <input type="text" class="form-control" id="op_modal" readonly>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                    <h4>Item</h4>
+                    <input type="text" class="form-control" id="item_modal" readonly>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                    <h4>Importe Neto</h4>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">$</div>
+                    </div>
+                    <input type="text" class="form-control form-control-lg" id="importe_neto_modal" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                    <h4>IVA</h4>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">$</div>
+                    </div>
+                    <input type="text" class="form-control form-control-lg" id="iva_modal" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                    <h4>Percepción</h4>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">$</div>
+                    </div>
+                    <input type="text" class="form-control form-control-lg" id="percepcio_modal" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                    <h4>Importe Bruto</h4>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">$</div>
+                    </div>
+                    <input type="text" class="form-control form-control-lg" id="importe_bruto_modal" readonly>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-2">
+                <div class="form-group">
+                    <h4>Tipo de Factura</h4>
+                    <input type="text" class="form-control" id="tipo_factura_modal" readonly>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                    <h4>Número de Factura</h4>
+                    <input type="number" id="numero_factura_modal" class="form-control" readonly>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                    <h4>Fecha de Factura</h4>
+                    <input type="text" id="fecha_factura_modal" class="form-control" readonly>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                    <h4>Tiempo de Pago</h4>
+                    <div class="input-group">
+                      <input type="text" id="tiempo_pago_modal" class="form-control" readonly>
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">&nbsp;días</div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                    <h4>Fecha de Pago</h4>
+                    <input type="text" id="fecha_pago_modal" class="form-control" readonly>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                    <h4>Forma de Pago</h4>
+                    <input type="text" id="forma_pago_modal" class="form-control" readonly>
                 </div>
               </div>
             </div>
-          </form>
+            <hr />
+            <!-- CHEQUE -->
+            <div id="formulario_cheque" style="display: none;">
+              <div class="row">
+                <div class="col-md-12 border-bottom">
+                  <h3>Datos de Cheque</h3>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                      <h4>Monto Pagado</h4>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                      </div>
+                      <input type="text" class="form-control form-control-lg sumar" id="monto_pagado_cheque">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                      <h4>Monto Retenido</h4>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                      </div>
+                      <input type="text" class="form-control form-control-lg sumar" id="monto_retenido_cheque">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                      <h4>Monto Total</h4>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                      </div>
+                      <input type="text" class="form-control form-control-lg sumar" id="monto_total_cheque">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <h4>Banco Origen</h4>
+                    <select class="form-control" id="forma_pago_nuevo">
+                        <option value="">Seleccionar</option>
+                      <?php
+                      // Attempt select query execution
+                      $sql_banco = "SELECT * FROM bancos ORDER BY nombre";
+                      mysql_query("SET NAMES 'utf8'");
+                      if($result_banco = mysqli_query($conexion, $sql_banco)){
+                          if(mysqli_num_rows($result_banco) > 0){
+                              $i = 0;
+                              while($row_banco = mysqli_fetch_array($result_banco)){
+                                ?>
+                                  <option value="<?php echo ($row_banco['id_banco']);?>"><?php echo (utf8_encode($row_banco['nombre']));?></option>
+                                <?php
+                              }
+                              // Free result set
+                              mysqli_free_result($result_banco);
+                          } else{
+                              echo "No hay datos para mostrar.";
+                          }
+                      } else{
+                          echo "ERROR: Could not able to execute $sql_banco. " . mysqli_error($conexion);
+                      }
+                    ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                      <h4>Número de Cheque</h4>
+                      <input type="number" id="numero_factura_nuevo_registro" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <h4>Tipo de Cheque</h4>
+                    <select class="form-control" id="forma_pago_nuevo">
+                      <option value="">Seleccionar</option>
+                      <option value="1">Diferido</option>
+                      <option value="1">Al Día</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                      <h4>Fecha Cheque</h4>
+                      <input type="date" id="emision_transferencia" class="form-control datepicker_ff"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                      <h4>Fecha de Pago</h4>
+                      <input type="date" id="ejecucion_transferencia" class="form-control datepicker_ff"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="checkbox-custom checkbox-primary">
+                    <input type="checkbox" id="inputChecked" checked="">
+                    <label for="inputChecked">Cruzado</label>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="checkbox-custom checkbox-primary">
+                    <input type="checkbox" id="inputChecked" checked="">
+                    <label for="inputChecked">A la Órden</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- CHEQUE -->
+            <!-- TRANSFERENCIA -->
+            <div id="formulario_transferencia">
+              <div class="row">
+                <div class="col-md-12 border-bottom">
+                  <h3>Datos de Transferencia Bancaria</h3>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                      <h4>Banco Origen</h4>
+                      <select class="form-control" id="banco_origen_transferencia">
+                          <option value="">Seleccionar</option>
+                        <?php
+                        // Attempt select query execution
+                        $sql_banco = "SELECT * FROM bancos ORDER BY nombre";
+                        mysql_query("SET NAMES 'utf8'");
+                        if($result_banco = mysqli_query($conexion, $sql_banco)){
+                            if(mysqli_num_rows($result_banco) > 0){
+                                $i = 0;
+                                while($row_banco = mysqli_fetch_array($result_banco)){
+                                  ?>
+                                    <option value="<?php echo ($row_banco['id_banco']);?>"><?php echo (utf8_encode($row_banco['nombre']));?></option>
+                                  <?php
+                                }
+                                // Free result set
+                                mysqli_free_result($result_banco);
+                            } else{
+                                echo "No hay datos para mostrar.";
+                            }
+                        } else{
+                            echo "ERROR: Could not able to execute $sql_banco. " . mysqli_error($conexion);
+                        }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                      <h4>Banco Destino</h4>
+                      <select class="form-control" id="banco_destino_transferencia">
+                          <option value="">Seleccionar</option>
+                        <?php
+                        // Attempt select query execution
+                        $sql_banco = "SELECT * FROM bancos ORDER BY nombre";
+                        mysql_query("SET NAMES 'utf8'");
+                        if($result_banco = mysqli_query($conexion, $sql_banco)){
+                            if(mysqli_num_rows($result_banco) > 0){
+                                $i = 0;
+                                while($row_banco = mysqli_fetch_array($result_banco)){
+                                  ?>
+                                    <option value="<?php echo ($row_banco['id_banco']);?>"><?php echo (utf8_encode($row_banco['nombre']));?></option>
+                                  <?php
+                                }
+                                // Free result set
+                                mysqli_free_result($result_banco);
+                            } else{
+                                echo "No hay datos para mostrar.";
+                            }
+                        } else{
+                            echo "ERROR: Could not able to execute $sql_banco. " . mysqli_error($conexion);
+                        }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                      <h4>Emisión Transferencia</h4>
+                      <input type="text" id="emision_transferencia" class="form-control datepicker_ff"  aria-label="Default" aria-describedby="inputGroup-sizing-default"data-plugin="datepicker">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                      <h4>Ejecución Transferencia</h4>
+                      <input type="text" id="ejecucion_transferencia" class="form-control datepicker_ff"  aria-label="Default" aria-describedby="inputGroup-sizing-default"data-plugin="datepicker">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                <div class="form-group">
+                    <h4>Importe Bruto a Transferir</h4>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">$</div>
+                    </div>
+                    <input type="text" class="form-control form-control-lg" id="importe_bruto_transferencia">
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <!-- TRANSFERENCIA -->
+
+            <hr />
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                    <h4>Observaciones</h4>
+                    <textarea row="8" id="observaciones_modal" class="form-control" readonly></textarea>
+                </div>
+              </div>
+              <br />
+              <div class="col-md-12" id="mostrar_archivo_adjunto">
+                <h4><a href="" target="_blank" id="archivo_adjunto"><i class="icon wb-file" aria-hidden="true" style="font-size: 20px;"></i>VER FACTURA ADJUNTA</a></h4>
+              </div>
+              <div class="col-md-3">
+                <button type="button" class="btn btn-danger btn-block definir_pago" data-pago="PP"><strong>POR PAGAR</strong></button>
+              </div>
+
+              <div class="col-md-3">
+                <button type="button" class="btn btn-warning btn-block definir_pago" data-pago="PD"><strong>PAGO DEMORADO</strong></button>
+              </div>
+
+              <div class="col-md-4">
+                <button type="button" class="btn btn-success btn-block definir_pago" data-pago="PC"><strong>PAGO CONFIRMADO</strong></button>
+              </div>
+
+              <div class="col-md-2">
+                <button type="button" class="btn btn-default btn-block definir_pago" data-dismiss="modal"><strong>CERRAR</strong></button>
+              </div>
+              <span style="margin-bottom: 1em;"></span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -495,11 +632,17 @@
             success:function(data){
                 $('#tabla_proveedores_confirmados').html(data);
                 funciones_pagos();
+                console.log("Ejecuto función funciones_pagos");
             }
         });
       });
+    </script>
 
+    <script type="text/javascript">
       function funciones_pagos(){ 
+
+        MergeCommonRows_pagos($('#tabla_proveedores_confirmados'));
+
         $(".ver_proveedores").click(function() {
             id = $(this).data("id");
             window.location = "pago_proveedores.php?id="+id;
@@ -512,25 +655,178 @@
           console.log("Muestro factura: ",archivo);
         });
 
+        $(".boton_volver").click(function() {
+          window.location = document.referrer;
+        });
+
+
+
+        $(".generar_reporte").click(function() { 
+          let id = '<?php echo $_GET['id'];?>';
+          let cliente = $(".tr_cliente").data("cliente");
+          console.log(cliente);
+          $.ajax({
+            type: "GET",
+            url:"ajax/reporte_mostrar_pagos_proveedores.php?id="+id,
+            success:function(data){
+              console.log(data);
+              $('#tabla_reporte_generado').html(data);
+              let excel_data = $('#tabla_reporte_generado').html();  
+              let page = "generar_excel.php?data=" + excel_data + "&filename="+cliente+"_reporte_pago_a_proveedores.xls";  
+              window.location = page;
+              //MergeCommonRows_pagos($('#tabla_reporte_generado'));
+              //$('#modal_reporte_generado').modal('show');
+            }
+          });
+        });
+
+        $(".definir_pago").click(function() {
+          id = $(this).data("pago");
+          tipo_pago = $(this).data("tipo_pago");
+          console.log("Gestion pago: ",id);
+          console.log("Tipo de pago: ",tipo_pago);
+          // Agarro todos los inputs, de todos los tipos de pago y en el AJAX proceso dependiendo el tipo de pago que haya elegido.
+
+        });
+
+        /*$(".descargar_reporte").click(function() {
+          console.log("Genero Excel");
+          let excel_data = $('#tabla_reporte_generado').html();  
+          let page = "generar_excel.php?data=" + excel_data + "&filename=reporte_pago_a_proveedores.xls";  
+          window.location = page;
+        }); */       
+
         $(".ver_modal_proveedor").click(function() {
           id = $(this).data("id");
-          window.location = "pago_proveedores_detalle.php?id="+id;
+          //window.location = "pago_proveedores_detalle.php?id="+id;
           console.log("Muestro modal: ",id);
-          /*$.ajax({
+          $.ajax({
             type: "GET",
             url:"ajax/detalle_proveedor_confirmado.php",
             method:"POST",
             data:{id:id},
             dataType:"json",
             success:function(data){
-              $("#edicion_categoria").val(data.categoria_cotizacion);
-              $('#modal_proveedor').modal('show');
+              $("#op_modal").val('');
+              $("#item_modal").val('');
+              $("#proveedor_modal").val('');
+              $("#razon_social_modal").val('');
+              $("#cuit_modal").val('');
+              $("#importe_neto_modal").val('');
+              $("#iva_modal").val('');
+              $("#percepcion_modal").val('');
+              $("#importe_bruto_modal").val('');
+              $("#tipo_factura_modal").val('');
+              $("#numero_factura_modal").val('');
+              $("#fecha_factura_modal").val('');
+              $("#tiempo_pago_modal").val('');
+              $("#fecha_pago_modal").val('');
+              $("#forma_pago_modal").val('');
+
+              $("#item_modal").val(data.nombre_item_cotizacion);
+              $('#modal_detalle_pago_proveedor').modal('show');
+              $("#op_modal").val(data.id_factura_cotizacion);
+              $("#proveedor_modal").val(data.contacto);
+              $("#razon_social_modal").val(data.razon_social_proveedor);
+              $("#cuit_modal").val(data.cuit);
+              $("#importe_neto_modal").val(data.importe_neto_cotizacion);
+              $("#iva_modal").val(data.iva_cotizacion);
+              $("#percepcion_modal").val(data.percepcion_cotizacion);
+              $("#importe_bruto_modal").val(data.importe_bruto_cotizacion);
+              $("#tipo_factura_modal").val(data.tipo_factura);
+              $("#numero_factura_modal").val(data.numero_factura_cotizacion);
+              $("#fecha_factura_modal").val(data.fecha_factura_cotizacion);
+              $("#tiempo_pago_modal").val(data.tiempo_pago_cotizacion);
+              $("#fecha_pago_modal").val(data.fecha_pago_cotizacion);
+              $("#forma_pago_modal").val(data.tipo);
+
+              var tipo_de_pago_switch = data.id_forma_pago_cotizacion;
+              console.log(tipo_de_pago_switch);
+
+              if (tipo_de_pago_switch == 1){
+                console.log("Pago en Efectivo");
+                $("#formulario_efectivo").css("display", "block");
+                $("#formulario_transferencia").css("display", "none");
+                $("#formulario_cheque").css("display", "none");
+              }
+              if (tipo_de_pago_switch == 2){
+                console.log("Pago con Transferencia");
+                $("#formulario_cheque").css("display", "none");
+                $("#formulario_transferencia").css("display", "block");
+                $(".definir_pago").attr("data-tipo_pago", "TR");
+              }
+
+              if (tipo_de_pago_switch == 3){
+                console.log("Pago con Cheque");
+                $("#formulario_transferencia").css("display", "none");
+                $("#formulario_cheque").css("display", "block");
+                $(".definir_pago").attr("data-tipo_pago", "CH");
+                $("#monto_pagado_cheque").val(data.importe_bruto_cotizacion);
+                $("#monto_total_cheque").val(data.importe_bruto_cotizacion);
+              }
+
+              if (tipo_de_pago_switch == 4){
+                console.log("Pago Contrafactura");
+                $("#formulario_contrafactura").css("display", "block");
+                $("#formulario_transferencia").css("display", "none");
+                $("#formulario_cheque").css("display", "none");
+              }
+
+              if (tipo_de_pago_switch == 5){
+                console.log("Pago con MercadoPago");
+                $("#formulario_mercadopago").css("display", "block");
+                $("#formulario_transferencia").css("display", "none");
+                $("#formulario_cheque").css("display", "none");
+              }
+
+              if (tipo_de_pago_switch == 6){
+                console.log("Pago con PayPal");
+                $("#formulario_paypal").css("display", "block");
+                $("#formulario_transferencia").css("display", "none");
+                $("#formulario_cheque").css("display", "none");
+              }
+
+              if (tipo_de_pago_switch == 7){
+                console.log("Pago con Otro medio");
+                $("#formulario_otro_medio").css("display", "block");
+                $("#formulario_transferencia").css("display", "none");
+                $("#formulario_cheque").css("display", "none");
+              }
+
+              if (tipo_de_pago_switch == 8){
+                console.log("Pago de Caja Chica");
+                $("#formulario_caja_chica").css("display", "block");
+                $("#formulario_transferencia").css("display", "none");
+                $("#formulario_cheque").css("display", "none");
+              }
             }
-          });*/
+          });
         });
 
         
       };
+
+      function MergeCommonRows_pagos(table, firstOnly) {
+        var firstColumnBrakes = [];   
+        for(var i=2; i<=5; i++){
+            var previous = null, cellToExtend = null, rowspan = 1;
+            table.find("td:nth-child(" + i + ")").each(function(index, el){   
+                if (previous == $(el).text() && $(el).text() !== "" && $.inArray(index, firstColumnBrakes) === -1) {
+                    $(el).addClass('hidden');
+                    cellToExtend.attr("rowspan", (rowspan = rowspan+1));
+                }else{
+                  if(firstOnly == 'first only'){                
+                      if(i === 1) firstColumnBrakes.push(index);
+                  }else{
+                      if($.inArray(index, firstColumnBrakes) === -1) firstColumnBrakes.push(index);
+                  }
+                  rowspan = 1;
+                  previous = $(el).text();
+                  cellToExtend = $(el);
+                }
+            });
+        }  
+      }
 
     </script>
   </body>

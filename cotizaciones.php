@@ -192,7 +192,7 @@
                                   while($row = mysqli_fetch_array($result)){
                                     $detalle = strlen($row['detalle']) > 50 ? substr($row['detalle'],0,50)."..." : $row['detalle'];
                         ?>
-                            <tr id="cargar_cotizaciones" data-id="<?php echo ($row['id']);?>" style="cursor: pointer;">
+                            <tr class="cargar_cotizaciones" data-id="<?php echo ($row['id']);?>" style="cursor: pointer;">
                               <td><?php echo ($row['id']);?></td>
                               <td scope="row"><?php echo ($row['nombre']);?></td>
                               <td><?php echo ($row['nombre_proyecto']);?></td>
@@ -294,7 +294,7 @@
     
         <script src="design/assets/examples/js/tables/bootstrap.js"></script>
     <script type="text/javascript">
-      $("#cargar_cotizaciones").click(function(){
+      $(".cargar_cotizaciones").click(function(){
         let id = $(this).attr('data-id');
         window.location.href = "cargar_cotizaciones.php?id="+id;
       });

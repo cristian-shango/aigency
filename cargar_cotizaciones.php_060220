@@ -444,12 +444,12 @@
 
                   <div class="col-md-12">
                     <div class="form-group">
-                      <h5>Costo Objetivo</h5>
+                      <h5>Precio Objetivo</h5>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">$</div>
                         </div>
-                        <input type="text" class="form-control" id="costo_presupuesto_total" readonly value="<?php echo ($row['costo_presupuestado']);?>">
+                        <input type="text" class="form-control numerable" id="costo_presupuesto_total" readonly value="<?php echo ($row['costo_presupuestado']);?>">
                       </div>
                     </div>
                   </div>
@@ -460,7 +460,7 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text">$</div>
                         </div>
-                        <input type="text" class="form-control" id="consumido_total" readonly value="<?php echo ($row['consumido']);?>">
+                        <input type="text" class="form-control numerable" id="consumido_total" readonly value="<?php echo ($row['consumido']);?>">
                       </div>
                     </div>
                   </div>
@@ -472,7 +472,7 @@
                         		<div class="input-group-prepend">
                           			<div class="input-group-text">$</div>
                         		</div>
-                        		<input type="text" class="form-control cotizacion_pagos_totales_monto" readonly>
+                        		<input type="text" class="form-control numerable cotizacion_pagos_totales_monto" readonly>
                       		</div>
                 		</div>
                   	</div>
@@ -549,7 +549,7 @@
 		        <?php 
 		        	if ($row['estado'] == 3){
 		        ?>
-		        		<button class="btn btn-block btn btn-warning clickable text-center" id="boton_actualizar" data-estado="3" style="cursor: pointer;" data-plugin="toastr" data-message="COTIZACION ACTUALIZADA" data-container-id="toast-topFullWidth" data-position-class="toast-top-full-width" data-show-method="slideDown" data-icon-class="toast-just-text toast-success toast-shadow" data-progress-bar="true">ACTUALIZAR COTIZACION</button>
+		        		<button class="btn btn-block btn btn-warning clickable text-center" id="boton_actualizar" data-estado="3" style="cursor: pointer;" data-plugin="toastr" data-message="COTIZACION ACTUALIZADA" data-container-id="toast-topFullWidth" data-position-class="toast-top-full-width" data-show-method="slideDown" data-icon-class="toast-just-text toast-success toast-shadow"data-progress-bar="true">ACTUALIZAR COTIZACION</button>
 		       	<?php
 		        	} else {
 		        ?>
@@ -1028,7 +1028,7 @@
                     <div class="input-group-prepend">
                       <div class="input-group-text">$</div>
                     </div>
-                    <input type="text" class="form-control form-control-lg" id="monto_adicional">
+                    <input type="text" class="form-control form-control-lg numerable" id="monto_adicional">
                   </div>
                 </div>
               </div>
@@ -1055,63 +1055,63 @@
             <div class="modal-body">
               	<div class="row">       
                     <div class="col-md-4">
-						          <div class="form-group">
-						            <h4>Forma de Pago</h4>
-					              <select class="form-control" id="forma_pago_nuevo">
-					                <option value="">Seleccionar</option>
-					                <?php
-					                  // Attempt select query execution
-            						    $sql1 = "SELECT * FROM forma_pago";
-            						    mysql_query("SET NAMES 'utf8'");
-            						    if($result1 = mysqli_query($conexion, $sql1)){
-            						        if(mysqli_num_rows($result1) > 0){
-            						            $i = 0;
-            						            while($row1 = mysqli_fetch_array($result1)){
-            						              ?>
-            						                <option value="<?php echo ($row1['id']);?>"><?php echo (utf8_encode($row1['tipo']));?></option>
-            						              <?php
-            						            }
-            						            // Free result set
-            						            mysqli_free_result($result1);
-            						        } else{
-            						            echo "No hay datos para mostrar.";
-            						        }
-            						    } else{
-            						        echo "ERROR: Could not able to execute $sql1. " . mysqli_error($conexion);
-            						    }
-					                ?>
-                        </select>
-						          </div>
-                    </div>
-                    <div class="col-md-4">
-						          <div class="form-group">
-                        <h4>Tipo de Factura</h4>
-						  	        <select class="form-control" id="tipo_factura_nuevo_registro">
-						              <option value="">Seleccionar</option>
+						<div class="form-group">
+						  <h4>Forma de Pago</h4>
+						  <select class="form-control" id="forma_pago_nuevo">
+						      <option value="">Seleccionar</option>
+						    <?php
+						    // Attempt select query execution
+						    $sql1 = "SELECT * FROM forma_pago";
+						    mysql_query("SET NAMES 'utf8'");
+						    if($result1 = mysqli_query($conexion, $sql1)){
+						        if(mysqli_num_rows($result1) > 0){
+						            $i = 0;
+						            while($row1 = mysqli_fetch_array($result1)){
+						              ?>
+						                <option value="<?php echo ($row1['id']);?>"><?php echo (utf8_encode($row1['tipo']));?></option>
 						              <?php
-            						    // Attempt select query execution
-            						    $sql1 = "SELECT * FROM tipo_factura ORDER BY tipo_factura";
-            						    mysql_query("SET NAMES 'utf8'");
-            						    if($result1 = mysqli_query($conexion, $sql1)){
-            						        if(mysqli_num_rows($result1) > 0){
-            						            $i = 0;
-            						            while($row1 = mysqli_fetch_array($result1)){
-            						              ?>
-            						                <option value="<?php echo ($row1['id_factura']);?>"><?php echo (utf8_encode($row1['tipo_factura']));?></option>
-            						              <?php
-            						            }
-            						            // Free result set
-            						            mysqli_free_result($result1);
-            						        } else{
-            						            echo "No hay datos para mostrar.";
-            						        }
-            						    } else{
-            						        echo "ERROR: Could not able to execute $sql1. " . mysqli_error($conexion);
-            						    }
-            						  ?>
-							          </select>
-						          </div>
-				            </div>
+						            }
+						            // Free result set
+						            mysqli_free_result($result1);
+						        } else{
+						            echo "No hay datos para mostrar.";
+						        }
+						    } else{
+						        echo "ERROR: Could not able to execute $sql1. " . mysqli_error($conexion);
+						    }
+						  ?>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+						  	<h4>Tipo de Factura</h4>
+						  	<select class="form-control" id="tipo_factura_nuevo_registro">
+						      <option value="">Seleccionar</option>
+						    <?php
+						    // Attempt select query execution
+						    $sql1 = "SELECT * FROM tipo_factura ORDER BY tipo_factura";
+						    mysql_query("SET NAMES 'utf8'");
+						    if($result1 = mysqli_query($conexion, $sql1)){
+						        if(mysqli_num_rows($result1) > 0){
+						            $i = 0;
+						            while($row1 = mysqli_fetch_array($result1)){
+						              ?>
+						                <option value="<?php echo ($row1['id_factura']);?>"><?php echo (utf8_encode($row1['tipo_factura']));?></option>
+						              <?php
+						            }
+						            // Free result set
+						            mysqli_free_result($result1);
+						        } else{
+						            echo "No hay datos para mostrar.";
+						        }
+						    } else{
+						        echo "ERROR: Could not able to execute $sql1. " . mysqli_error($conexion);
+						    }
+						  ?>
+							</select>
+						</div>
+					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 						  <h4>Número de Factura</h4>
@@ -1215,31 +1215,39 @@
 							</div>
 						</div>
 					</div>
-					
-					<div class="col-md-12">
-						<span class="input-group-text">Factura</span>
-					</div>
-
-          <div class="col-md-12" id="mostrar_archivo_adjunto">
-            <h4><a href="" target="_blank" id="archivo_adjunto"><i class="icon wb-file" aria-hidden="true" style="font-size: 20px;"></i>VER FACTURA ADJUNTA</a></h4>
-          </div>
-
-					<div class="col-md-12" id="subir_archivo_adjunto">
-						<input type="file" class="upload_file" data-plugin="dropify" data-default-file=""/>
-					</div>
-					
-					<div class="col-md-6">
-						<button type="button" class="btn btn-success btn-block" id="boton_guardar_factura_cotizacion" data-plugin="toastr" data-message="FACTURA GUARDADA CORRECTAMENTE" data-container-id="toast-topFullWidth" data-position-class="toast-top-full-width" data-show-method="slideDown" data-icon-class="toast-just-text toast-success toast-shadow" data-progress-bar="true" data-dismiss="modal" data-toggle="modal" data-target="#modal_cargar_proveedor"><strong>GUARDAR</strong></button>
-					</div>
-					<div class="col-md-6">
-						<button type="button" class="btn btn-danger btn-block" data-dismiss="modal" data-toggle="modal" data-target="#modal_cargar_proveedor"><strong>CANCELAR</strong></button>
-					</div>
-      	</div>
-    	</div>
-  	</form>
+					<?php
+						if(empty($row['archivo_adjunto'])){
+					?>
+						<div class="col-md-12">
+							<span class="input-group-text">Adjuntar factura</span>
+						</div>
+						<div class="col-md-12">
+							<input type="file"  class="upload_file" data-plugin="dropify" data-default-file=""/>
+						</div>
+					<?php
+						} else {
+					?>
+						<div class="col-md-12">
+							<span class="input-group-text">Adjuntar factura</span>
+						</div>
+						<div class="col-md-12">
+							<input type="file"  class="upload_file" data-plugin="dropify" data-default-file=""/>
+						</div>
+					<?php
+						}
+					?>
+						<div class="col-md-6">
+							<button type="button" class="btn btn-success btn-block" id="boton_guardar_factura_cotizacion"><strong>GUARDAR</strong></button>
+						</div>
+						<div class="col-md-6">
+							<button type="button" class="btn btn-danger btn-block" data-dismiss="modal" data-toggle="modal" data-target="#modal_cargar_proveedor"><strong>CANCELAR</strong></button>
+						</div>
+                	</div>
+            	</div>
+          	</form>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
     <!-- Modal Editar Cotización -->
     <div class="modal fade cotizacion_pagos_group" id="modal_cargar_proveedor" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -1250,10 +1258,10 @@
                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tab_editar_cotizacion" role="tab" aria-controls="editar"
                   aria-selected="true">EDITAR COTIZACIÓN</a>
               </li>
-              <!-- <li class="nav-item">
+              <li class="nav-item">
                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tab_cargar_proveedor" role="tab" aria-controls="proveedor"
                   aria-selected="false">CARGA DE FACTURAS</a>
-              </li> -->
+              </li>
               <!--<li class="nav-item">
                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab_editar_pagos" role="tab" aria-controls="pagos"
                   aria-selected="false">FORMAS DE PAGO</a>
@@ -1265,6 +1273,7 @@
               <form id="formulario_carga_cotizacion">
                 <div class="modal-body">
                   <div class="row">
+                    <div class="col-md-12"><h3>Editar Cotización</h3></div>
                     <div class="col-md-3">
                         <div class="form-group">
                           <h4>Rubro</h4>
@@ -1362,7 +1371,7 @@
                               <option value="">Seleccionar</option>
                             <?php
                             // Attempt select query execution
-                            $sql_proveedores = "SELECT * FROM proveedores ORDER BY contacto";
+                            $sql_proveedores = "SELECT * FROM proveedores ORDER BY descripcion";
                             mysql_query("SET NAMES 'utf8'");
                             if($result_proveedores = mysqli_query($conexion, $sql_proveedores)){
                                 if(mysqli_num_rows($result_proveedores) > 0){
@@ -1439,52 +1448,10 @@
                  </div>
                  <hr>
                  
-                 <div id="cotizacion_pagos_avatar" class="col-md-12">
-							<div class="cotizacion_pagos_container" data-id_registro="" data-id_proyecto="">
-								<div class="d-flex justify-content-between">
-									<h3>Editar Pagos</h3>
-									<h3 class="text-right">Total: $<span id="total_cotizacion2" class="subtotal_categoria"></span></h3>
-								</div>
-									<table class="col-md-12">
-										<tbody class="cotizacion_pagos_lista">
-											<tr>
-												<th class="gray">Pago</th>
-												<th class="gray">Porcentaje</th>
-												<th class="gray">Forma</th>
-												<th class="gray">Fecha 1</th>
-												<th class="gray">Fecha 2</th>
-												<th class="gray">Fecha 3</th>
-												<th class="gray">Monto</th>
-												<th class="gray"></th>
-												<th class="gray">Cargar Factura</th>
-											</tr>
-											<tr class="cotizacion_pagos_data" data-id_pago="">
-												<td><select class="form-control cotizacion_pagos_plazo"><option>PLAZO...</option></select></td>
-												<td><input type="text" class="form-control cotizacion_pagos_porcentaje"></td>
-												<td><select class="form-control cotizacion_pagos_forma"><option>FORMA...</option></select></td>
-												<td><input type="date" class="form-control cotizacion_pagos_fecha1" placeholder="fecha 1"></td>
-												<td><input type="date" class="form-control cotizacion_pagos_fecha2" placeholder="fecha 2"></td>
-												<td><input type="date" class="form-control cotizacion_pagos_fecha3" placeholder="fecha 3"></td>
-												<td><input type="text" class="form-control cotizacion_pagos_monto" width="9" readonly></td>
-												<td><button type="button" class="btn btn-primary btn-block cotizacion_pagos_borrar"><i class="icon wb-trash" aria-hidden="true"></i></button></td>
-												<td><button type="button" class="btn btn-danger btn-block cotizacion_pagos_cargar_factura"><i class="icon wb-file" aria-hidden="true"></i></button></td>
-											</tr>
-										</tbody>
-									</table>
-									<br>
-									<div class="d-flex justify-content-around align-items-baseline">
-										<button class="cotizacion_pagos_mostrar_agregar_pago btn btn-info col-md-4">AGREGAR</button>
-										<div class="col-md-1"></div>
-										<button class="cotizacion_pagos_guardar btn col-md-4" data-plugin="toastr" data-message="PAGOS GUARDADOS CORRECTAMENTE" data-container-id="toast-topFullWidth" data-position-class="toast-top-full-width" data-show-method="slideDown" data-icon-class="toast-just-text toast-success toast-shadow" data-progress-bar="true">GUARDAR</button>
-										<div class="col-md-1"></div>
-										<button class="cotizacion_pagos_cancelar btn btn-danger col-md-2" data-dismiss="modal">CANCELAR</button>
-									</div>
-									<br/>
-							</div>
-						</div>
+
                     
             </div>
-                <!-- <div class="tab-pane fade" id="tab_cargar_proveedor" role="tabpanel" aria-labelledby="proveedor-tab">
+                <div class="tab-pane fade" id="tab_cargar_proveedor" role="tabpanel" aria-labelledby="proveedor-tab">
 
                   <form id="formulario_carga_cotizacion">
                     <div class="modal-body">
@@ -1572,10 +1539,55 @@
                               <input type="text" class="form-control form-control" id="tipo_item" readonly>
                           </div>
                         </div>
+                        
+                        <div id="cotizacion_pagos_avatar" class="col-md-12">
+							<div class="cotizacion_pagos_container" data-id_registro="" data-id_proyecto="">
+								<div class="d-flex justify-content-between">
+									<h3>Editar Pagos</h3>
+									<h3 class="text-right">Total: $<span id="total_cotizacion2" class="numerable subtotal_categoria"></span></h3>
+								</div>
+									<table class="col-md-12">
+										<tbody class="cotizacion_pagos_lista">
+											<tr>
+												<th class="gray">Pago</th>
+												<th class="gray">Porcentaje</th>
+												<th class="gray">Forma</th>
+												<th class="gray">Fecha 1</th>
+												<th class="gray">Fecha 2</th>
+												<th class="gray">Fecha 3</th>
+												<th class="gray">Monto</th>
+												<th class="gray"></th>
+												<!-- <th class="gray">Cargar Factura</th> -->
+											</tr>
+											<tr class="cotizacion_pagos_data" data-id_pago="">
+												<td><select class="form-control cotizacion_pagos_plazo"><option>PLAZO...</option></select></td>
+												<td><input type="text" class="form-control cotizacion_pagos_porcentaje"></td>
+												<td><select class="form-control cotizacion_pagos_forma"><option>FORMA...</option></select></td>
+												<td><input type="date" class="form-control cotizacion_pagos_fecha1" placeholder="fecha 1"></td>
+												<td><input type="date" class="form-control cotizacion_pagos_fecha2" placeholder="fecha 2"></td>
+												<td><input type="date" class="form-control cotizacion_pagos_fecha3" placeholder="fecha 3"></td>
+												<td><input type="text" class="form-control cotizacion_pagos_monto" width="9" readonly></td>
+												<td><button type="button" class="btn btn-primary btn-block cotizacion_pagos_borrar"><i class="icon wb-trash" aria-hidden="true"></i></button></td>
+												<!-- <td><button type="button" class="btn btn-success btn-block cotizacion_pagos_cargar_factura"><i class="icon wb-file" aria-hidden="true"></i></button></td> -->
+											</tr>
+										</tbody>
+									</table>
+									<br>
+									<div class="d-flex justify-content-around align-items-baseline">
+										<button class="cotizacion_pagos_mostrar_agregar_pago btn btn-info col-md-4">AGREGAR</button>
+										<div class="col-md-1"></div>
+										<button class="cotizacion_pagos_guardar btn col-md-4" data-dismiss="modal">GUARDAR</button>
+										<div class="col-md-1"></div>
+										<button class="cotizacion_pagos_cancelar btn btn-danger col-md-2" data-dismiss="modal">CANCELAR</button>
+									</div>
+							</div>
+						</div>
+
+                        
                       </div>
                     </div>
                   </form>
-                </div> -->
+                </div>
                 <!-- Tab de carga y edicion de pagos -->
                 <!--<div class="tab-pane fade" id="tab_editar_pagos" role="tabpanel" aria-labelledby="pagos-tab">
                   <div class="modal-body">
@@ -1689,7 +1701,7 @@
           tags: true
         });
 
-        $("#ingreso_proveedor").select2({
+        $(".dropdown_proveedor").select2({
           tags: true
         });
 
@@ -1721,7 +1733,7 @@
                 MergeCommonRows($('#tabla_cotizaciones'));
                 funciones_cotizaciones();
                 total_cotizacion();
-                //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
+                $('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
             }
         });
 
@@ -2075,7 +2087,7 @@
             $("#edicion_dias").val(data.tiempo_pago);
             $("#edicion_id_registro").val(data.id);
             $("#edicion_id_item").val(data.item);
-            //$(".numerable").each(function(){abandonar(this);});
+            $(".numerable").each(function(){abandonar(this);});
             if (data.registro_seleccionado == 1){
 	        	$("#edicion_jornadas").attr("disabled", true);
 	        	$("#edicion_cantidad").attr("disabled", true);
@@ -2175,7 +2187,6 @@
           }
         });
       });
-
       $(".tiempo_pago_cambio").change(function(){
         var registro = $(this).attr('data-registro');
         var tiempo = $(this).val();
@@ -2299,7 +2310,7 @@
                         console.log("Adicional: ",suma_adicionales);
                         console.log("Consumido :",consumido);
                         document.getElementById('adicionales_total').value = suma_adicionales;
-                        //$(".numerable").each(function(){abandonar(this);})
+                        $(".numerable").each(function(){abandonar(this);})
                     }
                 });
                    }
@@ -2382,7 +2393,7 @@
               }
               $total = $('<span></span>')
                             .appendTo($tr.find('td:last-child').empty())
-                            .addClass('subtotalRubroMonto')
+                            .addClass('subtotalRubroMonto numerable')
                             .before($('<span>$</span>'))
                             .text(total);
               $total.text(completar(puntearTexto($total.text())));
@@ -2434,49 +2445,6 @@
             });
         });
 
-        $(".cargar_proveedor_cotizacion").click(function(){
-          let registro = $(this).attr('data-id');
-          setTimeout(
-            function (){
-              $(".cotizacion_pagos_cargar_factura").each(function(){
-                let proyecto = '<?php echo $_GET['id'];?>';
-                let pago = $(this).attr('data-id_pago');
-                console.log("Registro: ",registro," del Boton Pago: ",pago,"para el proyecto: ",proyecto);
-                let id_proy_reg_pago = proyecto+registro+pago;
-                $(this).attr("data-id_proy_reg_pago", id_proy_reg_pago);
-                console.log("Codigo unico de pago: ",id_proy_reg_pago);
-                // Compruebo si hay datos cargados para este pago
-
-                let proveedor = $("#edicion_proveedor").val();
-                console.log("Proveedor: ",proveedor);
-                if (proveedor == ""){
-                  $("[data-id_proy_reg_pago='"+id_proy_reg_pago+"']").addClass("btn-default").removeClass("btn-danger");
-                  $("[data-id_proy_reg_pago='"+id_proy_reg_pago+"']").attr("disabled", "true");
-                  console.log("No hay proveedor");
-                } else {
-                  $.ajax({
-                    url:'ajax/comprobar_pago_cargado.php',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: 'id_proy_reg_pago='+id_proy_reg_pago+'&registro='+ registro,
-                    success:function(data){
-                      console.log(data);
-                      if (data == 1){
-                        $("[data-id_proy_reg_pago='"+id_proy_reg_pago+"']").addClass("btn-success").removeClass("btn-danger");
-                        $("[data-id_proy_reg_pago='"+id_proy_reg_pago+"']").removeAttr("disabled");
-                      }
-
-                      if (data == 2){
-                        $("[data-id_proy_reg_pago='"+id_proy_reg_pago+"']").addClass("btn-warning").removeClass("btn-danger");
-                        $("[data-id_proy_reg_pago='"+id_proy_reg_pago+"']").removeAttr("disabled");
-                      }
-                    }
-                  });
-                }
-              });
-            }, 2000);
-        });
-
 
         var proyecto = document.getElementById('ingreso_id').innerHTML;
 
@@ -2488,7 +2456,7 @@
           tags: true
         });
 
-        $("#ingreso_proveedor").select2({
+        $(".dropdown_proveedor").select2({
           tags: true
         });
 
@@ -2574,16 +2542,16 @@
 
         $('.editar_proveedor_cotizacion').click(function () {
          // PARA EDITAR EL CONTENIDO DE CADA COTIZACION      
-          let rubro = $(this).parents("tr").attr("data-rubro");
-          let categoria = $(this).parents("tr").attr("data-categoria");
-          let item = $(this).parents("tr").attr("data-item");
-          let condicion = $(this).parents("tr").attr("data-condicion");
-          let jornadas = $(this).parents("tr").attr("data-jornadas");
-          let cantidad = $(this).parents("tr").attr("data-cantidad");
-          let valor = $(this).parents("tr").attr("data-valor");
-          let total = $(this).parents("tr").attr("data-total");
-          let proveedor = $(this).parents("tr").attr("data-proveedor");
-          let id_registro = $(this).parents("tr").attr("data-id_registro");
+          var rubro = $(this).parents("tr").attr("data-rubro");
+          var categoria = $(this).parents("tr").attr("data-categoria");
+          var item = $(this).parents("tr").attr("data-item");
+          var condicion = $(this).parents("tr").attr("data-condicion");
+          var jornadas = $(this).parents("tr").attr("data-jornadas");
+          var cantidad = $(this).parents("tr").attr("data-cantidad");
+          var valor = $(this).parents("tr").attr("data-valor");
+          var total = $(this).parents("tr").attr("data-total");
+          var proveedor = $(this).parents("tr").attr("data-proveedor");
+          var id_registro = $(this).parents("tr").attr("data-id_registro");
       
           $(this).parents("tr").find("td:eq(6)").html('<input type="number" id="ingreso_jornadas_linea" name="jornadas_linea" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" oninput="calculate_linea();" value="'+jornadas+'">');
 
@@ -2670,7 +2638,7 @@
                           $('#tabla_cotizaciones').html(data);
                           funciones_cotizaciones();
                           total_cotizacion();
-                          //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
+                          $('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
                           //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
                         }
                       });
@@ -2715,7 +2683,7 @@
                   $('#tabla_cotizaciones').html(data);
                   funciones_cotizaciones();
                   total_cotizacion();
-                  //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
+                  $('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
                 }
               });
             }
@@ -2723,10 +2691,9 @@
         });
 
         $('#boton_guardar_factura_cotizacion').click(function(){
-          let id_pago = $('#boton_guardar_factura_cotizacion').attr('data-id_pago');
-          let id_registro = $('#boton_guardar_factura_cotizacion').attr('data-id_registro');
+          let id = $("#ot").val();
           let id_proyecto = '<?php echo $_GET['id'];?>';
-          let id_proveedor = $('#boton_guardar_factura_cotizacion').attr('data-id_proveedor');
+          let id_proveedor = $("#proveedores1").val();
           let forma_pago = $("#forma_pago_nuevo").val();
           let tipo_factura = $("#tipo_factura_nuevo_registro").val();
           let numero_factura = $("#numero_factura_nuevo_registro").val();
@@ -2741,20 +2708,18 @@
 
           let archivo_adjunto = $('.upload_file').val();
 
-          if (archivo_adjunto == ""){
-            archivo_adjunto = "sin_subir";
-            console.log("Archivo adjunto vacio, ",archivo_adjunto);
+          if (archivo_adjunto == ''){
+            let archivo_adjunto = "sin_subir";
           } else {
             let adjunto = $(".upload_file")[0].files[0];
-            archivo_adjunto = adjunto.name;
-            console.log("Guardo en la DB el adjunto: ",archivo_adjunto);
+            let archivo_adjunto = adjunto.name;
           }
 
           $.ajax({
             //url:"agregar_proveedor_cotizacion.php",
             url:"agregar_factura_proveedor.php",
             method:"POST",
-            data: 'id_registro='+id_registro+'&id_proveedor='+id_proveedor+'&forma_pago='+forma_pago+'&tipo_factura='+tipo_factura+'&numero_factura='+numero_factura+'&fecha_factura='+fecha_factura+'&fecha_pactada='+fecha_pactada+'&archivo_adjunto='+archivo_adjunto+'&importe_neto='+importe_neto+'&iva='+iva+'&percepcion='+percepcion+'&importe_bruto='+importe_bruto+'&tipo_iva='+tipo_iva+'&id_proyecto='+id_proyecto+'&tiempo_pago='+tiempo_pago+'&id_pago='+id_pago,
+            data: 'id='+id+'&id_proveedor='+id_proveedor+'&forma_pago='+forma_pago+'&tipo_factura='+tipo_factura+'&numero_factura='+numero_factura+'&fecha_factura='+fecha_factura+'&fecha_pactada='+fecha_pactada+'&archivo_adjunto='+archivo_adjunto+'&importe_neto='+importe_neto+'&iva='+iva+'&percepcion='+percepcion+'&importe_bruto='+importe_bruto+'&tipo_iva='+tipo_iva+'&id_proyecto='+id_proyecto+'&tiempo_pago='+tiempo_pago,
             success:function(data){
               $('#formulario_carga_cotizacion')[0].reset();
               var drEvent = $('.upload_file').dropify();
@@ -2811,7 +2776,7 @@
                   $('#tabla_cotizaciones').html(data);
                   funciones_cotizaciones();
                   total_cotizacion();
-                  //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
+                  $('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
                   //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
                 }
               });
@@ -2844,7 +2809,7 @@
               $("#edicion_forma_pago").val(data.forma_pago);
               $("#edicion_dias").val(data.tiempo_pago);
               $("#edicion_id_registro").val(id_registro);
-              //$(".numerable").each(function(){abandonar(this);});
+              $(".numerable").each(function(){abandonar(this);});
               //$('#modal_editar_registro').modal('show');
               $("#edicion_id_item").val(data.item);
             }
@@ -2882,7 +2847,7 @@
                   $('#tabla_cotizaciones').html(data);
                   funciones_cotizaciones();
                   total_cotizacion();
-                  //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
+                  $('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
                   //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
                 }
               });
@@ -3037,7 +3002,7 @@
                   $('#pago30').val(data.valor30dias);
                   $('#pago60').val(data.valor60dias);
                   $('#pago90').val(data.valor90dias);
-                  //$(".numerable").each(function(){abandonar(this);});
+                  $(".numerable").each(function(){abandonar(this);});
                     $.ajax({
                       url:"ajax_cotizaciones_1.php",
                       method:"POST",
@@ -3049,7 +3014,7 @@
                           funciones_cotizaciones();
                           total_cotizacion();
                 //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
-                          //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
+                          $('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
                       }
                     });
                   /*$.ajax({
@@ -3098,7 +3063,7 @@
 
         });
 
-        //$(".numerable").each(function(){abandonar(this);});
+        $(".numerable").each(function(){abandonar(this);});
 
         $('.cargar_proveedor_cotizacion').click(function(){
           var id = $(this).attr('data-id');
@@ -3110,8 +3075,7 @@
               dataType:"json",
               success:function(data){
                 $('#modal_cargar_proveedor').attr('data-registro', id).modal('show');
-                $('#edicion_proveedor').val(data.id_proveedor);
-                $('#edicion_proveedor').trigger('change');
+                $('.proveedores').val(data.id_proveedor);
                 $('#ot').val(data.id);
                 $('#tipo_item').val(data.nombre_item_cotizacion);
                 $('#detalle').val(data.detalle_registro);
@@ -3138,12 +3102,7 @@
         });
 
         $("#tipo_iva").change(function(){
-          valor = $(this).val();
-          if (valor == 1){
-          	valor = 10.5;
-          } else {
-          	valor = 21;
-          }
+          valor = $(this).text();
           valor = parseFloat(valor);
           importe_neto = document.getElementById('importe_neto').value;
           importe_neto = parseFloat(importe_neto);
@@ -3187,8 +3146,7 @@
         });
 
         $('#tipo_factura_nuevo_registro').change(function() {
-        importe_neto = $("#importe_neto").val();
-          if ($('#tipo_factura_nuevo_registro').val() == '1' || $('#tipo_factura_nuevo_registro').val() == '2' || $('#tipo_factura_nuevo_registro').val() == '5') {
+          if ($('#tipo_factura_nuevo_registro').val() == '1') {
               $('#iva').removeAttr('disabled');
               $('#tipo_iva').removeAttr('disabled');
               $('#numero_factura_nuevo_registro').removeAttr('disabled');
@@ -3196,29 +3154,40 @@
               $('#percepcion').removeAttr('disabled');
           } else {
               $('#iva').attr('disabled', 'disabled').val('');
-	            $('#tipo_iva').attr('disabled', 'disabled').val('');
-	            $('#numero_factura_nuevo_registro').attr('disabled', 'disabled').val('');
-	            $('#fecha_facturacion').attr('disabled', 'disabled').val('');
-	            $('#fecha_cobro').attr('disabled', 'disabled').val('');
-	            $('#percepcion').attr('disabled', 'disabled').val('');
-	            $('#importe_bruto').attr('disabled', 'disabled').val(importe_neto);
-	            $('#numero_factura_nuevo_registro').attr('disabled', 'disabled').val('');
-	            $('#fecha_facturacion').attr('disabled', 'disabled');
+              if ($('#tipo_factura_nuevo_registro').val() == 'Sin factura') {
+                $('#numero_factura_nuevo_registro').attr('disabled', 'disabled').val('');
+                $('#fecha_facturacion').attr('disabled', 'disabled').val('');
+                $('#fecha_cobro').removeAttr('disabled');
+                $('#iva').attr('disabled', 'disabled').val('');
+                $('#tipo_iva').attr('disabled', 'disabled').val('');
+                $('#percepcion').attr('disabled', 'disabled').val('');
+              } else {
+                $('#numero_factura_nuevo_registro').removeAttr('disabled');
+                $('#fecha_facturacion').removeAttr('disabled');
+                $('#tipo_iva').attr('disabled', 'disabled').val('');
+                $('#fecha_cobro').removeAttr('disabled');
+                $('#percepcion').attr('disabled', 'disabled').val('');
+              }
+          }
+          if ($('#tipo_factura_nuevo_registro').val() == '') {
+            $('#iva').attr('disabled', 'disabled').val('');
+            $('#tipo_iva').attr('disabled', 'disabled').val('');
+            $('#numero_factura_nuevo_registro').attr('disabled', 'disabled').val('');
+              $('#fecha_facturacion').attr('disabled', 'disabled').val('');
+              $('#fecha_cobro').attr('disabled', 'disabled').val('');
+              $('#percepcion').attr('disabled', 'disabled').val('');
           }
         }).trigger('change'); // added trigger to calculate initial tipo_factura
 
         $(".upload_file").change(function(){
           var fd = new FormData();
           var files = $('.upload_file')[0].files[0];
-          let id_pago = $("#boton_guardar_factura_cotizacion").attr('data-id_pago');
           fd.append('file',files);
-          fd.append('id_pago',id_pago);
-          //console.log(fd);
+          console.log(fd);
           uploadData(fd);
         });
 
         function uploadData(formdata){
-          console.log(formdata);
           $.ajax({
             url: 'subir_archivo.php',
             type: 'post',
@@ -3227,7 +3196,6 @@
             processData: false,
             dataType: 'json',
             success: function(response){
-              console.log("Archivo subido correctamente");
             }
           });
         }
@@ -3487,7 +3455,7 @@
                     MergeCommonRows($('#tabla_cotizaciones'));
                     funciones_cotizaciones();
                     boton();
-                    //$('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
+                    $('#tabla_cotizaciones .numerable').each(function(ix, tag){ abandonar(tag); });
                 }
             });
     	};

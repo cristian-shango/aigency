@@ -20,6 +20,7 @@
   $tipo_factura = $_POST["tipo_factura"];
   $importe_neto = $_POST["importe_neto"];
   $iva = $_POST["iva"];
+  $tipo_iva = $_POST["tipo_iva"];
   $percepcion = $_POST["percepcion"];
   $importe_bruto = $_POST["importe_bruto"];
   $forma_pago = $_POST["forma_pago"];

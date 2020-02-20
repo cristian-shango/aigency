@@ -65,6 +65,11 @@
                         </a>
                       </li>
                       <li class="site-menu-item">
+                        <a class="animsition-link" href="cheques.php">
+                          <span class="site-menu-title">Cheques</span>
+                        </a>
+                      </li>
+                      <li class="site-menu-item">
                         <a class="animsition-link" href="bancos.php">
                           <span class="site-menu-title">Bancos</span>
                         </a>

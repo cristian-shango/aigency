@@ -115,12 +115,6 @@ var cotizacion_pagos = (function(){
     else ($(tag).text(valor));
   }
 
-  function escribir_data(data, valor) {
-    //console.log("escribiendo ", valor, " en ", tag);
-    if ("value" in tag) tag.value = valor;
-    else ($(tag).text(valor));
-  }
-
   function traer_forma(callback = (function(){})) {
     trayendo_forma = $.ajax({
       url:url_traer_forma,
@@ -308,9 +302,8 @@ var cotizacion_pagos = (function(){
           escribir_tag($(data).find(".cotizacion_pagos_porcentaje")[0], pagos[registro][pago].porcentaje);
           escribir_tag($(data).find(".cotizacion_pagos_fecha1")[0], pagos[registro][pago].fecha1);
           escribir_tag($(data).find(".cotizacion_pagos_fecha2")[0], pagos[registro][pago].fecha2);
-          $(this).closest("tr").find(".cotizacion_pagos_cargar_factura").attr("data-id_pago", pago);
-          let proveedor = $("#edicion_proveedor").val();
-          $(this).closest("tr").find(".cotizacion_pagos_cargar_factura").attr("data-id_proveedor", proveedor);
+
+          //$(".cotizacion_pagos_cargar_factura").attr("data-registro", registro);
       });
       // console.log("cargando...", $data, $data.find(".cotizacion_pagos_porcentaje")[0])
       // escribir_tag($data.find(".cotizacion_pagos_porcentaje")[0], pagos[registro][pago].porcentaje);
@@ -473,18 +466,9 @@ var cotizacion_pagos = (function(){
       let pago = leer_datos(datohtml);
       //console.log("Borrando ", pago);
       let reg = pago.registro;
-      let id_pago = pago.id_pago;
-      var proyecto = document.getElementById('ingreso_id').innerHTML;
-      let id_proy_reg_pago = proyecto+reg+id_pago;
       if (pagos[reg].hasOwnProperty(pago.id_pago)) {
           $(datohtml).remove();
           delete pagos[reg][pago.id_pago];
-          $.ajax({
-            url:"ajax/eliminar_factura_proveedor.php",
-            method:"POST",
-            data: 'id_proy_reg_pago='+id_proy_reg_pago,
-            dataType:"json"
-          });
           if (Object.keys(pagos[reg]).length==0) {
               agregar_nuevo_pago(reg);
           }
@@ -497,8 +481,8 @@ var cotizacion_pagos = (function(){
       let $listahtml = $(html).closest(".cotizacion_pagos_lista");
       let datohtml = $(html).closest(".cotizacion_pagos_data")[0];
       let pago = leer_datos(datohtml);
+      console.log("Cargar Factura de: ", pago);
       let registro = pago.registro;
-      console.log("Registro a cargar Factura: ", registro);
       let id_pago = pago.id_pago;
       let plazo = pago.plazo;
       let porcentaje = pago.porcentaje;
@@ -506,7 +490,6 @@ var cotizacion_pagos = (function(){
       let fecha1 = pago.fecha1;
       let fecha2 = pago.fecha2;
       let monto = pago.monto;
-      var proyecto = document.getElementById('ingreso_id').innerHTML;
 
       console.log(pago.registro);
       console.log(pago.id_pago);
@@ -517,100 +500,20 @@ var cotizacion_pagos = (function(){
       console.log(pago.fecha2);
       console.log(pago.monto);
 
-      let id_proy_reg_pago = proyecto+registro+id_pago;
-      console.log("ID Cotizacion + Registro + Pago: ",id_proy_reg_pago);
+      $("#importe_neto").val(pago.monto);
+      $("#forma_pago_nuevo").val(pago.forma);
+      $("#tiempo_pago").val(pago.plazo);
+      $("#fecha_facturacion").val(pago.fecha1);
 
-      $.ajax({
-        url:"ajax/comprobar_factura_proveedor.php",
-        method:"POST",
-        data: 'id_proy_reg_pago='+id_proy_reg_pago,
-        dataType:"json",
-        success:function(datos){
-          // LIMPIO EL FORMULARIO 
-          $("#importe_neto").val('');
-          $("#forma_pago_nuevo").val('');
-          $("#tiempo_pago").val('');
-          $("#fecha_facturacion").val('');
-          $("#numero_factura_nuevo_registro").val('');
-          $("#fecha_pago").val('');
-          $("#tipo_factura_nuevo_registro").val('');
-          $("#tipo_iva").val('');
-          $("#iva").val('');
-          $("#percepcion").val('');
-          $("#importe_bruto").val('');
-          //
-          if (datos != null){
-            console.log("ID Factura traido de la DB: ",datos.id_factura_cotizacion);
-            if (datos.id_factura_cotizacion == id_proy_reg_pago){
-              console.log("Factura existente");
-              if (datos.id_tipo_factura_cotizacion == '1' || datos.id_tipo_factura_cotizacion == '2' || datos.id_tipo_factura_cotizacion == '5') {
-                $('#iva').removeAttr('disabled');
-                $('#tipo_iva').removeAttr('disabled');
-                $('#numero_factura_nuevo_registro').removeAttr('disabled');
-                $('#fecha_facturacion').removeAttr('disabled');
-                $('#percepcion').removeAttr('disabled');
-              } else {
-                $('#iva').attr('disabled', 'disabled').val('');
-                $('#tipo_iva').attr('disabled', 'disabled').val('');
-                $('#numero_factura_nuevo_registro').attr('disabled', 'disabled').val('');
-                $('#fecha_facturacion').attr('disabled', 'disabled').val('');
-                $('#fecha_cobro').attr('disabled', 'disabled').val('');
-                $('#percepcion').attr('disabled', 'disabled').val('');
-                $('#importe_bruto').attr('disabled', 'disabled').val(importe_neto);
-                $('#numero_factura_nuevo_registro').attr('disabled', 'disabled').val('');
-                $('#fecha_facturacion').attr('disabled', 'disabled');
-              }
-
-              $("#importe_neto").val(datos.importe_neto_cotizacion);
-              $("#forma_pago_nuevo").val(datos.id_forma_pago_cotizacion);
-              $("#tiempo_pago").val(datos.tiempo_pago_cotizacion);
-              $("#fecha_facturacion").val(datos.fecha_factura_cotizacion);
-              $("#numero_factura_nuevo_registro").val(datos.numero_factura_cotizacion);
-              $("#fecha_pago").val(datos.fecha_pago_cotizacion);
-              $("#tipo_factura_nuevo_registro").val(datos.id_tipo_factura_cotizacion);
-              $("#tipo_iva").val(datos.id_tipo_iva_cotizacion);
-              $("#iva").val(datos.iva_cotizacion);
-              $("#percepcion").val(datos.percepcion_cotizacion);
-              $("#importe_bruto").val(datos.importe_bruto_cotizacion);
-
-              //$("#factura_adjunta").val(datos.factura_adjunta);
-              $("#boton_guardar_factura_cotizacion").attr('data-id_pago', id_proy_reg_pago);
-              $("#boton_guardar_factura_cotizacion").attr('data-id_registro', registro);
-              let archivo_adjunto = datos.factura_adjunta_cotizacion;
-              //archivo_adjunto = archivo_adjunto.substring(10);
-              console.log(archivo_adjunto);
-
-              //$("#subir_archivo_adjunto").css("display", "none");
-              if (archivo_adjunto == null){
-                $("#mostrar_archivo_adjunto").css("display", "none");
-              } else {
-                $("#mostrar_archivo_adjunto").css("display", "block");
-                $("#archivo_adjunto").attr("href", "https://admin.vivashango.com/uploads/factura_proveedores/"+id_proy_reg_pago+"_factura_proveedor_"+archivo_adjunto);
-              }    
-              
-              $('#modal_cargar_proveedor').modal('hide');
-              $('#modal_factura_cotizacion').modal('show');
-            }
-          } else {
-            $("#importe_neto").val(pago.monto);
-            $("#forma_pago_nuevo").val(pago.forma);
-            $("#tiempo_pago").val(pago.plazo);
-            $("#fecha_facturacion").val(pago.fecha1);
-            $("#boton_guardar_factura_cotizacion").attr('data-id_pago', id_proy_reg_pago);
-            $("#boton_guardar_factura_cotizacion").attr('data-id_registro', registro);
-            var fecha = new Date(document.getElementById('fecha_facturacion').value);
-            var dias = document.getElementById('tiempo_pago').value;
-            dias = parseInt(dias);
-            fecha_calculo = fecha.setDate(fecha.getDate() + dias);
-            console.log(fecha_calculo);
-            document.getElementById("fecha_pago").valueAsDate = fecha;
-            $("#subir_archivo_adjunto").css("display", "block");
-            $("#mostrar_archivo_adjunto").css("display", "none");    
-            $('#modal_cargar_proveedor').modal('hide');
-            $('#modal_factura_cotizacion').modal('show');
-          }
-        }
-      });  
+      var fecha = new Date(document.getElementById('fecha_facturacion').value);
+      var dias = document.getElementById('tiempo_pago').value;
+      dias = parseInt(dias);
+      fecha_calculo = fecha.setDate(fecha.getDate() + dias);
+      console.log(fecha_calculo);
+      document.getElementById("fecha_pago").valueAsDate = fecha;
+      
+      $('#modal_cargar_proveedor').modal('hide');
+      $('#modal_factura_cotizacion').modal('show');
   }
 
   function actualizar_totales(){
@@ -642,7 +545,7 @@ var cotizacion_pagos = (function(){
                   $totales.append($agregar);
                   //console.log($agregar);
               }
-              //$totales.find(".numerable").each(function(ix,valor){ abandonar(valor); });
+              $totales.find(".numerable").each(function(ix,valor){ abandonar(valor); });
           }
       });
   }
@@ -671,7 +574,7 @@ var cotizacion_pagos = (function(){
       montos[registro][pagos[registro][pago].plazo] = montopago;
     });
     //console.log("Actualizar_monto final >>> montos: ", montos);
-    //$cont.find(".cotizacion_pagos_monto").each(function(ix,monto){ abandonar(monto); });
+    $cont.find(".cotizacion_pagos_monto").each(function(ix,monto){ abandonar(monto); });
     if (actualizarTotales) actualizar_totales();
   }
 

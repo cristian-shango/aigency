@@ -50,7 +50,7 @@
     <script src="https://momentjs.com/downloads/moment.js" type="text/javascript"></script>
     <script src="js/numeros/numeros.js" type="text/javascript"></script>
     <script src="js/numeros/factura.js" type="text/javascript"></script>
-
+    <script src="js/tableToExcel.js"></script>
     <!--[if lt IE 9]>
     <script src="design/global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
@@ -178,13 +178,18 @@
               <!-- Basic Columns -->
               <div class="col-md-12">
                 <!-- Example Basic Columns -->
-                <div class="example-wrap">
-                  <div class="example table-responsive">
-                    <table class="table table-hover" id="tabla_proyectos"></table>
-                  </div>
-                </div>
+                
+                <table class="table border-tabla" id="tabla_proyectos"></table>
+                  
                 <!-- End Example Basic Columns -->
               </div>
+              <div class="col-md-12">
+                <span id="tabla_reporte_generado" style="display: none;"></span>
+              </div>
+              <div class="col-md-3">
+                <button type="button" class="btn btn-success btn-block generar_reporte"><i class="icon wb-download" aria-hidden="true"></i><strong>DESCARGAR EXCEL</strong></button>
+              </div>
+              <div class="col-md-9"></div>
           </div>
         </div>
         <!-- End Panel Columns & Select -->
@@ -256,6 +261,7 @@
             url:"ajax/mostrar_pago_proveedores.php",
             success:function(data){
                 $('#tabla_proyectos').html(data);
+                MergeCommonRows_pagos($('#tabla_proyectos'));
                 funciones_pagos();
             }
         });
@@ -267,6 +273,44 @@
             window.location = "pago_proveedores.php?id="+id;
         });
       };
+
+      $(".generar_reporte").click(function() { 
+        $.ajax({
+          type: "GET",
+          url:"ajax/reporte_mostrar_todos_pagos_proveedores.php",
+          success:function(data){
+            console.log(data);
+            $('#tabla_reporte_generado').html(data);
+            let excel_data = $('#tabla_reporte_todos').html();  
+            let page = "generar_excel_total.php?data=" + excel_data + "&filename=reporte_general_proveedores.xls";  
+            window.location = page;
+            //MergeCommonRows_pagos($('#tabla_reporte_generado'));
+            //$('#modal_reporte_generado').modal('show');
+          }
+        });
+      });
+
+      function MergeCommonRows_pagos(table, firstOnly) {
+        var firstColumnBrakes = [];   
+        for(var i=2; i<=5; i++){
+            var previous = null, cellToExtend = null, rowspan = 1;
+            table.find("td:nth-child(" + i + ")").each(function(index, el){   
+                if (previous == $(el).text() && $(el).text() !== "" && $.inArray(index, firstColumnBrakes) === -1) {
+                    $(el).addClass('hidden');
+                    cellToExtend.attr("rowspan", (rowspan = rowspan+1));
+                }else{
+                  if(firstOnly == 'first only'){                
+                      if(i === 1) firstColumnBrakes.push(index);
+                  }else{
+                      if($.inArray(index, firstColumnBrakes) === -1) firstColumnBrakes.push(index);
+                  }
+                  rowspan = 1;
+                  previous = $(el).text();
+                  cellToExtend = $(el);
+                }
+            });
+        }  
+      }
 
     </script>
   </body>

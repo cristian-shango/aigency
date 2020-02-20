@@ -2,8 +2,10 @@
 
     if(!empty($_FILES['file']))
   {
+    $id_pago = $_POST['id_pago'];
+    echo $id_pago;
     $path = "uploads/factura_proveedores/";
-    $path = $path . "factura_proveedor_".( $_FILES['file']['name']);
+    $path = $path . $id_pago . "_factura_proveedor_".( $_FILES['file']['name']);
     //$temp = explode(".", $_FILES["file"]["name"]);
     //$newfilename = "factura_proveedor_" . '.' . end($temp);
 
