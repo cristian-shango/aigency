@@ -572,6 +572,7 @@ var cotizacion_pagos = (function(){
               $("#iva").val(datos.iva_cotizacion);
               $("#percepcion").val(datos.percepcion_cotizacion);
               $("#importe_bruto").val(datos.importe_bruto_cotizacion);
+              $("#observaciones").val(datos.observaciones_cotizacion);
 
               //$("#factura_adjunta").val(datos.factura_adjunta);
               $("#boton_guardar_factura_cotizacion").attr('data-id_pago', id_proy_reg_pago);

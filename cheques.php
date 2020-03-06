@@ -12,7 +12,7 @@
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
 
-    <title>AiGency | Pagos</title>
+    <title>AiGency | Cheques</title>
 
     <link rel="apple-touch-icon" href="design/assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="design/assets/images/favicon.ico">
@@ -165,7 +165,7 @@
     <!-- Page -->
     <div class="page">
       <div class="page-header">
-        <h1 class="page-title">Pagos</h1>
+        <h1 class="page-title">Cheques</h1>
         <div class="page-header-actions">
         </div>
       </div>
@@ -188,9 +188,12 @@
                 <span id="tabla_reporte_generado" style="display: none;"></span>
               </div>
               <div class="col-md-3">
-                <button type="button" class="btn btn-success btn-block generar_reporte"><i class="icon wb-download" aria-hidden="true"></i><strong>DESCARGAR EXCEL</strong></button>
+                <button type="button" class="btn btn-success btn-block generar_reporte"><i class="icon wb-download" aria-hidden="true"></i><strong>&nbsp;DESCARGAR EXCEL</strong></button>
               </div>
-              <div class="col-md-9"></div>
+              <div class="col-md-3">
+                <button type="button" class="btn btn-info btn-block importar_extracto"><i class="icon wb-upload" aria-hidden="true"></i><strong>&nbsp;IMPORTAR EXTRACTO BANCARIO</strong></button>
+              </div>
+              <div class="col-md-6"></div>
           </div>
         </div>
         <!-- End Panel Columns & Select -->
@@ -259,7 +262,7 @@
       $(document).ready(function(){
         $.ajax({
             type: "GET",
-            url:"ajax/mostrar_pago_proveedores.php",
+            url:"ajax/mostrar_cheques_proveedores.php",
             success:function(data){
                 $('#tabla_proyectos').html(data);
                 MergeCommonRows_pagos($('#tabla_proyectos'));
@@ -269,27 +272,46 @@
       });
 
       function funciones_pagos(){ 
-        $(".ver_proveedores").click(function() {
-            id = $(this).data("id");
-            window.location = "pago_proveedores.php?id="+id;
+        $(".boton_cobrar_cheque").click(function(){
+          id_cheque = $(this).data("id_cheque");
+          console.log("Cobro cheque: ",id_cheque);
+          $.ajax({
+            type: "GET",
+            method:"POST",
+            data: 'id_cheque=' + id_cheque,
+            url:"ajax/marcar_cheque_cobrado.php",
+            success:function(data){
+              $.ajax({
+                type: "GET",
+                url:"ajax/mostrar_cheques_proveedores.php",
+                success:function(data){
+                  $('#tabla_proyectos').html(data);
+                  MergeCommonRows_pagos($('#tabla_proyectos'));
+                  funciones_pagos();
+                }
+              });
+            }
+          });
         });
       };
 
       $(".generar_reporte").click(function() { 
         $.ajax({
           type: "GET",
-          url:"ajax/reporte_mostrar_todos_pagos_proveedores.php",
+          url:"ajax/reporte_mostrar_todos_cheques_proveedores.php",
           success:function(data){
             console.log(data);
             $('#tabla_reporte_generado').html(data);
             let excel_data = $('#tabla_reporte_todos').html();  
-            let page = "generar_excel_total.php?data=" + excel_data + "&filename=reporte_general_proveedores.xls";  
+            let page = "generar_excel_total.php?data=" + excel_data + "&filename=reporte_general_cheques_proveedores.xls";  
             window.location = page;
             //MergeCommonRows_pagos($('#tabla_reporte_generado'));
             //$('#modal_reporte_generado').modal('show');
           }
         });
       });
+
+      
 
       function MergeCommonRows_pagos(table, firstOnly) {
         var firstColumnBrakes = [];   
